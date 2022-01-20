@@ -1,0 +1,48 @@
+version: "3.9"
+
+networks:
+  blublu-network:
+    driver: bridge
+
+volumes:
+  blublu-postgresql-volume:
+  
+services:
+  blazor:
+    container_name: 'BluBlu.Blazor'
+    build:
+      context: .
+      dockerfile: BluBlu.Blazor\Dockerfile
+    ports:
+      - "8080:80"
+    restart: always
+    depends_on:
+      - postgres
+      - mongo
+    networks:
+      - blublu-network
+
+  postgres:
+    container_name: 'BluBlu.Postgres'
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=blubluadmin
+      - POSTGRES_PASSWORD=[c2h5oh]40%BLUBLU_PG
+      - POSTGRES_DB=blublu
+    volumes:
+      - 'blublu-postgresql-volume:/var/lib/postgresql/data'
+    networks:
+      - blublu-network
+
+  mongo:
+    container_name: 'BluBlu.Mongo'
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: blubluadmin
+      MONGO_INITDB_ROOT_PASSWORD: "c2h5oh40percentBLUBLU_mongo"
+    networks:
+      - blublu-network
