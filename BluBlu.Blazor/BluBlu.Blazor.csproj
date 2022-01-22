@@ -21,6 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\BluBlu.Auth.Domain\BluBlu.Auth.Domain.csproj" />
       <ProjectReference Include="..\BluBlu.Auth.Infrastructure\BluBlu.Auth.Infrastructure.csproj" />
       <ProjectReference Include="..\BluBlu.Invoices.Domain\BluBlu.Invoices.Domain.csproj" />
       <ProjectReference Include="..\BluBlu.Invoices.Infrastructure\BluBlu.Invoices.Infrastructure.csproj" />

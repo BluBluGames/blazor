@@ -16,5 +16,9 @@
         <PackageReference Include="Npgsql" Version="6.0.2" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.2" />
     </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\BluBlu.Auth.Domain\BluBlu.Auth.Domain.csproj" />
+    </ItemGroup>
 
 </Project>

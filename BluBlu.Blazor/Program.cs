@@ -1,9 +1,9 @@
+using BluBlu.Auth.Domain.User;
 using BluBlu.Auth.Infrastructure.Database.Contexts;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BluBlu.Blazor.Areas.Identity;
-using BluBlu.Blazor.Data;
 using BluBlu.Invoices.Domain;
 using BluBlu.Invoices.Domain.Invoices;
 using BluBlu.Invoices.Infrastructure.Connection;
@@ -18,8 +18,8 @@ builder.Services.AddDbContext<AuthDbContext>(options => options.UseNpgsql(connec
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 // AUTH
-builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true) //Define User Class
+builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<BluBluIdentity>>();
+builder.Services.AddDefaultIdentity<BluBluIdentity>(options => options.SignIn.RequireConfirmedAccount = true) //Define User Class
     .AddRoles<IdentityRole>() //Allows defining user roles
     .AddEntityFrameworkStores<AuthDbContext>(); //Without this cant make first migration to in Auth.Infrastucture
 // --AUTH

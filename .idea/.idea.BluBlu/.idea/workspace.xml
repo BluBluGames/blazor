@@ -9,18 +9,22 @@
     <projectFile profileName="IIS Express">BluBlu.Stocks.Api/BluBlu.Stocks.Api.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e662321e-6c3b-40cd-99af-1574f65b4bd8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BluBlu.Auth.Infrastructure/Database/Contexts/AuthDbContext.cs" afterDir="false" />
+    <list default="true" id="e662321e-6c3b-40cd-99af-1574f65b4bd8" name="Changes" comment="add migrations and context in auth domain">
+      <change afterPath="$PROJECT_DIR$/BluBlu.Auth.Domain/User/BluBluIdentity.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Account/Manage/Index.cshtml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Account/Manage/_Layout.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Auth.Domain/BluBlu.Auth.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Auth.Domain/BluBlu.Auth.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Auth.Domain/Class1.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/BluBlu.Auth.Infrastructure/BluBlu.Auth.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Auth.Infrastructure/BluBlu.Auth.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Auth.Infrastructure/Class1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Auth.Infrastructure/Database/Contexts/AuthDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Auth.Infrastructure/Database/Contexts/AuthDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Auth.Infrastructure/Migrations/20220122182954_InitialIdentity.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Auth.Infrastructure/Migrations/20220122195954_InitialIdentity.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Auth.Infrastructure/Migrations/20220122182954_InitialIdentity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Auth.Infrastructure/Migrations/20220122195954_InitialIdentity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Auth.Infrastructure/Migrations/AuthDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Auth.Infrastructure/Migrations/AuthDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Account/LogOut.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Account/LogOut.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Account/Register.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Account/Register.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Shared/_LoginPartial.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Shared/_LoginPartial.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/BluBlu.Blazor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/BluBlu.Blazor.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Data/WeatherForecast.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Data/WeatherForecastService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Migrations/20220120212704_InitSchema.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Auth.Infrastructure/Migrations/20220122182954_InitialIdentity.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Migrations/20220120212704_InitSchema.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Auth.Infrastructure/Migrations/20220122182954_InitialIdentity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Auth.Infrastructure/Migrations/AuthDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Pages/FetchData.razor" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,13 +56,22 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e3bc3f84cc248cc742fc1c5f56a7727d2febed13ab281104470f728796baac5/RazorPage.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/974fa14c57bab8fe29f1bddd39b1a6548b9cc8cf9e0ef5e670c2407a56d9/String.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/598be7b76329747735b1e8e8b423ca7a2fff54b0a9474b23f1e0f920a889444d/RazorView.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/WebDev/DotNet/BluBlu/BluBlu.Auth.Infrastructure/Database/Contexts/AuthDbContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d4f4ac7db6d2c5d183ab2d92602280ed4349fd6e6a1b6313546b3d01fdab5/ServiceProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f4708639776589f5ac2739f6fcbfc67343b1f9dac51cc1dbfdb003eef77cc1c/Monitor.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/WebDev/DotNet/BluBlu/BluBlu.Blazor/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/37a954845b52703c5cce1aacf8fa1292378878e82bf68c4c4b5effc447316e9/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/WebDev/DotNet/BluBlu/BluBlu.Blazor/Areas/Identity/Pages/Shared/_LoginPartial.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/WebDev/DotNet/BluBlu/BluBlu.Blazor/Areas/Identity/Pages/Account/Register.cshtml.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/974fa14c57bab8fe29f1bddd39b1a6548b9cc8cf9e0ef5e670c2407a56d9/String.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/WebDev/DotNet/BluBlu/BluBlu.Blazor/Areas/Identity/Pages/Account/LogOut.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/WebDev/DotNet/BluBlu/BluBlu.Blazor/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://D:/WebDev/DotNet/BluBlu/BluBlu.Blazor/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bcaa9628af6c4f61b21166133af53b4823898/64/db31a71e/AuthAppBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/WebDev/DotNet/BluBlu/BluBlu.Blazor/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/WebDev/DotNet/BluBlu/BluBlu.Blazor/Areas/Identity/Pages/Account/Register.cshtml.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/41cc2659897ded1c75869e25f414a6dce3380d39586a3b5a93cc7ebd6ce5/SignInManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f4708639776589f5ac2739f6fcbfc67343b1f9dac51cc1dbfdb003eef77cc1c/Monitor.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -234,6 +247,14 @@
       <workItem from="1642791707564" duration="6468000" />
       <workItem from="1642830974688" duration="6072000" />
     </task>
+    <task id="LOCAL-00001" summary="add migrations and context in auth domain">
+      <created>1642880339839</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1642880339839</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,5 +277,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="add migrations and context in auth domain" />
+    <option name="LAST_COMMIT_MESSAGE" value="add migrations and context in auth domain" />
   </component>
 </project>
