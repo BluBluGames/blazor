@@ -4,9 +4,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace BluBlu.Blazor.Migrations
+namespace BluBlu.Auth.Infrastructure.Migrations
 {
-    public partial class InitSchema : Migration
+    public partial class InitialIdentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

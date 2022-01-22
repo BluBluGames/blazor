@@ -14,8 +14,6 @@
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
         <PackageReference Include="Npgsql" Version="6.0.2" />
@@ -23,6 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\BluBlu.Auth.Infrastructure\BluBlu.Auth.Infrastructure.csproj" />
       <ProjectReference Include="..\BluBlu.Invoices.Domain\BluBlu.Invoices.Domain.csproj" />
       <ProjectReference Include="..\BluBlu.Invoices.Infrastructure\BluBlu.Invoices.Infrastructure.csproj" />
     </ItemGroup>
