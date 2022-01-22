@@ -1,0 +1,107 @@
+﻿@page "/fetch-invoices"
+@layout AdminLayout
+
+@using BluBlu.Invoices.Domain.Invoices
+@using BluBlu.Invoices.Domain.Invoices.Commands.CreatePdf
+@using BluBlu.Invoices.Domain.Invoices.Commands.Delete
+@using BluBlu.Invoices.Domain.Invoices.Commands.Update
+@using BluBlu.Invoices.Domain.Invoices.Queries.GetAll
+@using BluBlu.Invoices.Domain.Invoices.Queries.GetById
+@using MediatR;
+@using MongoDB.Driver
+@using BluBlu.Blazor.Shared.Layouts
+
+@inject IMediator _mediator
+@inject NavigationManager _navigationManager
+
+<AuthorizeView>    
+    <Authorized> 
+        @if (_invoices == null)
+        {
+            <p>
+                <em>Loading...</em>
+            </p>
+        }
+        else
+        {
+            //<AddModal @ref="AddModal" OnInvoiceAdded="@HandleAddInvoice"></AddModal>
+            //<button @onclick="() => AddModal.Open(null)" type="button" class="btn btn-success w-25">Add</button>
+            
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Invoice Number</th>
+                    <th>Seller</th>
+                    <th>Buyer</th>
+                    <th>Date of Payment</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var invoice in _invoices)
+                {
+                    <tr>
+                        <td>@invoice.InvoiceNumber</td>
+                        <td>@invoice.Seller.Name</td>
+                        <td>@invoice.Buyer.Name</td>
+                        @* <td>@invoice.DateOfPayment</td> *@
+                        <td>
+                            <button type="button" class="btn @(invoice.IsPaid ? "btn-success" : "btn-warning") btn-success me-2 w-">Paid</button>
+                            <button type="button" @onclick="() => CreatePdf(invoice)" class="btn btn-info w-25">Generate</button>
+                            <button type="button" @onclick="() => Delete(invoice.Id)" class="btn btn-danger me-2 w-25">Delete</button>
+                            @* <button type="button" @onclick="() => AddModal.Open(invoice)" class="btn btn-danger me-2 w-25">Add Similar</button> *@
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+    </Authorized>
+    <NotAuthorized>
+        @{ _navigationManager.NavigateTo("/403"); }
+    </NotAuthorized>
+</AuthorizeView>
+@code {
+    private List<Invoice> _invoices;
+    [CascadingParameter] protected Task<AuthenticationState> AuthStat { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _invoices = await GetAll();
+    }
+    
+    private async Task<List<Invoice>> GetAll()
+    {
+        return await _mediator.Send(new GetAllQuery());
+    }
+    
+    private async Task<Invoice> GetById(string id)
+    {
+        return await _mediator.Send(new GetByIdQuery { Id = id });
+    }
+
+    private async Task<Invoice> Update(string id, Invoice invoice)
+    {
+        return await _mediator.Send(new UpdateCommand { Id = id, Invoice = invoice });
+    }
+
+    private async Task<DeleteResult> Delete(string id)
+    {
+        var result = await _mediator.Send(new DeleteCommand { Id = id });
+        
+        if (result.IsAcknowledged is true)
+            _invoices.RemoveAll(x => x.Id == id);
+        
+        return result;
+    }
+
+    private async Task<Unit> CreatePdf(Invoice invoice)
+    {
+        return await _mediator.Send(new CreatePdfCommand { Invoice = invoice });
+    }
+
+    private void HandleAddInvoice(Invoice invoice)
+    {
+        _invoices.Add(invoice);
+    }
+}

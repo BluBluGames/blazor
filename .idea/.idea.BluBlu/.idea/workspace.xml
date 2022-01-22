@@ -10,106 +10,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e662321e-6c3b-40cd-99af-1574f65b4bd8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/aws.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/BluBlu/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/BluBlu/project-colors.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/BluBlu/v17/.futdcache.v1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/BluBlu/v17/.suo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Auth.Domain/BluBlu.Auth.Domain.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Auth.Domain/Class1.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Auth.Infrastructure/BluBlu.Auth.Infrastructure.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Auth.Infrastructure/Class1.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/App.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Account/LogOut.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Shared/_LoginPartial.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/_ViewImports.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/_ViewStart.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/RevalidatingIdentityAuthenticationStateProvider.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/BluBlu.Blazor.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/BluBlu.Blazor.csproj.user" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Data/ApplicationDbContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Data/WeatherForecast.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Data/WeatherForecastService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Migrations/20220120212704_InitSchema.Designer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Migrations/20220120212704_InitSchema.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Counter.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Error.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Error.cshtml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/FetchData.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Index.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Invoices.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/_Host.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/_Layout.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Properties/launchSettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Shared/LoginDisplay.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Shared/MainLayout.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Shared/MainLayout.razor.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Shared/NavMenu.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Shared/NavMenu.razor.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Shared/SurveyPrompt.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/_Imports.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/appsettings.Development.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/appsettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/wwwroot/css/bootstrap/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/wwwroot/css/bootstrap/bootstrap.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/wwwroot/css/open-iconic/FONT-LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/wwwroot/css/open-iconic/ICON-LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/wwwroot/css/open-iconic/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/wwwroot/css/open-iconic/font/css/open-iconic-bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/wwwroot/css/open-iconic/font/fonts/open-iconic.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/wwwroot/css/open-iconic/font/fonts/open-iconic.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/wwwroot/css/open-iconic/font/fonts/open-iconic.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/wwwroot/css/open-iconic/font/fonts/open-iconic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/wwwroot/css/open-iconic/font/fonts/open-iconic.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/wwwroot/css/site.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/wwwroot/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/BluBlu.Invoices.Domain.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/Commands/Create/CreateCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/Commands/Create/CreateCommandHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/Commands/CreatePdf/CreatePdfCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/Commands/CreatePdf/CreatePdfCommandHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/Commands/Delete/DeleteCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/Commands/Delete/DeleteCommandHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/Commands/Update/UpdateCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/Commands/Update/UpdateCommandHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/IInvoiceRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/Invoice.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/Queries/GetAll/GetAllQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/Queries/GetAll/GetAllQueryHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/Queries/GetById/GetByIdQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/Queries/GetById/GetByIdQueryHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/Queries/GetByInvoiceNumber/GetByInvoicesYearAndMonthQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/Queries/GetByInvoiceNumber/GetByInvoicesYearAndMonthQueryHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/ValueObjects/Address.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/ValueObjects/Contractor.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/ValueObjects/PriceByVat.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/Invoices/ValueObjects/Product.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesDomainEmptyClass.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Infrastructure/BluBlu.Invoices.Infrastructure.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Infrastructure/Connection/IInvoicesDatabase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Infrastructure/Connection/InvoicesDatabase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Infrastructure/Connection/InvoicesOptions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Infrastructure/Invoices/InvoiceRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Infrastructure/InvoicesInfrastructureEmptyClass.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Stocks.Domain/BluBlu.Stocks.Domain.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Stocks.Domain/Class1.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Stocks.Infrastructure/BluBlu.Stocks.Infrastructure.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Stocks.Infrastructure/Class1.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.sln" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Account/Register.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Account/Register.cshtml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Admin/Invoices/Invoices.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Errors/Error403.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Errors/Error403.razor.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Errors/Error404.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Errors/Error404.razor.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Shared/Layouts/AdminLayout.razor.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Shared/Layouts/ErrorLayout.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Shared/Layouts/MainLayout.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Shared/Layouts/MainLayout.razor.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/App.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/App.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Counter.razor" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Invoices.razor" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Shared/MainLayout.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Shared/Layouts/AdminLayout.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Shared/MainLayout.razor.css" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Shared/Layouts/ErrorLayout.razor.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Shared/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Shared/NavMenu.razor" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,6 +41,14 @@
       <entry key="d0d6b7f8-0486-4b19-907a-927521d5029f" value="Blue" />
     </colors>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="SCSS File" />
+      </list>
+    </option>
+  </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
       <filtered-out-file-type name="LOCAL_BRANCH" />
@@ -131,6 +58,7 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e3bc3f84cc248cc742fc1c5f56a7727d2febed13ab281104470f728796baac5/RazorPage.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/974fa14c57bab8fe29f1bddd39b1a6548b9cc8cf9e0ef5e670c2407a56d9/String.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/598be7b76329747735b1e8e8b423ca7a2fff54b0a9474b23f1e0f920a889444d/RazorView.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d4f4ac7db6d2c5d183ab2d92602280ed4349fd6e6a1b6313546b3d01fdab5/ServiceProvider.cs" root0="SKIP_HIGHLIGHTING" />
@@ -156,6 +84,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="terminal" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -308,6 +237,8 @@
       <workItem from="1642631753434" duration="2647000" />
       <workItem from="1642712493379" duration="3447000" />
       <workItem from="1642716042700" duration="143000" />
+      <workItem from="1642791707564" duration="6468000" />
+      <workItem from="1642830974688" duration="6072000" />
     </task>
     <servers />
   </component>

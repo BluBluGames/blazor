@@ -1,4 +1,8 @@
-﻿<CascadingAuthenticationState>
+﻿@using BluBlu.Blazor.Shared.Layouts
+
+@inject NavigationManager _navigationManager
+
+<CascadingAuthenticationState>
     <Router AppAssembly="@typeof(App).Assembly">
         <Found Context="routeData">
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
@@ -6,9 +10,7 @@
         </Found>
         <NotFound>
             <PageTitle>Not found</PageTitle>
-            <LayoutView Layout="@typeof(MainLayout)">
-                <p role="alert">Sorry, there's nothing at this address.</p>
-            </LayoutView>
+                @{ _navigationManager.NavigateTo("/404"); }
         </NotFound>
     </Router>
 </CascadingAuthenticationState>
