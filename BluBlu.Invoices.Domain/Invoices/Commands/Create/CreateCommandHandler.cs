@@ -11,8 +11,8 @@ public class CreateCommandHandler : IRequestHandler<CreateCommand, Invoice>
         _invoiceRepository = invoiceRepository;
     }
 
-    public Task<Invoice> Handle(CreateCommand request, CancellationToken cancellationToken)
+    public async Task<Invoice> Handle(CreateCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _invoiceRepository.Create(request.Invoice);
     }
 }
