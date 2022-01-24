@@ -1,10 +1,12 @@
 ﻿@{
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
     {
-        Layout = (string)parentLayout;
+        Layout = (string)parentLayout!;
     }
     else
     {
+        // TODO to remove in newer versions of Resharper
+        // ReSharper disable once Razor.LayoutNotResolved
         Layout = "/Areas/Identity/Pages/_Layout.cshtml";
     }
 }

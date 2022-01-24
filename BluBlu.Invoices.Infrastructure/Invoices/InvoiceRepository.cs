@@ -1,4 +1,4 @@
-﻿using BluBlu.Invoices.Domain.Invoices;
+﻿using BluBlu.Invoices.Domain.InvoicesAggregate;
 using BluBlu.Invoices.Infrastructure.Connection;
 using MongoDB.Bson;
 using MongoDB.Driver;

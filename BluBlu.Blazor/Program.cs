@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BluBlu.Blazor.Areas.Identity;
 using BluBlu.Invoices.Domain;
-using BluBlu.Invoices.Domain.Invoices;
+using BluBlu.Invoices.Domain.ContractorsEntity;
+using BluBlu.Invoices.Domain.InvoicesAggregate;
 using BluBlu.Invoices.Infrastructure.Connection;
+using BluBlu.Invoices.Infrastructure.Contractors;
 using BluBlu.Invoices.Infrastructure.Invoices;
 using MediatR;
 
@@ -30,6 +32,7 @@ builder.Services.AddMediatR(typeof(InvoicesDomainEmptyClass));
 builder.Services.Configure<InvoicesOptions>(builder.Configuration.GetSection("MongoClient"));
 builder.Services.AddSingleton<IInvoicesDatabase, InvoicesDatabase>();
 builder.Services.AddTransient<IInvoiceRepository, InvoiceRepository>();
+builder.Services.AddTransient<IContractorsRepository, ContractorsRepository>();
 
 var app = builder.Build();
 

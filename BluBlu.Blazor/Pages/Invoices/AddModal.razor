@@ -1,0 +1,383 @@
+﻿@* @using MediatR; *@
+@* @using Newtonsoft.Json *@
+@* @using System.Linq *@
+@* @using BluBlu.Invoices.Domain.InvoicesAggregate *@
+@* @using BluBlu.Invoices.Domain.InvoicesAggregate.Commands.Create *@
+@* @using BluBlu.Invoices.Domain.InvoicesAggregate.Queries.GetByInvoiceNumber *@
+@* @using BluBlu.Invoices.Domain.InvoicesAggregate.ValueObjects *@
+@* @inject IMediator _mediator *@
+@* *@
+@* <div class="modal @_addModalClass" tabindex="-1" role="dialog" style="display:@_addModalDisplay" > *@
+@*     <div class="modal-dialog modal-xl modal-dialog-centered" role="document"> *@
+@*         <div class="modal-content container-fluid"> *@
+@*             <div class="row"> *@
+@*                 <div class="modal-header col-12"> *@
+@*                     <h2 class="modal-title">Add Invoice</h2> *@
+@*                 </div> *@
+@*             </div> *@
+@* *@
+@*             <div class="row"> *@
+@*                 <div class="modal-body col-12"> *@
+@*                     <EditForm class="col-12" Model="@_invoice" OnValidSubmit="@Create"> *@
+@*                         <DataAnnotationsValidator></DataAnnotationsValidator> *@
+@*                         <div class="row"> *@
+@*                             <div class="col-4"> *@
+@*                                 <h3>Invoice Details</h3> *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="InvoiceNumber" @bind-Value="_invoice.InvoiceNumber"/> *@
+@*                                     <label for="InvoiceNumber">Invoice Number</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.InvoiceNumber)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputDate class="w-100" id="DateOfInvoice" @bind-Value="_invoice.DateOfInvoice"/> *@
+@*                                     <label for="DateOfInvoice">Date of invoice</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.DateOfInvoice)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputDate class="w-100" id="DateOfRelease" @bind-Value="_invoice.DateOfRelease"/> *@
+@*                                     <label for="DateOfRelease">Date of release</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.DateOfRelease)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputDate class="w-100" id="DateOfPayment" @bind-Value="_invoice.DateOfPayment"/> *@
+@*                                     <label for="FormOfPayment">Date Of Payment</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.DateOfPayment)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="FormOfPayment" @bind-Value="_invoice.FormOfPayment"/> *@
+@*                                     <label for="FormOfPayment">Form of payment</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.FormOfPayment)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="AccountNumber" @bind-Value="_invoice.AccountNumber"/> *@
+@*                                     <label for="AccountNumber">Account Number</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.AccountNumber)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputCheckbox id="IsPaymentDivided" @bind-Value="_invoice.IsPaymentDivided"/> *@
+@*                                     <label for="FormOfPayment">Is Payment Divided</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.IsPaymentDivided)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputCheckbox id="IsPaid" @bind-Value="_invoice.IsPaid"/> *@
+@*                                     <label for="FormOfPayment">Is Paid</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.IsPaid)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputTextArea class="w-100" id="Remarks" @bind-Value="_invoice.Remarks"/> *@
+@*                                     <label for="Remarks">Remarks</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.Remarks)"></ValidationMessage> *@
+@*                                 </p> *@
+@*                             </div> *@
+@*                             <div class="col-4"> *@
+@*                                 <h3>Seller Details</h3> *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="SellerNip" @bind-Value="_invoice.Seller.Nip"/> *@
+@*                                     <label for="SellerNip">Nip</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.Seller.Nip)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="SellerName" @bind-Value="_invoice.Seller.Name"/> *@
+@*                                     <label for="SellerName">Name</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.Seller.Name)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="SellerStreet" @bind-Value="_invoice.Seller.Address.Street"/> *@
+@*                                     <label for="SellerStreet">Street</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.Seller.Address.Street)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="SellerCity" @bind-Value="_invoice.Seller.Address.City"/> *@
+@*                                     <label for="SellerCity">City</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.Seller.Address.City)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="SellerCountry" @bind-Value="_invoice.Seller.Address.Country"/> *@
+@*                                     <label for="SellerCountry">Country</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.Seller.Address.Country)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="SellerPostCode" @bind-Value="_invoice.Seller.Address.PostCode"/> *@
+@*                                     <label for="SellerPostCode">Post Code</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.Seller.Address.PostCode)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="SellerBuildingNumber" @bind-Value="_invoice.Seller.Address.BuildingNumber"/> *@
+@*                                     <label for="SellerBuildingNumber">Building Number</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.Seller.Address.BuildingNumber)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="SellerFlatNumber" @bind-Value="_invoice.Seller.Address.FlatNumber"/> *@
+@*                                     <label for="SellerFlatNumber">Flat Number</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.Seller.Address.FlatNumber)"></ValidationMessage> *@
+@*                                 </p> *@
+@*                             </div> *@
+@*                             <div class="col-4"> *@
+@*                                 <h3>Buyer Details</h3> *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="BuyerNip" @bind-Value="_invoice.Buyer.Nip"/> *@
+@*                                     <label for="BuyerNip">Nip</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.Buyer.Nip)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="BuyerName" @bind-Value="_invoice.Buyer.Name"/> *@
+@*                                     <label for="BuyerName">Name</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.Buyer.Name)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="BuyerStreet" @bind-Value="_invoice.Buyer.Address.Street"/> *@
+@*                                     <label for="BuyerStreet">Street</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.Buyer.Address.Street)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="BuyerCity" @bind-Value="_invoice.Buyer.Address.City"/> *@
+@*                                     <label for="BuyerCity">City</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.Buyer.Address.City)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="BuyerCountry" @bind-Value="_invoice.Buyer.Address.Country"/> *@
+@*                                     <label for="BuyerCountry">Country</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.Buyer.Address.Country)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="BuyerPostCode" @bind-Value="_invoice.Buyer.Address.PostCode"/> *@
+@*                                     <label for="BuyerPostCode">Post Code</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.Buyer.Address.PostCode)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="BuyerBuildingNumber" @bind-Value="_invoice.Buyer.Address.BuildingNumber"/> *@
+@*                                     <label for="BuyerPostCode">Post Code</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.Buyer.Address.BuildingNumber)"></ValidationMessage> *@
+@*                                 </p> *@
+@* *@
+@*                                 <p> *@
+@*                                     <InputText class="w-100" id="BuyerFlatNumber" @bind-Value="_invoice.Buyer.Address.FlatNumber"/> *@
+@*                                     <label for="BuyerFlatNumber">Flat Number</label> *@
+@*                                     <ValidationMessage For="@(() => _invoice.Buyer.Address.FlatNumber)"></ValidationMessage> *@
+@*                                 </p> *@
+@*                             </div> *@
+@*                             <div class="col-12" id="products"> *@
+@*                                 <h3>Products</h3> *@
+@*                                 @foreach (var product in _invoice.Products.Select((value, index) => new { index, value })) *@
+@*                                 { *@
+@*                                     var idName = $"{product.value.Name}-{product.index}-Name"; *@
+@*                                     var idLegalBasisForTaxExemption = $"{product.value.LegalBasisForTaxExemption}-{product.index}-LegalBasisForTaxExemption"; *@
+@*                                     var idPricePerUnit = $"{product.value.Name}-{product.index}-Name"; *@
+@*                                     var idNumberOfUnits = $"{product.value.Name}-{product.index}-Name"; *@
+@*                                     var idUnitName = $"{product.value.Name}-{product.index}-Name"; *@
+@*                                     var idVat = $"{product.value.Name}-{product.index}-Name"; *@
+@*                                     var idIsVatZw = $"{product.value.Name}-{product.index}-IsVatZw"; *@
+@* *@
+@*                                     <div class="row g-2"> *@
+@*                                         <div class="col-4"> *@
+@*                                             <InputText class="w-100" id="@idName" @bind-Value="_invoice.Products.ToList()[product.index].Name"/> *@
+@*                                             <label for="@idName">Name</label> *@
+@*                                             <ValidationMessage For="@(() => _invoice.Products.ToList()[product.index].Name)"></ValidationMessage> *@
+@*                                         </div> *@
+@* *@
+@*                                         <div class="col-4"> *@
+@*                                             <InputText class="w-100" id="@idLegalBasisForTaxExemption" @bind-Value="_invoice.Products.ToList()[product.index].LegalBasisForTaxExemption"/> *@
+@*                                             <label for="@idLegalBasisForTaxExemption">Tax Exemption Basis</label> *@
+@*                                             <ValidationMessage For="@(() => _invoice.Products.ToList()[product.index].LegalBasisForTaxExemption)"></ValidationMessage> *@
+@*                                         </div> *@
+@* *@
+@*                                         <div class="col-2"> *@
+@*                                             <InputNumber class="w-100" id="@idPricePerUnit" @bind-Value="_invoice.Products.ToList()[product.index].PricePerUnit"/> *@
+@*                                             <label for="@idPricePerUnit">Price per Unit</label> *@
+@*                                             <ValidationMessage For="@(() => _invoice.Products.ToList()[product.index].PricePerUnit)"></ValidationMessage> *@
+@*                                         </div> *@
+@* *@
+@*                                         <div class="col-1"> *@
+@*                                             <InputNumber class="w-100" id="@idNumberOfUnits" @bind-Value="_invoice.Products.ToList()[product.index].NumberOfUnits"/> *@
+@*                                             <label for="@idNumberOfUnits">Units</label> *@
+@*                                             <ValidationMessage For="@(() => _invoice.Products.ToList()[product.index].NumberOfUnits)"></ValidationMessage> *@
+@*                                         </div> *@
+@* *@
+@*                                         <div class="col-1"> *@
+@*                                             <InputText class="w-100" id="@idUnitName" @bind-Value="_invoice.Products.ToList()[product.index].UnitName"/> *@
+@*                                             <label for="@idUnitName">Unit Name</label> *@
+@*                                             <ValidationMessage For="@(() => _invoice.Products.ToList()[product.index].UnitName)"></ValidationMessage> *@
+@*                                         </div> *@
+@* *@
+@*                                         <div class="col-1"> *@
+@*                                             <InputNumber class="w-100" id="@idVat" @bind-Value="_invoice.Products.ToList()[product.index].Vat"/> *@
+@*                                             <label for="@idVat">Vat</label> *@
+@*                                             <ValidationMessage For="@(() => _invoice.Products.ToList()[product.index].Vat)"></ValidationMessage> *@
+@*                                         </div> *@
+@* *@
+@*                                         <div class="col-1"> *@
+@*                                             <InputCheckbox class="w-100" id="@idIsVatZw" @bind-Value="_invoice.Products.ToList()[product.index].isVatZw"/> *@
+@*                                             <label for="@idIsVatZw">Is Vat Zw</label> *@
+@*                                             <ValidationMessage For="@(() => _invoice.Products.ToList()[product.index].isVatZw)"></ValidationMessage> *@
+@*                                         </div> *@
+@*                                     </div> *@
+@*                                 } *@
+@* *@
+@*                                 <button type="button" class="btn btn-primary" @onclick="() => AddProduct()">Add Product</button> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                     </EditForm> *@
+@*                 </div> *@
+@* *@
+@*             </div> *@
+@*             <div class="row"> *@
+@*                 <div class="modal-footer col-12"> *@
+@*                     <button type="submit" class="btn btn-primary" @onclick="() => Create()">Save changes</button> *@
+@*                     <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Close()">Close</button> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
+@* *@
+@* *@
+@* @if (_showBackdrop) *@
+@* { *@
+@*     <div class="modal-backdrop fade show"></div> *@
+@* } *@
+@* *@
+@* @code { *@
+@*     [Parameter] *@
+@*     public EventCallback<Invoice> OnInvoiceAdded { get; set; } *@
+@* *@
+@*     private string _addModalDisplay = "none;"; *@
+@*     private string _addModalClass = ""; *@
+@*     private bool _showBackdrop = false; *@
+@* *@
+@*     private Invoice _invoice = SetEmptyInvoice(); *@
+@* *@
+@*     private static Invoice SetEmptyInvoice() *@
+@*     { *@
+@*         return new Invoice *@
+@*         { *@
+@*             Id = null, *@
+@*             InvoiceNumber = null, *@
+@*             DateOfInvoice = default, *@
+@*             DateOfRelease = default, *@
+@*             DateOfPayment = default, *@
+@*             FormOfPayment = null, *@
+@*             AccountNumber = null, *@
+@*             IsPaymentDivided = false, *@
+@*             IsPaid = false, *@
+@*             Remarks = null, *@
+@*             Seller = new Contractor *@
+@*             { *@
+@*                 Name = null, *@
+@*                 Nip = null, *@
+@*                 Address = new Address *@
+@*                 { *@
+@*                     Street = null, *@
+@*                     City = null, *@
+@*                     Country = null, *@
+@*                     PostCode = null, *@
+@*                     BuildingNumber = null, *@
+@*                     FlatNumber = null *@
+@*                 } *@
+@*             }, *@
+@*             Buyer = new Contractor *@
+@*             { *@
+@*                 Name = null, *@
+@*                 Nip = null, *@
+@*                 Address = new Address *@
+@*                 { *@
+@*                     Street = null, *@
+@*                     City = null, *@
+@*                     Country = null, *@
+@*                     PostCode = null, *@
+@*                     BuildingNumber = null, *@
+@*                     FlatNumber = null *@
+@*                 } *@
+@*             }, *@
+@*             Products = new List<Product>() *@
+@*         }; *@
+@*     } *@
+@* *@
+@*     public async Task Open(Invoice invoiceToClone) *@
+@*     { *@
+@*         _addModalDisplay = "block;"; *@
+@*         _addModalClass = "Show"; *@
+@*         _showBackdrop = true; *@
+@*         await SetFormDefaultFields(invoiceToClone); *@
+@*         StateHasChanged(); *@
+@*     } *@
+@* *@
+@*     private void Close() *@
+@*     { *@
+@*         _addModalDisplay = "none"; *@
+@*         _addModalClass = ""; *@
+@*         _showBackdrop = false; *@
+@*         StateHasChanged(); *@
+@*     } *@
+@* *@
+@*     private async Task SetFormDefaultFields(Invoice invoiceToClone) *@
+@*     { *@
+@*         var currentMonth = DateTime.Now.Month.ToString(); *@
+@*         var currentYear = DateTime.Now.Year.ToString(); *@
+@*         var invoices = await _mediator.Send(new GetByInvoicesYearAndMonthQuery { Month = currentMonth, Year = currentYear}); *@
+@*         var invoiceNumber = invoices.Count+1; *@
+@* *@
+@*         switch (invoiceToClone) *@
+@*         { *@
+@*             case null: *@
+@*                 _invoice = SetEmptyInvoice(); *@
+@*                 _invoice.InvoiceNumber = $"F{invoiceNumber}-{currentMonth}-{currentYear}"; *@
+@*                 _invoice.IsPaid = false; *@
+@*                 _invoice.DateOfInvoice = DateTime.Now; *@
+@*                 _invoice.DateOfRelease = DateTime.Now; *@
+@*                 _invoice.DateOfPayment = DateTime.Now.AddDays(14); *@
+@*                 _invoice.FormOfPayment = "Przelew"; *@
+@*                 break; *@
+@*             default: *@
+@*                 _invoice.InvoiceNumber = $"F{invoiceNumber}-{currentMonth}-{currentYear}"; *@
+@*                 _invoice.DateOfInvoice = DateTime.Now; *@
+@*                 _invoice.DateOfRelease = DateTime.Now; *@
+@*                 _invoice.DateOfPayment = DateTime.Now.AddDays(14); *@
+@*                 _invoice.FormOfPayment = invoiceToClone.FormOfPayment; *@
+@*                 _invoice.AccountNumber = invoiceToClone.AccountNumber; *@
+@*                 _invoice.IsPaymentDivided = false; *@
+@*                 _invoice.Remarks = ""; *@
+@*                 _invoice.Seller.Name = invoiceToClone.Seller.Name; *@
+@*                 _invoice.Seller.Nip = invoiceToClone.Seller.Nip; *@
+@*                 _invoice.Seller.Address = invoiceToClone.Seller.Address; *@
+@*                 _invoice.Buyer.Name = invoiceToClone.Buyer.Name; *@
+@*                 _invoice.Buyer.Nip = invoiceToClone.Buyer.Nip; *@
+@*                 _invoice.Buyer.Address = invoiceToClone.Buyer.Address; *@
+@*                 _invoice.Products = invoiceToClone.Products; *@
+@*                 break; *@
+@*         } *@
+@*     } *@
+@* *@
+@*     private void AddProduct() *@
+@*     { *@
+@*         _invoice.Products.Add(new Product *@
+@*         { Name = null, PricePerUnit = 0, NumberOfUnits = 1, UnitName = null, Vat = 23, PriceGross = 0 }); *@
+@*     } *@
+@* *@
+@*     private async Task Create() *@
+@*     { *@
+@*         await _mediator.Send(new CreateCommand { Invoice = _invoice }); *@
+@*         await OnInvoiceAdded.InvokeAsync(_invoice); *@
+@*         Close(); *@
+@*     } *@
+@* } *@

@@ -1,0 +1,77 @@
+﻿@page "/AddContractor"
+@using MediatR
+@using Microsoft.AspNetCore.Components
+@using BluBlu.Invoices.Domain.ContractorsEntity
+@using BluBlu.Invoices.Domain.ContractorsEntity.Commands
+@using BluBlu.Blazor.Pages.Contractors.Requests
+@inject IMediator _mediator
+
+<EditForm class="col-12" Model="@_command" OnValidSubmit="@Create">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <div class="row">
+        <div class="col-4">
+            <h3>Contractor</h3>
+            <p>
+                <InputText class="w-100" id="Nip" @bind-Value="_command.Nip"/>
+                <label for="Nip">Nip</label>
+                <ValidationMessage For="@(() => _command.Nip)"></ValidationMessage>
+            </p>
+
+            <p>
+                <InputText class="w-100" id="Name" @bind-Value="_command.Name"/>
+                <label for="Name">Name</label>
+                <ValidationMessage For="@(() => _command.Name)"></ValidationMessage>
+            </p>
+
+            <p>
+                <InputText class="w-100" id="Street" @bind-Value="_command.AddressStreet"/>
+                <label for="Street">Street</label>
+                <ValidationMessage For="@(() => _command.AddressStreet)"></ValidationMessage>
+            </p>
+
+            <p>
+                <InputText class="w-100" id="City" @bind-Value="_command.AddressCity"/>
+                <label for="City">City</label>
+                <ValidationMessage For="@(() => _command.AddressCity)"></ValidationMessage>
+            </p>
+
+            <p>
+                <InputText class="w-100" id="Country" @bind-Value="_command.AddressCountry"/>
+                <label for="Country">Country</label>
+                <ValidationMessage For="@(() => _command.AddressCountry)"></ValidationMessage>
+            </p>
+
+            <p>
+                <InputText class="w-100" id="PostCode" @bind-Value="_command.AddressPostCode"/>
+                <label for="PostCode">Post Code</label>
+                <ValidationMessage For="@(() => _command.AddressPostCode)"></ValidationMessage>
+            </p>
+
+            <p>
+                <InputText class="w-100" id="BuildingNumber" @bind-Value="_command.AddressBuildingNumber"/>
+                <label for="BuildingNumber">Building Number</label>
+                <ValidationMessage For="@(() => _command.AddressBuildingNumber)"></ValidationMessage>
+            </p>
+
+            <p>
+                <InputText class="w-100" id="FlatNumber" @bind-Value="_command.AddressFlatNumber"/>
+                <label for="FlatNumber">Flat Number</label>
+                <ValidationMessage For="@(() => _command.AddressFlatNumber)"></ValidationMessage>
+            </p>
+        </div>
+    </div>
+</EditForm>
+<div class="row">
+     <div class="modal-footer col-12">
+         <button type="submit" class="btn btn-primary" @onclick="() => Create()">Save changes</button>
+     </div>
+</div>
+
+
+@code {
+    private CreateContractorCommand _command = new();
+    
+    private async Task Create()
+    {
+        await _mediator.Send(new CreateCommand { Contractor = _command.ToDomainModel() });
+    }}
