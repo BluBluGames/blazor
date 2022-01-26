@@ -71,22 +71,22 @@
     
     private async Task<List<Invoice>> GetAll()
     {
-        return await _mediator.Send(new GetAllQuery());
+        return await _mediator.Send(new GetAllInvoicesQuery());
     }
     
     private async Task<Invoice> GetById(string id)
     {
-        return await _mediator.Send(new GetByIdQuery { Id = id });
+        return await _mediator.Send(new GetInvoiceByIdQuery { Id = id });
     }
 
     private async Task<Invoice> Update(string id, Invoice invoice)
     {
-        return await _mediator.Send(new UpdateCommand { Id = id, Invoice = invoice });
+        return await _mediator.Send(new UpdateInvoiceCommand { Id = id, Invoice = invoice });
     }
 
     private async Task<DeleteResult> Delete(string id)
     {
-        var result = await _mediator.Send(new DeleteCommand { Id = id });
+        var result = await _mediator.Send(new DeleteInvoiceCommand { Id = id });
 
         if (!result.IsAcknowledged) return result;
         

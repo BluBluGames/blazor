@@ -2,7 +2,7 @@
 
 namespace BluBlu.Invoices.Domain.InvoicesAggregate.Commands.Create;
 
-public class CreateCommand : IRequest<Invoice>
+public class CreateInvoiceCommand : IRequest<Invoice>
 {
     public Invoice Invoice { get; set; } = null!;
 }

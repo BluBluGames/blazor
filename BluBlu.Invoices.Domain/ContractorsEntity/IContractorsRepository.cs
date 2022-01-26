@@ -2,5 +2,5 @@
 
 public interface IContractorsRepository
 {
-    Task<Contractor> Create(Contractor invoice);
+    Task<Contractor> CreateContractor(Contractor invoice);
 }

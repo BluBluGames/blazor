@@ -29,6 +29,4 @@ public class Contractor
         Address = new Address(addressStreet, addressCity, addressCountry, addressPostCode, addressBuildingNumber, addressFlatNumber);
         Nip = new Nip(nip);
     }
-
-
 }

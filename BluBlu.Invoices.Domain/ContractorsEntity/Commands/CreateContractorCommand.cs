@@ -2,7 +2,7 @@
 
 namespace BluBlu.Invoices.Domain.ContractorsEntity.Commands;
 
-public class CreateCommand : IRequest<Contractor>
+public class CreateContractorCommand : IRequest<Contractor>
 {
     public Contractor Contractor { get; set; } = null!;
 }

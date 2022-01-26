@@ -4,6 +4,7 @@
 @using BluBlu.Invoices.Domain.ContractorsEntity
 @using BluBlu.Invoices.Domain.ContractorsEntity.Commands
 @using BluBlu.Blazor.Pages.Contractors.Requests
+@using CreateContractorCommand = BluBlu.Invoices.Domain.ContractorsEntity.Commands.CreateContractorCommand
 @inject IMediator _mediator
 
 <EditForm class="col-12" Model="@_command" OnValidSubmit="@Create">
@@ -69,9 +70,9 @@
 
 
 @code {
-    private CreateContractorCommand _command = new();
+    private Requests.CreateContractorCommand _command = new();
     
     private async Task Create()
     {
-        await _mediator.Send(new CreateCommand { Contractor = _command.ToDomainModel() });
+        await _mediator.Send(new CreateContractorCommand { Contractor = _command.ToDomainModel() });
     }}

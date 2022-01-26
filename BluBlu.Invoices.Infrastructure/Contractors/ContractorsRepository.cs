@@ -14,7 +14,7 @@ public class ContractorsRepository : IContractorsRepository
         _database = database;
     }
 
-    public async Task<Contractor> Create(Contractor contractor)
+    public async Task<Contractor> CreateContractor(Contractor contractor)
     {
         contractor.Id = ObjectId.GenerateNewId().ToString();
         await _database.Contractors.InsertOneAsync(contractor);
