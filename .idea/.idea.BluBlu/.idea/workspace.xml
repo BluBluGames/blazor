@@ -9,57 +9,11 @@
     <projectFile profileName="IIS Express">BluBlu.Stocks.Api/BluBlu.Stocks.Api.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e662321e-6c3b-40cd-99af-1574f65b4bd8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Requests/ContractorRequestModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Requests/InvoiceRequestModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Requests/ProductRequestModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/DateTimeValueObject.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/DateValueObject.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoDateTimeValueObjectSerializer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/AccountNumber.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/DateOfInvoice.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/DateOfPayment.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/DateOfRelease.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/FormOfPayment.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/InvoiceNumber.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/IsPaid.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/IsPaymentDivided.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/ProductVO/NumberOfUnits.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/Remarks.cs" afterDir="false" />
+    <list default="true" id="e662321e-6c3b-40cd-99af-1574f65b4bd8" name="Changes" comment="create and fetch invoices">
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/F1-01-2022.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/blublu-logo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Contractors/AddContractor.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Contractors/AddContractor.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Contractors/Requests/CreateContractorCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Contractors/Requests/CreateContractorCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/AddModal.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/AddModal.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Invoices.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Invoices.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/DecimalValueObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/DecimalValueObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoBooleanValueObjectSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoBooleanValueObjectSerializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoDecimalValueObjectSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoDecimalValueObjectSerializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoLongValueObjectSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoLongValueObjectSerializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoStringValueObjectSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoStringValueObjectSerializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/Contractor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/Contractor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Address.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Address.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/BuildingNumber.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/BuildingNumber.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/Country.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/Country.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/FlatNumber.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/FlatNumber.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/PostCity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/PostCity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/PostCode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/PostCode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/Street.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/Street.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Name.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Name.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Nip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Nip.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/CreatePdf/CreatePdfCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/CreatePdf/CreatePdfCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Invoice.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Invoice.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/Product.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/Product.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/IsVatZw.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/IsVatZw.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/LegalBasisForTaxExemption.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/LegalBasisForTaxExemption.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/Name.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/Name.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/PriceGross.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/PriceGross.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/PriceNet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/PriceNet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/UnitName.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/UnitName.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/Vat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/Vat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetAll/GetAllInvoicesQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetAll/GetAllInvoicesQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/PriceByVat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/PriceByVat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/Product.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/ProductWithNumberOfUnits.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -303,7 +257,7 @@
       <workItem from="1643292848382" duration="14076000" />
       <workItem from="1643378916392" duration="5917000" />
       <workItem from="1643393792863" duration="124000" />
-      <workItem from="1643393954994" duration="7819000" />
+      <workItem from="1643393954994" duration="8104000" />
     </task>
     <task id="LOCAL-00001" summary="add migrations and context in auth domain">
       <created>1642880339839</created>
@@ -347,7 +301,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643179144601</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="create and fetch invoices">
+      <created>1643441734971</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1643441734971</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -376,7 +337,8 @@
     <MESSAGE value="Invoices MVP" />
     <MESSAGE value="Implement Value Objects and serialization for mongo, implement contractors entity" />
     <MESSAGE value="Add product entity and needed value objects" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add product entity and needed value objects" />
+    <MESSAGE value="create and fetch invoices" />
+    <option name="LAST_COMMIT_MESSAGE" value="create and fetch invoices" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

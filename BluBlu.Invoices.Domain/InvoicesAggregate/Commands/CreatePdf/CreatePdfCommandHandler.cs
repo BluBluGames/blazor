@@ -204,8 +204,17 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
     private static void SetHeaderTable(CreatePdfCommand request, PdfFont helvetica, PdfFont helveticaBold, Document document)
     {
         var headerTable = new Table(UnitValue.CreatePercentArray(2)).UseAllAvailableWidth();
-            
-        var logo = new Image(ImageDataFactory.Create("./blublu-logo.jpg"));
+
+        Image logo;
+        try
+        {
+            logo = new Image(ImageDataFactory.Create("./blublu-logo.jpg"));
+        }
+        catch (Exception e)
+        {
+            logo = new Image(ImageDataFactory.Create("./blublu-logo.png"));
+        }
+
         logo.ScaleToFit(128, 128);
         var image = new Paragraph().Add(logo);
             
