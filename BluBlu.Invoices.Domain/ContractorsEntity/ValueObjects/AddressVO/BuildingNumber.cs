@@ -7,7 +7,7 @@ namespace BluBlu.Invoices.Domain.ContractorsEntity.ValueObjects.AddressVO;
 [BsonSerializer(typeof(MongoStringValueObjectSerializer<BuildingNumber>))]
 public class BuildingNumber : StringValueObject
 {
-    protected BuildingNumber()
+    public BuildingNumber()
     {
     }
 

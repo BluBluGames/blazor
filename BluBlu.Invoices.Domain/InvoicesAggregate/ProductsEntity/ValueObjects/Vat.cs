@@ -13,6 +13,10 @@ public class Vat : DecimalValueObject
     {
     }
 
+    public Vat(decimal value) : base(value, Precision)
+    {
+    }
+
     public Vat(decimal value, decimal? minValue = 0m, decimal? maxValue = 999.99m)
         : base(value, Precision, minValue, maxValue)
     {

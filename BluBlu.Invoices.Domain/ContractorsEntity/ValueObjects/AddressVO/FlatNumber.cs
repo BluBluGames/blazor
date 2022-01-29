@@ -7,7 +7,7 @@ namespace BluBlu.Invoices.Domain.ContractorsEntity.ValueObjects.AddressVO;
 [BsonSerializer(typeof(MongoStringValueObjectSerializer<FlatNumber>))]
 public class FlatNumber : StringValueObject
 {
-    protected FlatNumber()
+    public FlatNumber()
     {
     }
 

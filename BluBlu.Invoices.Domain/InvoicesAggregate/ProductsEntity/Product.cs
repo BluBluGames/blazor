@@ -13,5 +13,27 @@ public class Product
     [BsonElement("Vat")] public Vat Vat { get; set; } = null!;
     [BsonElement("IsVatZw")] public IsVatZw IsVatZw { get; set; } = null!;
     [BsonElement("PriceGross")] public PriceGross PriceGross { get; set; } = null!;
-    [BsonElement("LegalBasisForTaxExemption")] public LegalBasisForTaxExemption LegalBasisForTaxExemption { get; set; } = null!;
+    [BsonElement("LegalBasisForTaxExemption")] public LegalBasisForTaxExemption? LegalBasisForTaxExemption { get; set; } = null!;
+
+    public Product()
+    {
+    }
+    
+    public Product(
+        Name name,
+        PriceNet priceNet,
+        UnitName unitName,
+        Vat vat,
+        IsVatZw isVatZw,
+        PriceGross priceGross,
+        LegalBasisForTaxExemption? legalBasisForTaxExemption)
+    {
+        Name = name;
+        PriceNet = priceNet;
+        UnitName = unitName;
+        Vat = vat;
+        IsVatZw = isVatZw;
+        PriceGross = priceGross;
+        LegalBasisForTaxExemption = legalBasisForTaxExemption;
+    }
 }

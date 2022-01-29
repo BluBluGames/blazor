@@ -7,7 +7,7 @@ namespace BluBlu.Invoices.Domain.ContractorsEntity.ValueObjects.AddressVO;
 [BsonSerializer(typeof(MongoStringValueObjectSerializer<Country>))]
 public class Country : StringValueObject
 {
-    protected Country()
+    public Country()
     {
     }
 

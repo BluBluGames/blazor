@@ -7,7 +7,7 @@ namespace BluBlu.Invoices.Domain.ContractorsEntity.ValueObjects;
 [BsonSerializer(typeof(MongoStringValueObjectSerializer<Name>))]
 public class Name : StringValueObject
 {
-    protected Name()
+    public Name()
     {
     }
 

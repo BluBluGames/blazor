@@ -13,6 +13,10 @@ public class PriceNet : DecimalValueObject
     {
     }
 
+    public PriceNet(decimal value) : base(value, Precision)
+    {
+    }
+    
     public PriceNet(decimal value, decimal? minValue = 0m, decimal? maxValue = 99999999999.99m)
         : base(value, Precision, minValue, maxValue)
     {

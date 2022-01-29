@@ -4,10 +4,10 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace BluBlu.Invoices.Domain.InvoicesAggregate.ProductsEntity.ValueObjects;
 
-[BsonSerializer(typeof(MongoStringValueObjectSerializer<Name>))]
+[BsonSerializer(typeof(MongoStringValueObjectSerializer<UnitName>))]
 public class UnitName : StringValueObject
 {
-    protected UnitName()
+    public UnitName()
     {
     }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 
 namespace BluBlu.Common.Domain.ValueObjects.Serializers;
@@ -20,16 +21,29 @@ public class MongoStringValueObjectSerializer<TValueObject> : IBsonSerializer<TV
         context.Writer.WriteString(value?.Value);
     }
 
-    public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, object value)
+    public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, object? value)
     {
-        if (value is TValueObject name)
-            context.Writer.WriteString(name.Value);
-        else
-            throw new NotSupportedException("This type is not supported");
+        switch (value)
+        {
+            case TValueObject name:
+                context.Writer.WriteString(name.Value);
+                break;
+            case null:
+                context.Writer.WriteNull();
+                break;
+            default:
+                throw new NotSupportedException("This type is not supported");
+        }
     }
 
     object IBsonSerializer.Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
     {
+        if (context.Reader.CurrentBsonType == BsonType.Null)
+        {
+            context.Reader.ReadNull();
+            return (TValueObject) Activator.CreateInstance(typeof(TValueObject), null)!;
+        }
+
         var value = context.Reader.ReadString();
         return (TValueObject) Activator.CreateInstance(typeof(TValueObject), value)!;
     }

@@ -10,46 +10,56 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e662321e-6c3b-40cd-99af-1574f65b4bd8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/BooleanValueObject.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/DecimalValueObject.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoBooleanValueObjectSerializer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoDecimalValueObjectSerializer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/Commands/CreateProductCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/Commands/CreateProductCommandHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/IProductsRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/Product.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/IsVatZw.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/LegalBasisForTaxExemption.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/Name.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/PriceGross.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/PriceNet.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/UnitName.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/Vat.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Infrastructure/Products/ProductsRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Requests/ContractorRequestModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Requests/InvoiceRequestModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Requests/ProductRequestModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/DateTimeValueObject.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/DateValueObject.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoDateTimeValueObjectSerializer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/AccountNumber.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/DateOfInvoice.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/DateOfPayment.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/DateOfRelease.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/FormOfPayment.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/InvoiceNumber.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/IsPaid.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/IsPaymentDivided.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/ProductVO/NumberOfUnits.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/Remarks.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Contractors/AddContractor.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Contractors/AddContractor.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Contractors/Requests/CreateContractorCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Contractors/Requests/CreateContractorCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/AddModal.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/AddModal.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Invoices.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Invoices.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/Commands/CreateCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/Commands/CreateContractorCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/Commands/CreateCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/Commands/CreateContractorCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/DecimalValueObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/DecimalValueObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoBooleanValueObjectSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoBooleanValueObjectSerializer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoDecimalValueObjectSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoDecimalValueObjectSerializer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoLongValueObjectSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoLongValueObjectSerializer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoStringValueObjectSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoStringValueObjectSerializer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/Contractor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/Contractor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/IContractorsRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/IContractorsRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/Create/CreateCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/Create/CreateInvoiceCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/Create/CreateCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/Create/CreateInvoiceCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/Delete/DeleteCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/Delete/DeleteInvoiceCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/Delete/DeleteCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/Delete/DeleteInvoiceCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/Update/UpdateCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/Update/UpdateInvoiceCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/Update/UpdateCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/Update/UpdateInvoiceCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/IInvoiceRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/IInvoiceRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetAll/GetAllQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetAll/GetAllInvoicesQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetAll/GetAllQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetAll/GetAllInvoicesQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetById/GetByIdQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetById/GetInvoiceByIdQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetById/GetByIdQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetById/GetInvoiceByIdQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetByInvoiceNumber/GetByInvoicesYearAndMonthQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetByInvoiceNumber/GetInvoicesByYearAndMonthQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetByInvoiceNumber/GetByInvoicesYearAndMonthQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetByInvoiceNumber/GetInvoicesByYearAndMonthQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Infrastructure/Connection/IInvoicesDatabase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Infrastructure/Connection/IInvoicesDatabase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Infrastructure/Connection/InvoicesDatabase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Infrastructure/Connection/InvoicesDatabase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Infrastructure/Contractors/ContractorsRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Infrastructure/Contractors/ContractorsRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Infrastructure/Invoices/InvoiceRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Infrastructure/Invoices/InvoiceRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Address.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Address.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/BuildingNumber.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/BuildingNumber.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/Country.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/Country.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/FlatNumber.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/FlatNumber.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/PostCity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/PostCity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/PostCode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/PostCode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/Street.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/AddressVO/Street.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Name.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Name.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Nip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Nip.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/CreatePdf/CreatePdfCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/CreatePdf/CreatePdfCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Invoice.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Invoice.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/Product.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/Product.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/IsVatZw.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/IsVatZw.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/LegalBasisForTaxExemption.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/LegalBasisForTaxExemption.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/Name.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/Name.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/PriceGross.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/PriceGross.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/PriceNet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/PriceNet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/UnitName.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/UnitName.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/Vat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/Vat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetAll/GetAllInvoicesQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetAll/GetAllInvoicesQueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/PriceByVat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/PriceByVat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/Product.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/ProductWithNumberOfUnits.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,23 +90,33 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e3bc3f84cc248cc742fc1c5f56a7727d2febed13ab281104470f728796baac5/RazorPage.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/99f419da685db5b785ad98ae98ffc828baa4e16ee92330e6d3d152fc38ff31b1/TypeConverter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/598be7b76329747735b1e8e8b423ca7a2fff54b0a9474b23f1e0f920a889444d/RazorView.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f4708639776589f5ac2739f6fcbfc67343b1f9dac51cc1dbfdb003eef77cc1c/Monitor.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c1da7b6c7c71a954fe3eb2531c6476711b3e6d93a8d76795386d326bb9dbc/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a9cbda3784706aeeed61f1a08a18046925b69f777943eca27fbbcca09dff60/DateTime.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Invoices.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/af506b2bcf2f429f84c4f850f5e34ace73400/a1/e79173e9/BsonReader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/974fa14c57bab8fe29f1bddd39b1a6548b9cc8cf9e0ef5e670c2407a56d9/String.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/AddModal.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BluBlu.Blazor/Pages/Contractors/AddContractor.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cff4d35895d3db30db86a0ec21297ac77589b961f6e219dede5a24aff0bb3b8d/ComponentBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9ff6e15065aca4366778dbe1a1b71b9164dea3534b71e1795c33fd6f159f52/RuntimeType.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bcaa9628af6c4f61b21166133af53b4823898/64/db31a71e/AuthAppBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d77c4680ed9457393ace56767da2743b443a47727beda6a2b5304cc4abee506e/Activator.RuntimeType.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/af506b2bcf2f429f84c4f850f5e34ace73400/f4/ba780617/BsonClassMapSerializer`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/UnitName.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/af506b2bcf2f429f84c4f850f5e34ace73400/79/b892ad34/IBsonSerializerExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/99f419da685db5b785ad98ae98ffc828baa4e16ee92330e6d3d152fc38ff31b1/TypeConverter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Name.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Address.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/IProductsRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d4f4ac7db6d2c5d183ab2d92602280ed4349fd6e6a1b6313546b3d01fdab5/ServiceProvider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/Product.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f4708639776589f5ac2739f6fcbfc67343b1f9dac51cc1dbfdb003eef77cc1c/Monitor.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/37a954845b52703c5cce1aacf8fa1292378878e82bf68c4c4b5effc447316e9/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoBooleanValueObjectSerializer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/Contractor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/974fa14c57bab8fe29f1bddd39b1a6548b9cc8cf9e0ef5e670c2407a56d9/String.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BluBlu.Blazor/Pages/Contractors/AddContractor.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9ff6e15065aca4366778dbe1a1b71b9164dea3534b71e1795c33fd6f159f52/RuntimeType.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bcaa9628af6c4f61b21166133af53b4823898/64/db31a71e/AuthAppBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d77c4680ed9457393ace56767da2743b443a47727beda6a2b5304cc4abee506e/Activator.RuntimeType.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea95343b9387b73062a9b61b7538f826c54ce3529632b4472ba4494044d23/AsyncTaskMethodBuilderT.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/41cc2659897ded1c75869e25f414a6dce3380d39586a3b5a93cc7ebd6ce5/SignInManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/UnitName.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -275,6 +295,15 @@
       <workItem from="1643000434211" duration="2168000" />
       <workItem from="1643041276962" duration="4793000" />
       <workItem from="1643141946300" duration="3529000" />
+      <workItem from="1643179071837" duration="81000" />
+      <workItem from="1643179182734" duration="10000" />
+      <workItem from="1643235798901" duration="1595000" />
+      <workItem from="1643264864783" duration="3605000" />
+      <workItem from="1643268526698" duration="3000" />
+      <workItem from="1643292848382" duration="14076000" />
+      <workItem from="1643378916392" duration="5917000" />
+      <workItem from="1643393792863" duration="124000" />
+      <workItem from="1643393954994" duration="7819000" />
     </task>
     <task id="LOCAL-00001" summary="add migrations and context in auth domain">
       <created>1642880339839</created>
@@ -311,7 +340,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643044080436</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Add product entity and needed value objects">
+      <created>1643179144601</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1643179144601</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -339,6 +375,146 @@
     <MESSAGE value="Customizing razor layouts in blazor" />
     <MESSAGE value="Invoices MVP" />
     <MESSAGE value="Implement Value Objects and serialization for mongo, implement contractors entity" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement Value Objects and serialization for mongo, implement contractors entity" />
+    <MESSAGE value="Add product entity and needed value objects" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add product entity and needed value objects" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/AddModal.razor</url>
+          <line>370</line>
+          <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Blazor\Pages\Invoices\AddModal.razor" initialLine="331" isMultiMethodBreakpoint="true">
+            <option name="multiMethodBreakpoint" value="true" />
+            <startOffsets>
+              <option value="-1" />
+            </startOffsets>
+            <endOffsets>
+              <option value="-1" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/Create/CreateInvoiceCommandHandler.cs</url>
+          <line>15</line>
+          <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Invoices.Domain\InvoicesAggregate\Commands\Create\CreateInvoiceCommandHandler.cs" initialLine="15" containingFunctionPresentation="method 'Handle'">
+            <startOffsets>
+              <option value="495" />
+            </startOffsets>
+            <endOffsets>
+              <option value="558" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/BluBlu.Invoices.Infrastructure/Invoices/InvoiceRepository.cs</url>
+          <line>36</line>
+          <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Invoices.Infrastructure\Invoices\InvoiceRepository.cs" initialLine="36" containingFunctionPresentation="method 'CreateInvoice'">
+            <startOffsets>
+              <option value="1174" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1223" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoDateTimeValueObjectSerializer.cs</url>
+          <line>24</line>
+          <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Common.Domain\ValueObjects\Serializers\MongoDateTimeValueObjectSerializer.cs" initialLine="24" containingFunctionPresentation="method 'Serialize'">
+            <startOffsets>
+              <option value="890" />
+            </startOffsets>
+            <endOffsets>
+              <option value="904" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoLongValueObjectSerializer.cs</url>
+          <line>39</line>
+          <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Common.Domain\ValueObjects\Serializers\MongoLongValueObjectSerializer.cs" initialLine="39" containingFunctionPresentation="method 'Deserialize'">
+            <startOffsets>
+              <option value="1321" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1360" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/AddModal.razor</url>
+          <line>325</line>
+          <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Blazor\Pages\Invoices\AddModal.razor" initialLine="325" isMultiMethodBreakpoint="true">
+            <option name="multiMethodBreakpoint" value="true" />
+            <startOffsets>
+              <option value="-1" />
+            </startOffsets>
+            <endOffsets>
+              <option value="-1" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/AddModal.razor</url>
+          <line>289</line>
+          <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Blazor\Pages\Invoices\AddModal.razor" initialLine="289" isMultiMethodBreakpoint="true">
+            <option name="multiMethodBreakpoint" value="true" />
+            <startOffsets>
+              <option value="-1" />
+            </startOffsets>
+            <endOffsets>
+              <option value="-1" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetAll/GetAllInvoicesQueryHandler.cs</url>
+          <line>16</line>
+          <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Invoices.Domain\InvoicesAggregate\Queries\GetAll\GetAllInvoicesQueryHandler.cs" initialLine="15" containingFunctionPresentation="method 'Handle'">
+            <startOffsets>
+              <option value="570" />
+            </startOffsets>
+            <endOffsets>
+              <option value="622" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetAll/GetAllInvoicesQueryHandler.cs</url>
+          <line>15</line>
+          <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Invoices.Domain\InvoicesAggregate\Queries\GetAll\GetAllInvoicesQueryHandler.cs" initialLine="15" containingFunctionPresentation="method 'Handle'">
+            <startOffsets>
+              <option value="506" />
+            </startOffsets>
+            <endOffsets>
+              <option value="561" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoDecimalValueObjectSerializer.cs</url>
+          <line>40</line>
+          <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Common.Domain\ValueObjects\Serializers\MongoDecimalValueObjectSerializer.cs" initialLine="40" containingFunctionPresentation="method 'Deserialize'">
+            <startOffsets>
+              <option value="1362" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1406" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

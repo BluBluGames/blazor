@@ -9,7 +9,7 @@ public class Nip : NumericStringValueObject
 {
     private static string EmptyValue => "0000000000";
     
-    protected Nip()
+    public Nip()
     {
     }
 

@@ -10,21 +10,25 @@ public class Address
     [BsonElement("Country")] public Country Country { get; set; }
     [BsonElement("PostCode")] public PostCode PostCode { get; set; }
     [BsonElement("BuildingNumber")] public BuildingNumber BuildingNumber { get; set; }
-    [BsonElement("FlatNumber")] public FlatNumber FlatNumber { get; set; }
+    [BsonElement("FlatNumber")] public FlatNumber? FlatNumber { get; set; }
 
-    public Address(
-        string street,
-        string postCity,
-        string country,
-        string postCode,
-        string buildingNumber,
-        string flatNumber)
+    public Address()
     {
-        Street = new(street);
-        PostCity = new(postCity);
-        Country = new(country);
-        PostCode = new(postCode);
-        BuildingNumber = new(buildingNumber);
-        FlatNumber = new(flatNumber);
+    }
+    
+    public Address(
+        Street street,
+        PostCity postCity,
+        Country country,
+        PostCode postCode,
+        BuildingNumber buildingNumber,
+        FlatNumber? flatNumber)
+    {
+        Street = street;
+        PostCity = postCity;
+        Country = country;
+        PostCode = postCode;
+        BuildingNumber = buildingNumber;
+        FlatNumber = flatNumber;
     }
 }

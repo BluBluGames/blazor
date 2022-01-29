@@ -23,8 +23,9 @@
         }
         else
         {
+            <h1>@Error</h1>
             <AddModal @ref="AddModal" OnInvoiceAdded="@HandleAddInvoice"></AddModal>
-            //<button @onclick="() => AddModal.Open(null)" type="button" class="btn btn-success w-25">Add</button>
+            <button @onclick="() => AddModal.Open()" type="button" class="btn btn-success w-25">Add</button>
             
             <table class="table">
                 <thead>
@@ -43,12 +44,12 @@
                         <td>@invoice.InvoiceNumber</td>
                         <td>@invoice.Seller.Name</td>
                         <td>@invoice.Buyer.Name</td>
-                        @* <td>@invoice.DateOfPayment</td> *@
+                        <td>@invoice.DateOfPayment</td>
                         <td>
                             <button type="button" class="btn @(invoice.IsPaid ? "btn-success" : "btn-warning") btn-success me-2 w-">Paid</button>
                             <button type="button" @onclick="() => CreatePdf(invoice)" class="btn btn-info w-25">Generate</button>
                             <button type="button" @onclick="() => Delete(invoice.Id)" class="btn btn-danger me-2 w-25">Delete</button>
-                            @* <button type="button" @onclick="() => AddModal.Open(invoice)" class="btn btn-danger me-2 w-25">Add Similar</button> *@
+                            <button type="button" @onclick="() => AddModal.Open(invoice)" class="btn btn-danger me-2 w-25">Add Similar</button>
                         </td>
                     </tr>
                 }
@@ -62,11 +63,19 @@
 </AuthorizeView>
 @code {
     private List<Invoice> _invoices = new();
-    private AddModal AddModal { get; set; } = null!;
-
+    private AddModal AddModal { get; set; } = new();
+    private string Error { get; set; } = string.Empty;
     protected override async Task OnInitializedAsync()
     {
-        _invoices = await GetAll();
+        try
+        {
+            _invoices = await GetAll();
+        }
+        catch (Exception e)
+        {
+            Error = e.Message;
+            Console.WriteLine(e);
+        }
     }
     
     private async Task<List<Invoice>> GetAll()

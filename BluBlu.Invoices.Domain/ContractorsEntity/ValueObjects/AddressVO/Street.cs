@@ -7,7 +7,7 @@ namespace BluBlu.Invoices.Domain.ContractorsEntity.ValueObjects.AddressVO;
 [BsonSerializer(typeof(MongoStringValueObjectSerializer<Street>))]
 public class Street : StringValueObject
 {
-    protected Street()
+    public Street()
     {
     }
 

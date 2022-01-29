@@ -7,7 +7,7 @@ namespace BluBlu.Invoices.Domain.InvoicesAggregate.ProductsEntity.ValueObjects;
 [BsonSerializer(typeof(MongoStringValueObjectSerializer<LegalBasisForTaxExemption>))]
 public class LegalBasisForTaxExemption : StringValueObject
 {
-    protected LegalBasisForTaxExemption()
+    public LegalBasisForTaxExemption()
     {
     }
 

@@ -7,7 +7,7 @@ namespace BluBlu.Invoices.Domain.InvoicesAggregate.ProductsEntity.ValueObjects;
 [BsonSerializer(typeof(MongoBooleanValueObjectSerializer<IsVatZw>))]
 public class IsVatZw : BooleanValueObject
 {
-    protected IsVatZw()
+    public IsVatZw()
     {
     }
 

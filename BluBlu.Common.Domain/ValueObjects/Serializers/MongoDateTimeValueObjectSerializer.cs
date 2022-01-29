@@ -3,21 +3,21 @@ using MongoDB.Bson.Serialization;
 
 namespace BluBlu.Common.Domain.ValueObjects.Serializers;
 
-public class MongoLongValueObjectSerializer<TValueObject> : IBsonSerializer<TValueObject>
-    where TValueObject : LongValueObject
+public class MongoDateTimeValueObjectSerializer<TValueObject> : IBsonSerializer<TValueObject>
+    where TValueObject : DateTimeValueObject
 {
     public Type ValueType => typeof(TValueObject);
 
     public TValueObject Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
     {
-        var value = context.Reader.ReadInt64();
+        var value = context.Reader.ReadDateTime();
         
-        return (TValueObject) Activator.CreateInstance(typeof(TValueObject), value)!;
+        return (TValueObject) Activator.CreateInstance(typeof(TValueObject), new DateTime(value))!;
     }
 
     public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, TValueObject? value)
     {
-        if (value != null) context.Writer.WriteInt64(value.Value);
+        if (value != null) context.Writer.WriteDateTime(value.Value.Ticks);
     }
 
     public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, object? value)
@@ -25,7 +25,7 @@ public class MongoLongValueObjectSerializer<TValueObject> : IBsonSerializer<TVal
         switch (value)
         {
             case TValueObject name:
-                context.Writer.WriteInt64(name.Value);
+                context.Writer.WriteDateTime(name.Value.Ticks);
                 break;
             case null:
                 context.Writer.WriteNull();
@@ -37,7 +37,7 @@ public class MongoLongValueObjectSerializer<TValueObject> : IBsonSerializer<TVal
 
     object IBsonSerializer.Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
     {
-        var value = context.Reader.ReadInt64();
-        return (TValueObject) Activator.CreateInstance(typeof(TValueObject), value)!;
+        var value = context.Reader.ReadDateTime();
+        return (TValueObject) Activator.CreateInstance(typeof(TValueObject), new DateTime(value))!;
     }
 }

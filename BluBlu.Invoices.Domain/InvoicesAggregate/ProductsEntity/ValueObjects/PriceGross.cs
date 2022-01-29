@@ -13,6 +13,10 @@ public class PriceGross : DecimalValueObject
     {
     }
 
+    public PriceGross(decimal value) : base(value, Precision)
+    {
+    }
+
     public PriceGross(decimal value, decimal? minValue = 0m, decimal? maxValue = 99999999999.99m)
         : base(value, Precision, minValue, maxValue)
     {

@@ -14,19 +14,11 @@ public class Contractor
     public Contractor()
     {
     }
-    
-    public Contractor(
-        string name, 
-        string addressStreet,
-        string addressCity,
-        string addressCountry,
-        string addressPostCode,
-        string addressBuildingNumber,
-        string addressFlatNumber,
-        string nip)
+
+    public Contractor(Name name, Address address, Nip nip)
     {
-        Name = new Name(name);
-        Address = new Address(addressStreet, addressCity, addressCountry, addressPostCode, addressBuildingNumber, addressFlatNumber);
-        Nip = new Nip(nip);
+        Name = name;
+        Address = address;
+        Nip = nip;
     }
 }

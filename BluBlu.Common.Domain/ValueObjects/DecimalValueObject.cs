@@ -19,6 +19,11 @@ namespace BluBlu.Common.Domain.ValueObjects
             _precision = precision;
         }
 
+        protected DecimalValueObject(decimal value, int? precision) : base(value)
+        {
+            _precision = precision;
+        }
+
         protected DecimalValueObject(decimal value, int? precision, decimal? minValue, decimal? maxValue) : base(value)
         {
             if (minValue.HasValue && value < minValue.Value)

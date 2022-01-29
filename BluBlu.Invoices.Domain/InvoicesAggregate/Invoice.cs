@@ -8,16 +8,48 @@ namespace BluBlu.Invoices.Domain.InvoicesAggregate;
 public class Invoice
 {
     [BsonId] [BsonRepresentation(BsonType.ObjectId)] [BsonIgnoreIfDefault] public string Id { get; set; } = null!;
-    [BsonElement("InvoiceNumber")] public string InvoiceNumber { get; set; } = null!;
-    [BsonElement("DateOfInvoice")] public DateTime DateOfInvoice { get; set; }
-    [BsonElement("DateOfRelease")] public DateTime DateOfRelease { get; set; }
-    [BsonElement("DateOfPayment")] public DateTime DateOfPayment { get; set; }
-    [BsonElement("FormOfPayment")] public string FormOfPayment { get; set; } = null!;
-    [BsonElement("AccountNumber")] public string AccountNumber { get; set; } = null!;
-    [BsonElement("IsPaymentDivided")] public bool IsPaymentDivided { get; set; }
-    [BsonElement("IsPaid")] public bool IsPaid { get; set; }
-    [BsonElement("Remarks")] public string Remarks { get; set; } = null!;
+    [BsonElement("InvoiceNumber")] public InvoiceNumber InvoiceNumber { get; set; } = null!;
+    [BsonElement("DateOfInvoice")] public DateOfInvoice DateOfInvoice { get; set; } = null!;
+    [BsonElement("DateOfRelease")] public DateOfRelease DateOfRelease { get; set; } = null!;
+    [BsonElement("DateOfPayment")] public DateOfPayment DateOfPayment { get; set; } = null!;
+    [BsonElement("FormOfPayment")] public FormOfPayment FormOfPayment { get; set; } = null!;
+    [BsonElement("AccountNumber")] public AccountNumber AccountNumber { get; set; } = null!;
+    [BsonElement("IsPaymentDivided")] public IsPaymentDivided IsPaymentDivided { get; set; } = null!;
+    [BsonElement("IsPaid")] public IsPaid IsPaid { get; set; } = null!;
+    [BsonElement("Remarks")] public Remarks? Remarks { get; set; } = null!;
     [BsonElement("Seller")] public Contractor Seller { get; set; } = null!;
     [BsonElement("Buyer")] public Contractor Buyer { get; set; } = null!;
-    [BsonElement("Products")] public ICollection<Product> Products { get; set; } = null!;
+    [BsonElement("Products")] public ICollection<ProductWithNumberOfUnits> Products { get; set; } = null!;
+    
+    public Invoice()
+    {
+    }
+
+    public Invoice(
+        InvoiceNumber invoiceNumber,
+        DateOfInvoice dateOfInvoice,
+        DateOfRelease dateOfRelease,
+        DateOfPayment dateOfPayment,
+        FormOfPayment formOfPayment,
+        AccountNumber accountNumber,
+        IsPaymentDivided isPaymentDivided,
+        IsPaid isPaid,
+        Remarks? remarks,
+        Contractor seller,
+        Contractor buyer,
+        ICollection<ProductWithNumberOfUnits> products)
+    {
+        InvoiceNumber = invoiceNumber;
+        DateOfInvoice = dateOfInvoice;
+        DateOfRelease = dateOfRelease;
+        DateOfPayment = dateOfPayment;
+        FormOfPayment = formOfPayment;
+        AccountNumber = accountNumber;
+        IsPaymentDivided = isPaymentDivided;
+        IsPaid = isPaid;
+        Remarks = remarks;
+        Seller = seller;
+        Buyer = buyer;
+        Products = products;
+    }
 }

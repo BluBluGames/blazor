@@ -7,7 +7,7 @@ namespace BluBlu.Invoices.Domain.ContractorsEntity.ValueObjects.AddressVO;
 [BsonSerializer(typeof(MongoStringValueObjectSerializer<PostCity>))]
 public class PostCity : StringValueObject
 {
-    protected PostCity()
+    public PostCity()
     {
     }
 

@@ -1,10 +1,13 @@
-﻿namespace BluBlu.Blazor.Pages.Contractors.Requests;
+﻿using BluBlu.Invoices.Domain.ContractorsEntity.ValueObjects;
+using BluBlu.Invoices.Domain.ContractorsEntity.ValueObjects.AddressVO;
+
+namespace BluBlu.Blazor.Pages.Contractors.Requests;
 
 public class CreateContractorCommand
 {
     public string Name { get; set; } = null!;
     public string AddressStreet { get; set; } = null!;
-    public string AddressCity { get; set; } = null!;
+    public string AddressPostCity { get; set; } = null!;
     public string AddressCountry { get; set; } = null!;
     public string AddressPostCode { get; set; } = null!;
     public string AddressBuildingNumber { get; set; } = null!;
@@ -13,12 +16,13 @@ public class CreateContractorCommand
 
     public BluBlu.Invoices.Domain.ContractorsEntity.Contractor ToDomainModel()
         => new(
-            Name,
-            AddressStreet,
-            AddressCity,
-            AddressCountry,
-            AddressPostCode,
-            AddressBuildingNumber,
-            AddressFlatNumber, 
-            Nip);
+            new(Name),
+            new(
+                new(AddressStreet),
+                new(AddressPostCity),
+                new(AddressCountry),
+                new(AddressPostCode),
+                new(AddressBuildingNumber),
+                new(AddressFlatNumber)),
+            new(Nip));
 }
