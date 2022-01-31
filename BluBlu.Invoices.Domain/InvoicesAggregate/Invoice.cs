@@ -8,18 +8,18 @@ namespace BluBlu.Invoices.Domain.InvoicesAggregate;
 public class Invoice
 {
     [BsonId] [BsonRepresentation(BsonType.ObjectId)] [BsonIgnoreIfDefault] public string Id { get; set; } = null!;
-    [BsonElement("InvoiceNumber")] public InvoiceNumber InvoiceNumber { get; set; } = null!;
-    [BsonElement("DateOfInvoice")] public DateOfInvoice DateOfInvoice { get; set; } = null!;
-    [BsonElement("DateOfRelease")] public DateOfRelease DateOfRelease { get; set; } = null!;
-    [BsonElement("DateOfPayment")] public DateOfPayment DateOfPayment { get; set; } = null!;
-    [BsonElement("FormOfPayment")] public FormOfPayment FormOfPayment { get; set; } = null!;
-    [BsonElement("AccountNumber")] public AccountNumber AccountNumber { get; set; } = null!;
-    [BsonElement("IsPaymentDivided")] public IsPaymentDivided IsPaymentDivided { get; set; } = null!;
-    [BsonElement("IsPaid")] public IsPaid IsPaid { get; set; } = null!;
-    [BsonElement("Remarks")] public Remarks? Remarks { get; set; } = null!;
-    [BsonElement("Seller")] public Contractor Seller { get; set; } = null!;
-    [BsonElement("Buyer")] public Contractor Buyer { get; set; } = null!;
-    [BsonElement("Products")] public ICollection<ProductWithNumberOfUnits> Products { get; set; } = null!;
+    [BsonElement("InvoiceNumber")] public InvoiceNumber InvoiceNumber { get; set; } = new();
+    [BsonElement("DateOfInvoice")] public DateOfInvoice DateOfInvoice { get; set; } = new();
+    [BsonElement("DateOfRelease")] public DateOfRelease DateOfRelease { get; set; } = new();
+    [BsonElement("DateOfPayment")] public DateOfPayment DateOfPayment { get; set; } = new();
+    [BsonElement("FormOfPayment")] public FormOfPayment FormOfPayment { get; set; } = new();
+    [BsonElement("AccountNumber")] public AccountNumber AccountNumber { get; set; } = new();
+    [BsonElement("IsPaymentDivided")] public IsPaymentDivided IsPaymentDivided { get; set; } = new();
+    [BsonElement("IsPaid")] public IsPaid IsPaid { get; set; } = new();
+    [BsonElement("Remarks")] public Remarks? Remarks { get; set; }
+    [BsonElement("Seller")] public Contractor Seller { get; set; } = new();
+    [BsonElement("Buyer")] public Contractor Buyer { get; set; } = new();
+    [BsonElement("Products")] public ICollection<ProductWithNumberOfUnits> Products { get; set; } = new List<ProductWithNumberOfUnits>();
     
     public Invoice()
     {

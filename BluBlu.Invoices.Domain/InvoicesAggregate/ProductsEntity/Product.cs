@@ -7,13 +7,13 @@ namespace BluBlu.Invoices.Domain.InvoicesAggregate.ProductsEntity;
 public class Product
 {
     [BsonId] [BsonRepresentation(BsonType.ObjectId)] [BsonIgnoreIfDefault] public string Id { get; set; } = null!;
-    [BsonElement("Name")] public Name Name { get; set; } = null!;
-    [BsonElement("PriceNet")] public PriceNet PriceNet { get; set; } = null!;
-    [BsonElement("UnitName")] public UnitName UnitName { get; set; } = null!;
-    [BsonElement("Vat")] public Vat Vat { get; set; } = null!;
-    [BsonElement("IsVatZw")] public IsVatZw IsVatZw { get; set; } = null!;
+    [BsonElement("Name")] public Name Name { get; set; } = new();
+    [BsonElement("PriceNet")] public PriceNet PriceNet { get; set; } = new();
+    [BsonElement("UnitName")] public UnitName UnitName { get; set; } = new();
+    [BsonElement("Vat")] public Vat Vat { get; set; } = new();
+    [BsonElement("IsVatZw")] public IsVatZw IsVatZw { get; set; } = new();
     [BsonElement("PriceGross")] public PriceGross PriceGross { get; set; } = null!;
-    [BsonElement("LegalBasisForTaxExemption")] public LegalBasisForTaxExemption? LegalBasisForTaxExemption { get; set; } = null!;
+    [BsonElement("LegalBasisForTaxExemption")] public LegalBasisForTaxExemption? LegalBasisForTaxExemption { get; set; }
 
     public Product()
     {

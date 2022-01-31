@@ -271,17 +271,17 @@
 
     private InvoiceRequestModel _requestModel = new InvoiceRequestModel 
     {
-        InvoiceNumber = null,
+        InvoiceNumber = string.Empty,
         DateOfInvoice = DateTime.Now,
         DateOfRelease = DateTime.Now,
         DateOfPayment = DateTime.Now.AddDays(14),
-        FormOfPayment = null,
-        AccountNumber = null,
+        FormOfPayment = string.Empty,
+        AccountNumber = string.Empty,
         IsPaymentDivided = false,
         IsPaid = false,
-        Remarks = null,
-        Seller = new ContractorRequestModel {Name = null, AddressStreet = null, AddressPostCity = null, AddressCountry = null, AddressPostCode = null, AddressBuildingNumber = null, AddressFlatNumber = null, Nip = null},
-        Buyer = new ContractorRequestModel {Name = null, AddressStreet = null, AddressPostCity = null, AddressCountry = null, AddressPostCode = null, AddressBuildingNumber = null, AddressFlatNumber = null, Nip = null},
+        Remarks = string.Empty,
+        Seller = new ContractorRequestModel {Name = string.Empty, AddressStreet = string.Empty, AddressPostCity = string.Empty, AddressCountry = string.Empty, AddressPostCode = string.Empty, AddressBuildingNumber = string.Empty, AddressFlatNumber = string.Empty, Nip = string.Empty},
+        Buyer = new ContractorRequestModel {Name = string.Empty, AddressStreet = string.Empty, AddressPostCity = string.Empty, AddressCountry = string.Empty, AddressPostCode = string.Empty, AddressBuildingNumber = string.Empty, AddressFlatNumber = string.Empty, Nip = string.Empty},
         Products = new List<ProductRequestModel>()
     };
     
@@ -289,53 +289,53 @@
     {
         return new InvoiceRequestModel
         {
-            InvoiceNumber = invoiceToClone.InvoiceNumber.Value,
+            InvoiceNumber = invoiceToClone.InvoiceNumber.Value ?? string.Empty,
             DateOfInvoice = invoiceToClone.DateOfInvoice.Value,
             DateOfRelease = invoiceToClone.DateOfRelease.Value,
             DateOfPayment = invoiceToClone.DateOfPayment.Value,
-            FormOfPayment = invoiceToClone.FormOfPayment.Value,
-            AccountNumber = invoiceToClone.AccountNumber.Value,
+            FormOfPayment = invoiceToClone.FormOfPayment?.Value ?? string.Empty,
+            AccountNumber = invoiceToClone.AccountNumber?.Value ?? string.Empty,
             IsPaymentDivided = invoiceToClone.IsPaymentDivided.Value,
             IsPaid = invoiceToClone.IsPaid.Value,
-            Remarks = invoiceToClone.Remarks.Value,
+            Remarks = invoiceToClone.Remarks?.Value ?? string.Empty,
             Seller = new ContractorRequestModel
             {
-                Name = invoiceToClone.Seller.Name.Value, 
-                AddressStreet = invoiceToClone.Seller.Address.Street.Value, 
-                AddressPostCity = invoiceToClone.Seller.Address.PostCity.Value, 
-                AddressCountry = invoiceToClone.Seller.Address.Country.Value, 
-                AddressPostCode = invoiceToClone.Seller.Address.PostCode.Value, 
-                AddressBuildingNumber = invoiceToClone.Seller.Address.BuildingNumber.Value, 
-                AddressFlatNumber = invoiceToClone.Seller.Address.FlatNumber.Value, 
-                Nip = invoiceToClone.Seller.Nip.Value
+                Name = invoiceToClone.Seller.Name.Value ?? string.Empty, 
+                AddressStreet = invoiceToClone.Seller.Address.Street.Value ?? string.Empty, 
+                AddressPostCity = invoiceToClone.Seller.Address.PostCity.Value ?? string.Empty, 
+                AddressCountry = invoiceToClone.Seller.Address.Country.Value ?? string.Empty, 
+                AddressPostCode = invoiceToClone.Seller.Address.PostCode.Value ?? string.Empty, 
+                AddressBuildingNumber = invoiceToClone.Seller.Address.BuildingNumber.Value ?? string.Empty, 
+                AddressFlatNumber = invoiceToClone.Seller.Address.FlatNumber?.Value ?? string.Empty, 
+                Nip = invoiceToClone.Seller.Nip.Value ?? string.Empty
             },
             Buyer = new ContractorRequestModel 
             {
-                Name = invoiceToClone.Buyer.Name.Value,
-                AddressStreet = invoiceToClone.Buyer.Address.Street.Value,
-                AddressPostCity = invoiceToClone.Buyer.Address.PostCity.Value,
-                AddressCountry = invoiceToClone.Buyer.Address.Country.Value,
-                AddressPostCode = invoiceToClone.Buyer.Address.PostCode.Value,
-                AddressBuildingNumber = invoiceToClone.Buyer.Address.BuildingNumber.Value,
-                AddressFlatNumber = invoiceToClone.Buyer.Address.FlatNumber.Value,
-                Nip = invoiceToClone.Buyer.Nip.Value
+                Name = invoiceToClone.Buyer.Name.Value ?? string.Empty,
+                AddressStreet = invoiceToClone.Buyer.Address.Street.Value ?? string.Empty,
+                AddressPostCity = invoiceToClone.Buyer.Address.PostCity.Value ?? string.Empty,
+                AddressCountry = invoiceToClone.Buyer.Address.Country.Value ?? string.Empty,
+                AddressPostCode = invoiceToClone.Buyer.Address.PostCode.Value ?? string.Empty,
+                AddressBuildingNumber = invoiceToClone.Buyer.Address.BuildingNumber.Value ?? string.Empty,
+                AddressFlatNumber = invoiceToClone.Buyer.Address.FlatNumber?.Value ?? string.Empty,
+                Nip = invoiceToClone.Buyer.Nip.Value ?? string.Empty
         
             },
             Products = invoiceToClone.Products.Select(product => new ProductRequestModel
             {
-                Name = product.Product.Name.Value,
+                Name = product.Product.Name.Value ?? string.Empty,
                 PriceNet = product.Product.PriceNet.Value,
                 NumberOfUnits = product.NumberOfUnits.Value,
-                UnitName = product.Product.UnitName.Value,
+                UnitName = product.Product.UnitName.Value ?? string.Empty,
                 Vat = product.Product.Vat.Value,
                 IsVatZw = product.Product.IsVatZw.Value,
                 PriceGross = product.Product.PriceGross.Value,
-                LegalBasisForTaxExemption = product.Product.LegalBasisForTaxExemption.Value
+                LegalBasisForTaxExemption = product.Product.LegalBasisForTaxExemption?.Value ?? string.Empty
             }).ToList()
         };
     }
 
-    public async Task Open()
+    public void Open()
     {
         _addModalDisplay = "block;";
         _addModalClass = "Show";
@@ -343,7 +343,7 @@
         StateHasChanged();
     }
     
-    public async Task Open(Invoice invoiceToClone)
+    public void Open(Invoice invoiceToClone)
     {
         _addModalDisplay = "block;";
         _addModalClass = "Show";
@@ -363,7 +363,7 @@
     private void AddProduct()
     {
         _requestModel.Products.Add(new ProductRequestModel
-        { Name = null, PriceNet = 0, NumberOfUnits = 1, UnitName = null, Vat = 23, PriceGross = 0 });
+        { Name = string.Empty, PriceNet = 0, NumberOfUnits = 1, UnitName = string.Empty, Vat = 23, PriceGross = 0 });
     }
 
     private async Task Create()

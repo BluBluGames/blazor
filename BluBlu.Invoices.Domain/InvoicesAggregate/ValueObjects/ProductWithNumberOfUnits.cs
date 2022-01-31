@@ -6,8 +6,8 @@ namespace BluBlu.Invoices.Domain.InvoicesAggregate.ValueObjects;
 
 public class ProductWithNumberOfUnits
 {
-    [BsonElement("Product")] public Product Product { get; set; } = null!;
-    [BsonElement("NumberOfUnits")] public NumberOfUnits NumberOfUnits { get; set; } = null!;
+    [BsonElement("Product")] public Product Product { get; set; } = new();
+    [BsonElement("NumberOfUnits")] public NumberOfUnits NumberOfUnits { get; set; } = new();
     
     public ProductWithNumberOfUnits()
     {

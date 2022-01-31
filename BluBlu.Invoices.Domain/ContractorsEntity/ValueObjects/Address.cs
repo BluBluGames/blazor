@@ -5,11 +5,11 @@ namespace BluBlu.Invoices.Domain.ContractorsEntity.ValueObjects;
 
 public class Address
 {
-    [BsonElement("Street")] public Street Street { get; set; }
-    [BsonElement("PostCity")] public PostCity PostCity { get; set; }
-    [BsonElement("Country")] public Country Country { get; set; }
-    [BsonElement("PostCode")] public PostCode PostCode { get; set; }
-    [BsonElement("BuildingNumber")] public BuildingNumber BuildingNumber { get; set; }
+    [BsonElement("Street")] public Street Street { get; set; } = new();
+    [BsonElement("PostCity")] public PostCity PostCity { get; set; } = new();
+    [BsonElement("Country")] public Country Country { get; set; } = new();
+    [BsonElement("PostCode")] public PostCode PostCode { get; set; } = new();
+    [BsonElement("BuildingNumber")] public BuildingNumber BuildingNumber { get; set; } = new();
     [BsonElement("FlatNumber")] public FlatNumber? FlatNumber { get; set; }
 
     public Address()

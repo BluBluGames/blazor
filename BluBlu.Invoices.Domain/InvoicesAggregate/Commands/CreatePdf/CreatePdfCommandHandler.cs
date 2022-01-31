@@ -109,7 +109,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         {
             seller.Add(new Text($"{request.Invoice.Seller.Name.Value}\n").SetFont(helveticaBold).SetFontSize(20));
                 
-            if (string.IsNullOrWhiteSpace(request.Invoice.Seller.Address.FlatNumber.Value) == false)
+            if (request.Invoice.Seller.Address.FlatNumber is not null)
             {
                 seller.Add(
                         $"{request.Invoice.Seller.Address.PostCode.Value} {request.Invoice.Seller.Address.PostCity.Value} {request.Invoice.Seller.Address.BuildingNumber.Value}/{request.Invoice.Seller.Address.FlatNumber.Value}\n")
@@ -128,7 +128,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         else
         {
             seller.Add(new Text($"{request.Invoice.Seller.Name.Value}\n").SetFont(helveticaBold).SetFontSize(20));
-            if (string.IsNullOrWhiteSpace(request.Invoice.Seller.Address.FlatNumber.Value) == false)
+            if (request.Invoice.Seller.Address.FlatNumber is not null)
             {
                 seller.Add(
                         $"{request.Invoice.Seller.Address.Street.Value} {request.Invoice.Seller.Address.BuildingNumber.Value}/{request.Invoice.Seller.Address.FlatNumber.Value}\n")
@@ -150,7 +150,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         {
             buyer.Add(new Text($"{request.Invoice.Buyer.Name.Value}\n").SetFont(helveticaBold).SetFontSize(20));
                 
-            if (string.IsNullOrWhiteSpace(request.Invoice.Buyer.Address.FlatNumber.Value) == false)
+            if (request.Invoice.Buyer.Address.FlatNumber is not null)
             {
                 buyer.Add(
                         $"{request.Invoice.Buyer.Address.PostCode} {request.Invoice.Buyer.Address.PostCity.Value} {request.Invoice.Buyer.Address.BuildingNumber.Value}/{request.Invoice.Buyer.Address.FlatNumber.Value}\n")
@@ -170,7 +170,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         {
             buyer.Add(new Text($"{request.Invoice.Buyer.Name.Value}\n").SetFont(helveticaBold).SetFontSize(20));
                 
-            if (string.IsNullOrWhiteSpace(request.Invoice.Buyer.Address.FlatNumber.Value) == false)
+            if (request.Invoice.Buyer.Address.FlatNumber is not null)
             {
                 buyer.Add(
                         $"{request.Invoice.Buyer.Address.Street.Value} {request.Invoice.Buyer.Address.BuildingNumber.Value}/{request.Invoice.Buyer.Address.FlatNumber.Value}\n")
@@ -210,7 +210,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         {
             logo = new Image(ImageDataFactory.Create("./blublu-logo.jpg"));
         }
-        catch (Exception e)
+        catch (Exception)
         {
             logo = new Image(ImageDataFactory.Create("./blublu-logo.png"));
         }
@@ -265,7 +265,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         {
             AddCell($"{count}", true, false, 1);
             AddCell($"{product.Product.Name.Value}", true, false, 4);
-            AddCell($"{product.Product.LegalBasisForTaxExemption.Value}", true, false, 2);
+            AddCell($"{product.Product.LegalBasisForTaxExemption?.Value}", true, false, 2);
             AddCell($"{product.Product.PriceNet.Value:0.00}", true, false, 1);
             AddCell($"{product.NumberOfUnits.Value}", true, false, 1);
             AddCell($"{product.Product.UnitName.Value}", true, false, 1);
@@ -331,7 +331,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         AddCell("Forma płatności:", false);
         AddCell($"{request.Invoice.FormOfPayment}", true);
         AddCell("Numer konta:", false);
-        AddCell($"{PrepareAccountNumber(request.Invoice.AccountNumber.Value)}", true);
+        AddCell($"{PrepareAccountNumber(request.Invoice.AccountNumber.Value!)}", true);
         AddCell("Płatność podzielona:", false);
         AddCell($"{PreparePaymentDivided(request.Invoice.IsPaymentDivided)}", true);
         AddCell("Uwagi:", false);
@@ -347,7 +347,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         string PrepareAccountNumber(string number)
         {
             if (number == null) throw new ArgumentNullException(nameof(number));
-            number = request.Invoice.AccountNumber.Value.Trim();
+            number = request.Invoice.AccountNumber.Value!.Trim();
             number = number.Replace(" ", string.Empty);
             return Regex.Replace(number, @"(\w{2})(\w{4})(\w{4})(\w{4})(\w{4})(\w{4})(\w{4})", @"$1 $2 $3 $4 $5 $6 $7");
         }

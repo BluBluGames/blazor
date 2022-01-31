@@ -9,11 +9,16 @@
     <projectFile profileName="IIS Express">BluBlu.Stocks.Api/BluBlu.Stocks.Api.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e662321e-6c3b-40cd-99af-1574f65b4bd8" name="Changes" comment="create and fetch invoices">
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/F1-01-2022.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/blublu-logo.png" afterDir="false" />
+    <list default="true" id="e662321e-6c3b-40cd-99af-1574f65b4bd8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Auth.Domain/User/BluBluIdentity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Auth.Domain/User/BluBluIdentity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Account/Register.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Account/Register.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/AddModal.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/AddModal.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Address.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Address.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/CreatePdf/CreatePdfCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/CreatePdf/CreatePdfCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Invoice.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Invoice.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/Product.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/Product.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/ProductWithNumberOfUnits.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/ProductWithNumberOfUnits.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -257,7 +262,11 @@
       <workItem from="1643292848382" duration="14076000" />
       <workItem from="1643378916392" duration="5917000" />
       <workItem from="1643393792863" duration="124000" />
-      <workItem from="1643393954994" duration="8104000" />
+      <workItem from="1643393954994" duration="10331000" />
+      <workItem from="1643489195071" duration="3586000" />
+      <workItem from="1643532031971" duration="86000" />
+      <workItem from="1643532152375" duration="9822000" />
+      <workItem from="1643607085548" duration="875000" />
     </task>
     <task id="LOCAL-00001" summary="add migrations and context in auth domain">
       <created>1642880339839</created>
@@ -308,7 +317,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643441734971</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="pdf generator fixes">
+      <created>1643442135297</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1643442135297</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,7 +354,8 @@
     <MESSAGE value="Implement Value Objects and serialization for mongo, implement contractors entity" />
     <MESSAGE value="Add product entity and needed value objects" />
     <MESSAGE value="create and fetch invoices" />
-    <option name="LAST_COMMIT_MESSAGE" value="create and fetch invoices" />
+    <MESSAGE value="pdf generator fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="pdf generator fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -408,34 +425,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/AddModal.razor</url>
-          <line>325</line>
-          <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Blazor\Pages\Invoices\AddModal.razor" initialLine="325" isMultiMethodBreakpoint="true">
-            <option name="multiMethodBreakpoint" value="true" />
-            <startOffsets>
-              <option value="-1" />
-            </startOffsets>
-            <endOffsets>
-              <option value="-1" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/AddModal.razor</url>
-          <line>289</line>
-          <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Blazor\Pages\Invoices\AddModal.razor" initialLine="289" isMultiMethodBreakpoint="true">
-            <option name="multiMethodBreakpoint" value="true" />
-            <startOffsets>
-              <option value="-1" />
-            </startOffsets>
-            <endOffsets>
-              <option value="-1" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetAll/GetAllInvoicesQueryHandler.cs</url>

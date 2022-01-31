@@ -8,5 +8,5 @@ public class BluBluIdentity : IdentityUser
     /// Gets or sets the display name for this user.
     /// </summary>
     [ProtectedPersonalData]
-    public virtual string DisplayName { get; set; }
+    public virtual string DisplayName { get; set; } = default!;
 }
