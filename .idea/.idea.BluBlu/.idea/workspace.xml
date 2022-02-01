@@ -10,15 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e662321e-6c3b-40cd-99af-1574f65b4bd8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/blank-logo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Auth.Domain/User/BluBluIdentity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Auth.Domain/User/BluBluIdentity.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Account/Register.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Account/Register.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/AddModal.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/AddModal.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Address.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Address.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Invoices.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Invoices.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/CreatePdf/CreatePdfCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/CreatePdf/CreatePdfCommand.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/CreatePdf/CreatePdfCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/CreatePdf/CreatePdfCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Invoice.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Invoice.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/Product.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/Product.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/ProductWithNumberOfUnits.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ValueObjects/ProductWithNumberOfUnits.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -266,7 +263,8 @@
       <workItem from="1643489195071" duration="3586000" />
       <workItem from="1643532031971" duration="86000" />
       <workItem from="1643532152375" duration="9822000" />
-      <workItem from="1643607085548" duration="875000" />
+      <workItem from="1643607085548" duration="4128000" />
+      <workItem from="1643621613111" duration="1254000" />
     </task>
     <task id="LOCAL-00001" summary="add migrations and context in auth domain">
       <created>1642880339839</created>
@@ -324,7 +322,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643442135297</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="register authorized view only">
+      <created>1643608216630</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1643608216630</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -355,7 +360,8 @@
     <MESSAGE value="Add product entity and needed value objects" />
     <MESSAGE value="create and fetch invoices" />
     <MESSAGE value="pdf generator fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="pdf generator fixes" />
+    <MESSAGE value="register authorized view only" />
+    <option name="LAST_COMMIT_MESSAGE" value="register authorized view only" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -427,43 +433,17 @@
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetAll/GetAllInvoicesQueryHandler.cs</url>
-          <line>16</line>
-          <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Invoices.Domain\InvoicesAggregate\Queries\GetAll\GetAllInvoicesQueryHandler.cs" initialLine="15" containingFunctionPresentation="method 'Handle'">
+          <url>file://$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/CreatePdf/CreatePdfCommandHandler.cs</url>
+          <line>208</line>
+          <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Invoices.Domain\InvoicesAggregate\Commands\CreatePdf\CreatePdfCommandHandler.cs" initialLine="208" containingFunctionPresentation="method 'SetHeaderTable'">
             <startOffsets>
-              <option value="570" />
+              <option value="10243" />
             </startOffsets>
             <endOffsets>
-              <option value="622" />
+              <option value="10273" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Queries/GetAll/GetAllInvoicesQueryHandler.cs</url>
-          <line>15</line>
-          <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Invoices.Domain\InvoicesAggregate\Queries\GetAll\GetAllInvoicesQueryHandler.cs" initialLine="15" containingFunctionPresentation="method 'Handle'">
-            <startOffsets>
-              <option value="506" />
-            </startOffsets>
-            <endOffsets>
-              <option value="561" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoDecimalValueObjectSerializer.cs</url>
-          <line>40</line>
-          <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Common.Domain\ValueObjects\Serializers\MongoDecimalValueObjectSerializer.cs" initialLine="40" containingFunctionPresentation="method 'Deserialize'">
-            <startOffsets>
-              <option value="1362" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1406" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="20" />
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

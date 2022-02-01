@@ -47,7 +47,8 @@
                         <td>@invoice.DateOfPayment</td>
                         <td>
                             <button type="button" class="btn @(invoice.IsPaid ? "btn-success" : "btn-warning") btn-success me-2 w-">Paid</button>
-                            <button type="button" @onclick="() => CreatePdf(invoice)" class="btn btn-info w-25">Generate</button>
+                            <button type="button" @onclick="() => CreatePdf(invoice, true)" class="btn btn-info w-25">Generate</button>
+                            <button type="button" @onclick="() => CreatePdf(invoice, false)" class="btn btn-info w-25">Generate (NoLogo)</button>
                             <button type="button" @onclick="() => Delete(invoice.Id)" class="btn btn-danger me-2 w-25">Delete</button>
                             <button type="button" @onclick="() => AddModal.Open(invoice)" class="btn btn-danger me-2 w-25">Add Similar</button>
                         </td>
@@ -105,9 +106,9 @@
         return result;
     }
 
-    private async Task<Unit> CreatePdf(Invoice invoice)
+    private async Task<Unit> CreatePdf(Invoice invoice, bool isWithLogo)
     {
-        return await _mediator.Send(new CreatePdfCommand { Invoice = invoice });
+        return await _mediator.Send(new CreatePdfCommand { Invoice = invoice, IsWithLogo = isWithLogo});
     }
 
     private async Task HandleAddInvoice(Invoice invoice)

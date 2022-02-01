@@ -109,7 +109,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         {
             seller.Add(new Text($"{request.Invoice.Seller.Name.Value}\n").SetFont(helveticaBold).SetFontSize(20));
                 
-            if (request.Invoice.Seller.Address.FlatNumber is not null)
+            if (request.Invoice.Seller.Address.FlatNumber?.Value is not null)
             {
                 seller.Add(
                         $"{request.Invoice.Seller.Address.PostCode.Value} {request.Invoice.Seller.Address.PostCity.Value} {request.Invoice.Seller.Address.BuildingNumber.Value}/{request.Invoice.Seller.Address.FlatNumber.Value}\n")
@@ -128,7 +128,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         else
         {
             seller.Add(new Text($"{request.Invoice.Seller.Name.Value}\n").SetFont(helveticaBold).SetFontSize(20));
-            if (request.Invoice.Seller.Address.FlatNumber is not null)
+            if (request.Invoice.Seller.Address.FlatNumber?.Value is not null)
             {
                 seller.Add(
                         $"{request.Invoice.Seller.Address.Street.Value} {request.Invoice.Seller.Address.BuildingNumber.Value}/{request.Invoice.Seller.Address.FlatNumber.Value}\n")
@@ -150,7 +150,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         {
             buyer.Add(new Text($"{request.Invoice.Buyer.Name.Value}\n").SetFont(helveticaBold).SetFontSize(20));
                 
-            if (request.Invoice.Buyer.Address.FlatNumber is not null)
+            if (request.Invoice.Buyer.Address.FlatNumber?.Value is not null)
             {
                 buyer.Add(
                         $"{request.Invoice.Buyer.Address.PostCode} {request.Invoice.Buyer.Address.PostCity.Value} {request.Invoice.Buyer.Address.BuildingNumber.Value}/{request.Invoice.Buyer.Address.FlatNumber.Value}\n")
@@ -170,7 +170,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         {
             buyer.Add(new Text($"{request.Invoice.Buyer.Name.Value}\n").SetFont(helveticaBold).SetFontSize(20));
                 
-            if (request.Invoice.Buyer.Address.FlatNumber is not null)
+            if (request.Invoice.Buyer.Address.FlatNumber?.Value is not null)
             {
                 buyer.Add(
                         $"{request.Invoice.Buyer.Address.Street.Value} {request.Invoice.Buyer.Address.BuildingNumber.Value}/{request.Invoice.Buyer.Address.FlatNumber.Value}\n")
@@ -201,22 +201,11 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         document.Add(contractorsTable);
     }
     
-    private static void SetHeaderTable(CreatePdfCommand request, PdfFont helvetica, PdfFont helveticaBold, Document document)
+    private void SetHeaderTable(CreatePdfCommand request, PdfFont helvetica, PdfFont helveticaBold, Document document)
     {
         var headerTable = new Table(UnitValue.CreatePercentArray(2)).UseAllAvailableWidth();
 
-        Image logo;
-        try
-        {
-            logo = new Image(ImageDataFactory.Create("./blublu-logo.jpg"));
-        }
-        catch (Exception)
-        {
-            logo = new Image(ImageDataFactory.Create("./blublu-logo.png"));
-        }
-
-        logo.ScaleToFit(128, 128);
-        var image = new Paragraph().Add(logo);
+        SetLogo(request, headerTable);
             
         var invoiceDate =
             new Paragraph("FAKTURA ").SetFont(helvetica).SetFontSize(14)
@@ -224,11 +213,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
                 .Add($"data wystawienia: {request.Invoice.DateOfInvoice.Value.ToShortDateString()}\n").SetFont(helvetica)
                 .Add($"data wydania towaru: {request.Invoice.DateOfRelease.Value.ToShortDateString()}").SetFont(helvetica)
                 .SetTextAlignment(TextAlignment.RIGHT);
-            
-        var nameCell = new Cell().Add(image);
-        nameCell.SetBorder(Border.NO_BORDER);
-        headerTable.AddCell(nameCell);
-    
+
         var dateCell = new Cell().Add(invoiceDate).SetVerticalAlignment(VerticalAlignment.MIDDLE);
         dateCell.SetBorder(Border.NO_BORDER);
         headerTable.AddCell(dateCell);
@@ -236,8 +221,42 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
             
         document.Add(headerTable);
     }
-        
-    private static void SetProductsTable(
+
+    private void SetLogo(CreatePdfCommand request, Table headerTable)
+    {
+        Image? logo;
+        if (!request.IsWithLogo)
+        {
+            logo = new Image(ImageDataFactory.Create("./blank-logo.png"));
+        }
+        else
+        {
+            try
+            {
+                logo = new Image(ImageDataFactory.Create("./blublu-logo.jpg"));
+            }
+            catch (Exception)
+            {
+                try
+                {
+                    logo = new Image(ImageDataFactory.Create("./blublu-logo.png"));
+                }
+                catch (Exception)
+                {
+                    logo = new Image(ImageDataFactory.Create("./blank-logo.png"));
+                    //TODO come up with better idea
+                }
+            }
+        }
+
+        logo.ScaleToFit(128, 128);
+        var image = new Paragraph().Add(logo);
+        var nameCell = new Cell().Add(image);
+        nameCell.SetBorder(Border.NO_BORDER);
+        headerTable.AddCell(nameCell);
+    }
+
+    private void SetProductsTable(
         CreatePdfCommand request,
         PdfFont helvetica,
         PdfFont helveticaBold,
@@ -320,7 +339,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         }
     }
         
-    private static void SetSummaryTable(CreatePdfCommand request, PdfFont helveticaBold, PdfFont helvetica, Document document, decimal sumGross)
+    private void SetSummaryTable(CreatePdfCommand request, PdfFont helveticaBold, PdfFont helvetica, Document document, decimal sumGross)
     {
         var summaryTable = new Table(UnitValue.CreatePercentArray(4)).SetWidth(UnitValue.CreatePercentValue(70));
             
