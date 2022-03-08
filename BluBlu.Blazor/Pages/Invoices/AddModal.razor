@@ -307,7 +307,7 @@
                 AddressPostCode = invoiceToClone.Seller.Address.PostCode.Value ?? string.Empty, 
                 AddressBuildingNumber = invoiceToClone.Seller.Address.BuildingNumber.Value ?? string.Empty, 
                 AddressFlatNumber = invoiceToClone.Seller.Address.FlatNumber?.Value ?? string.Empty, 
-                Nip = invoiceToClone.Seller.Nip.Value ?? string.Empty
+                Nip = invoiceToClone.Seller.Nip?.Value ?? string.Empty
             },
             Buyer = new ContractorRequestModel 
             {
@@ -318,7 +318,7 @@
                 AddressPostCode = invoiceToClone.Buyer.Address.PostCode.Value ?? string.Empty,
                 AddressBuildingNumber = invoiceToClone.Buyer.Address.BuildingNumber.Value ?? string.Empty,
                 AddressFlatNumber = invoiceToClone.Buyer.Address.FlatNumber?.Value ?? string.Empty,
-                Nip = invoiceToClone.Buyer.Nip.Value ?? string.Empty
+                Nip = invoiceToClone.Buyer.Nip?.Value ?? string.Empty
         
             },
             Products = invoiceToClone.Products.Select(product => new ProductRequestModel

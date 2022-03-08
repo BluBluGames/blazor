@@ -45,7 +45,7 @@ public class InvoiceRequestModel
                     new(Seller.AddressPostCode),
                     new(Seller.AddressBuildingNumber),
                     string.IsNullOrWhiteSpace(Seller.AddressFlatNumber) ? null : new(Seller.AddressFlatNumber)),
-                new(Seller.Nip)),
+                string.IsNullOrWhiteSpace(Seller.Nip) ? null : new(Seller.Nip)),
             new(
                 new(Buyer.Name),
                 new(
@@ -55,7 +55,7 @@ public class InvoiceRequestModel
                     new(Buyer.AddressPostCode),
                     new(Buyer.AddressBuildingNumber),
                     string.IsNullOrWhiteSpace(Buyer.AddressFlatNumber) ? null : new(Buyer.AddressFlatNumber)),
-                new(Buyer.Nip)),
+                string.IsNullOrWhiteSpace(Buyer.Nip) ? null : new(Buyer.Nip)),
             Products.Select(product => new ProductWithNumberOfUnits(
                     new(
                         new(product.Name),

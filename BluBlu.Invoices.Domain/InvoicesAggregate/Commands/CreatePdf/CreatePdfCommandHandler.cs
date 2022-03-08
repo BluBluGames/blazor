@@ -13,6 +13,7 @@ using iText.Layout.Borders;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using MediatR;
+using Path = System.IO.Path;
 
 namespace BluBlu.Invoices.Domain.InvoicesAggregate.Commands.CreatePdf;
 
@@ -122,7 +123,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
                     .SetFont(helvetica);
             }
                 
-            if (string.IsNullOrWhiteSpace(request.Invoice.Seller.Nip.Value) == false)
+            if (string.IsNullOrWhiteSpace(request.Invoice.Seller.Nip?.Value) == false)
                 seller.Add($"NIP: {request.Invoice.Seller.Nip.Value}").SetFont(helvetica);
         }
         else
@@ -142,7 +143,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
             }
             seller.Add($"{request.Invoice.Seller.Address.PostCode.Value} {request.Invoice.Seller.Address.PostCity.Value}\n")
                 .SetFont(helvetica);
-            if (string.IsNullOrWhiteSpace(request.Invoice.Seller.Nip.Value) == false)
+            if (string.IsNullOrWhiteSpace(request.Invoice.Seller.Nip?.Value) == false)
                 seller.Add($"NIP: {request.Invoice.Seller.Nip.Value}").SetFont(helvetica);
         }
     
@@ -163,7 +164,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
                     .SetFont(helvetica);
             }
     
-            if (string.IsNullOrWhiteSpace(request.Invoice.Buyer.Nip.Value) == false)
+            if (string.IsNullOrWhiteSpace(request.Invoice.Buyer.Nip?.Value) == false)
                 buyer.Add($"NIP: {request.Invoice.Buyer.Nip.Value}").SetFont(helvetica);
         }
         else
@@ -185,7 +186,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
                 
             buyer.Add($"{request.Invoice.Buyer.Address.PostCode.Value} {request.Invoice.Buyer.Address.PostCity.Value}\n")
                 .SetFont(helvetica);
-            if (string.IsNullOrWhiteSpace(request.Invoice.Buyer.Nip.Value) == false)
+            if (string.IsNullOrWhiteSpace(request.Invoice.Buyer.Nip?.Value) == false)
                 buyer.Add($"NIP: {request.Invoice.Buyer.Nip.Value}").SetFont(helvetica);
         }
     
@@ -227,23 +228,27 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         Image? logo;
         if (!request.IsWithLogo)
         {
-            logo = new Image(ImageDataFactory.Create("./blank-logo.png"));
+            logo = new Image(ImageDataFactory.Create("/blank-logo.png"));
         }
         else
         {
             try
             {
-                logo = new Image(ImageDataFactory.Create("./blublu-logo.jpg"));
+                // logo = new Image(ImageDataFactory.Create("./blublu-logo.jpg"));
+                logo = new Image(ImageDataFactory.Create(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "blublu-logo.png")));
+
             }
             catch (Exception)
             {
                 try
                 {
-                    logo = new Image(ImageDataFactory.Create("./blublu-logo.png"));
+                    // logo = new Image(ImageDataFactory.Create("./blublu-logo.png"));
+                    logo = new Image(ImageDataFactory.Create(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "blublu-logo.jpg")));
                 }
                 catch (Exception)
                 {
-                    logo = new Image(ImageDataFactory.Create("./blank-logo.png"));
+                    // logo = new Image(ImageDataFactory.Create("./blank-logo.png"));
+                    logo = new Image(ImageDataFactory.Create(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "blank-logo.png")));
                     //TODO come up with better idea
                 }
             }

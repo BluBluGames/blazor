@@ -10,12 +10,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e662321e-6c3b-40cd-99af-1574f65b4bd8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/blank-logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/CalculatorB2B/Calculator.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/CalculatorB2B/Calculator.razor.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.CalculatorB2B.Domain/BluBlu.CalculatorB2B.Domain.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.CalculatorB2B.Domain/Class1.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.CalculatorB2B.Infrastructure/BluBlu.CalculatorB2B.Infrastructure.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BluBlu.CalculatorB2B.Infrastructure/Class1.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BluBlu/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Account/Register.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Areas/Identity/Pages/Account/Register.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Invoices.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Invoices.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/CreatePdf/CreatePdfCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/CreatePdf/CreatePdfCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/BluBlu.Blazor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/BluBlu.Blazor.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/AddModal.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/AddModal.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Requests/InvoiceRequestModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Pages/Invoices/Requests/InvoiceRequestModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/Shared/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/Shared/NavMenu.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Blazor/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Blazor/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/Contractor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/Contractor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/CreatePdf/CreatePdfCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/CreatePdf/CreatePdfCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BluBlu.sln" beforeDir="false" afterPath="$PROJECT_DIR$/BluBlu.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +56,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e3bc3f84cc248cc742fc1c5f56a7727d2febed13ab281104470f728796baac5/RazorPage.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/598be7b76329747735b1e8e8b423ca7a2fff54b0a9474b23f1e0f920a889444d/RazorView.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7a1ad32abaee44480b66c2c1fcee9628cca92a4cd272eced5781564201180/Number.Parsing.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f4708639776589f5ac2739f6fcbfc67343b1f9dac51cc1dbfdb003eef77cc1c/Monitor.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c1da7b6c7c71a954fe3eb2531c6476711b3e6d93a8d76795386d326bb9dbc/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a9cbda3784706aeeed61f1a08a18046925b69f777943eca27fbbcca09dff60/DateTime.cs" root0="SKIP_HIGHLIGHTING" />
@@ -60,19 +70,27 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bcaa9628af6c4f61b21166133af53b4823898/64/db31a71e/AuthAppBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d77c4680ed9457393ace56767da2743b443a47727beda6a2b5304cc4abee506e/Activator.RuntimeType.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/af506b2bcf2f429f84c4f850f5e34ace73400/f4/ba780617/BsonClassMapSerializer`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/11ea7d8b7cd3d1f62cc6759f665c323bd51b4211b4b1c013972b2115dfcf5de/JSRuntimeExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/ValueObjects/UnitName.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6531f0ef8211ade7b28cd628285da26d79181ad65233ef65451653358367a/RequestExceptionActionProcessorBehavior.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/af506b2bcf2f429f84c4f850f5e34ace73400/79/b892ad34/IBsonSerializerExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/99f419da685db5b785ad98ae98ffc828baa4e16ee92330e6d3d152fc38ff31b1/TypeConverter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b05314ed92a8cc3623ddeabcc77a9722e54e4da328fb4810e414bee23a2a7dc1/RequestHandlerWrapper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f9e259d18138c7fde498ede177576de7fd10fcf169979fe4e488fab591b4b7/JsonConverterOfT.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Name.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/aebbcfe1b7da99372cc653a4983f02fb21cfcec4d7ebef99c47495d77b90ad/ByteArrayJsonConverter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/ValueObjects/Address.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/IProductsRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BluBlu.CalculatorB2B.Domain/Class1.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d4f4ac7db6d2c5d183ab2d92602280ed4349fd6e6a1b6313546b3d01fdab5/ServiceProvider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/ProductsEntity/Product.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/37a954845b52703c5cce1aacf8fa1292378878e82bf68c4c4b5effc447316e9/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BluBlu.Common.Domain/ValueObjects/Serializers/MongoBooleanValueObjectSerializer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/089df371fb95ac32834d618c0723b2e2c7975bd3c33bdc8a588c9bb829074a6/DotNetStreamReference.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BluBlu.Invoices.Domain/ContractorsEntity/Contractor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea95343b9387b73062a9b61b7538f826c54ce3529632b4472ba4494044d23/AsyncTaskMethodBuilderT.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/41cc2659897ded1c75869e25f414a6dce3380d39586a3b5a93cc7ebd6ce5/SignInManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/0b5567882521e02aa3d40a7bce81b7235ccac4db588866e3498e614c3bc/CastHelpers.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -265,6 +283,11 @@
       <workItem from="1643532152375" duration="9822000" />
       <workItem from="1643607085548" duration="4128000" />
       <workItem from="1643621613111" duration="1254000" />
+      <workItem from="1644324701844" duration="3398000" />
+      <workItem from="1645562476852" duration="17630000" />
+      <workItem from="1646024618714" duration="2494000" />
+      <workItem from="1646333392452" duration="4653000" />
+      <workItem from="1646626208822" duration="202000" />
     </task>
     <task id="LOCAL-00001" summary="add migrations and context in auth domain">
       <created>1642880339839</created>
@@ -437,13 +460,26 @@
           <line>208</line>
           <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Invoices.Domain\InvoicesAggregate\Commands\CreatePdf\CreatePdfCommandHandler.cs" initialLine="208" containingFunctionPresentation="method 'SetHeaderTable'">
             <startOffsets>
-              <option value="10243" />
+              <option value="10272" />
             </startOffsets>
             <endOffsets>
-              <option value="10273" />
+              <option value="10302" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/BluBlu.Invoices.Domain/InvoicesAggregate/Commands/CreatePdf/CreatePdfCommandHandler.cs</url>
+          <line>227</line>
+          <properties documentPath="D:\WebDev\DotNet\BluBlu\BluBlu.Invoices.Domain\InvoicesAggregate\Commands\CreatePdf\CreatePdfCommandHandler.cs" initialLine="227" containingFunctionPresentation="method 'SetLogo'">
+            <startOffsets>
+              <option value="11151" />
+            </startOffsets>
+            <endOffsets>
+              <option value="11163" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
