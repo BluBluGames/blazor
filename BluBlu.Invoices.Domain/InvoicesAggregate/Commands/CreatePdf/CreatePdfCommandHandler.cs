@@ -38,14 +38,14 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         return await Task.FromResult(Unit.Value);
     }
     
-    private static (PdfFont helvetica, PdfFont helveticaBold) SetFonts()
+    private (PdfFont helvetica, PdfFont helveticaBold) SetFonts()
     {
         var helvetica = PdfFontFactory.CreateFont(StandardFonts.HELVETICA, PdfEncodings.CP1257);
         var helveticaBold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD, PdfEncodings.CP1257);
         return (helvetica, helveticaBold);
     }
     
-    private static void SetSummedPrices(CreatePdfCommand request, out decimal sumNet, out decimal sumVat, out decimal sumGross,
+    private void SetSummedPrices(CreatePdfCommand request, out decimal sumNet, out decimal sumVat, out decimal sumGross,
         out SortedDictionary<string, PriceByVat> sumByVat)
     {
         sumNet = 0m;
@@ -64,7 +64,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
     
             var key = product.Product.Vat.Value switch
             {
-                0 => product.Product.IsVatZw.Value == false ? "0" : "zw",
+                0 => product.Product.IsVatZw.Value ? "zw" : "0",
                 _ => product.Product.Vat.Value.ToString(CultureInfo.InvariantCulture)
             };
     
@@ -99,7 +99,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         }
     }
     
-    private static void SetContractorsTable(CreatePdfCommand request, PdfFont helveticaBold, PdfFont helvetica, Document document)
+    private void SetContractorsTable(CreatePdfCommand request, PdfFont helveticaBold, PdfFont helvetica, Document document)
     {
         var contractorsTable = new Table(UnitValue.CreatePercentArray(2)).UseAllAvailableWidth();
     
@@ -226,28 +226,24 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
     private void SetLogo(CreatePdfCommand request, Table headerTable)
     {
         Image? logo;
-        if (!request.IsWithLogo)
+        if (request.IsWithLogo == false)
         {
-            logo = new Image(ImageDataFactory.Create("/blank-logo.png"));
+            logo = new Image(ImageDataFactory.Create(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "blank-logo.png")));
         }
         else
         {
             try
             {
-                // logo = new Image(ImageDataFactory.Create("./blublu-logo.jpg"));
                 logo = new Image(ImageDataFactory.Create(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "blublu-logo.png")));
-
             }
             catch (Exception)
             {
                 try
                 {
-                    // logo = new Image(ImageDataFactory.Create("./blublu-logo.png"));
                     logo = new Image(ImageDataFactory.Create(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "blublu-logo.jpg")));
                 }
                 catch (Exception)
                 {
-                    // logo = new Image(ImageDataFactory.Create("./blank-logo.png"));
                     logo = new Image(ImageDataFactory.Create(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "blank-logo.png")));
                     //TODO come up with better idea
                 }
@@ -294,7 +290,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
             AddCell($"{product.NumberOfUnits.Value}", true, false, 1);
             AddCell($"{product.Product.UnitName.Value}", true, false, 1);
             AddCell($"{Math.Round(product.Product.PriceNet.Value * product.NumberOfUnits.Value, 2):0.00}", true, false, 2);
-            AddCell(product.Product.IsVatZw.Value ? $"zw" : $"{product.Product.Vat.Value}%", true, false, 2);
+            AddCell(product.Product.IsVatZw.Value ? "zw" : $"{product.Product.Vat.Value}%", true, false, 2);
             AddCell($"{Math.Round(product.Product.PriceNet.Value * product.NumberOfUnits.Value * product.Product.Vat.Value / 100, 2):0.00}", true, false, 2);
             AddCell($"{Math.Round(product.Product.PriceNet.Value * product.NumberOfUnits.Value + product.Product.PriceNet.Value * product.NumberOfUnits.Value * product.Product.Vat.Value / 100, 2):0.00}", true, false, 3);
             count++;
@@ -318,7 +314,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
             AddCell("", true, false, 1);
             AddCell("w tym", true, true, 2);
             AddCell($"{value.NetPrice:0.00}", true, false, 2);
-            AddCell(value.IsVatZw ? $"zw" : $"{key}%", true, false, 2);
+            AddCell(value.IsVatZw ? "zw" : $"{key}%", true, false, 2);
             AddCell($"{value.VatPrice:0.00}", true, false, 2);
             AddCell($"{value.GrossPrice:0.00}", true, false, 3);
         }

@@ -1,23 +1,24 @@
 ﻿using System;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 
 namespace BluBlu.Common.Domain.ValueObjects.Serializers;
 
-public class MongoBooleanValueObjectSerializer<TValueObject> : IBsonSerializer<TValueObject>
-    where TValueObject : BooleanValueObject
+public class MongoEnumValueObjectSerializer<TValueObject> : IBsonSerializer<TValueObject>
+    where TValueObject : EnumValueObject<Enum>
 {
     public Type ValueType => typeof(TValueObject);
 
     public TValueObject Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
     {
-        var value = context.Reader.ReadBoolean();
+        var value = context.Reader.ReadString();
         
-        return (TValueObject) Activator.CreateInstance(typeof(TValueObject), args: value)!;
+        return (TValueObject) Activator.CreateInstance(typeof(TValueObject), value)!;
     }
 
     public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, TValueObject? value)
     {
-        if (value != null) context.Writer.WriteBoolean(value.Value);
+        context.Writer.WriteString(value?.Value?.ToString());
     }
 
     public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, object? value)
@@ -25,7 +26,7 @@ public class MongoBooleanValueObjectSerializer<TValueObject> : IBsonSerializer<T
         switch (value)
         {
             case TValueObject name:
-                context.Writer.WriteBoolean(name.Value);
+                context.Writer.WriteString(name.Value?.ToString());
                 break;
             case null:
                 context.Writer.WriteNull();
@@ -37,7 +38,13 @@ public class MongoBooleanValueObjectSerializer<TValueObject> : IBsonSerializer<T
 
     object IBsonSerializer.Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
     {
-        var value = context.Reader.ReadBoolean();
-        return (TValueObject) Activator.CreateInstance(typeof(TValueObject), args: value)!;
+        if (context.Reader.CurrentBsonType == BsonType.Null)
+        {
+            context.Reader.ReadNull();
+            return (TValueObject) Activator.CreateInstance(typeof(TValueObject), null)!;
+        }
+
+        var value = context.Reader.ReadString();
+        return (TValueObject) Activator.CreateInstance(typeof(TValueObject), value)!;
     }
 }
