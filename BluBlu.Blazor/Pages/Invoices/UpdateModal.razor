@@ -3,6 +3,7 @@
 @using BluBlu.Blazor.Pages.Invoices.Requests
 @using BluBlu.Invoices.Domain.InvoicesAggregate
 @using BluBlu.Invoices.Domain.InvoicesAggregate.Commands.Create
+@using BluBlu.Invoices.Domain.InvoicesAggregate.Commands.Update
 @inject IMediator _mediator
 
 <div class="modal @_addModalClass" tabindex="-1" role="dialog" style="display:@_addModalDisplay">
@@ -16,7 +17,7 @@
 
             <div class="row">
                 <div class="modal-body col-12">
-                    <EditForm class="col-12" Model="@_requestModel" OnValidSubmit="@Create">
+                    <EditForm class="col-12" Model="@_requestModel" OnValidSubmit="@Update">
                         <DataAnnotationsValidator></DataAnnotationsValidator>
                         <div class="row">
                             <div class="col-4">
@@ -245,8 +246,8 @@
             </div>
             <div class="row">
                 <div class="modal-footer col-12">
-                    <button type="submit" class="btn btn-primary" @onclick="() => Create()">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Close()">Close</button>
+                    <button type="submit" class="btn btn-primary" @onclick="Update">Update</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="Close">Close</button>
                 </div>
             </div>
         </div>
@@ -269,7 +270,7 @@
     private string _addModalClass = "";
     private bool _showBackdrop;
 
-    private InvoiceRequestModel _requestModel = new InvoiceRequestModel 
+    private InvoiceRequestModel _requestModel = new()
     {
         InvoiceNumber = string.Empty,
         DateOfInvoice = DateTime.Now,
@@ -289,12 +290,12 @@
     {
         return new InvoiceRequestModel
         {
-            InvoiceNumber = GenerateNextInvoiceNumber(invoices),
-            DateOfInvoice = LastDayOfTheMonth(),
-            DateOfRelease = LastDayOfTheMonth(),
-            DateOfPayment = LastDayOfTheMonth().AddDays(14),
-            FormOfPayment = invoiceToClone.FormOfPayment?.Value ?? string.Empty,
-            AccountNumber = invoiceToClone.AccountNumber?.Value ?? string.Empty,
+            InvoiceNumber = invoiceToClone.InvoiceNumber.ToString() ?? string.Empty,
+            DateOfInvoice = invoiceToClone.DateOfInvoice,
+            DateOfRelease = invoiceToClone.DateOfRelease,
+            DateOfPayment = invoiceToClone.DateOfPayment,
+            FormOfPayment = invoiceToClone.FormOfPayment.Value ?? string.Empty,
+            AccountNumber = invoiceToClone.AccountNumber.Value ?? string.Empty,
             IsPaymentDivided = invoiceToClone.IsPaymentDivided.Value,
             IsPaid = invoiceToClone.IsPaid.Value,
             Remarks = invoiceToClone.Remarks?.Value ?? string.Empty,
@@ -335,54 +336,6 @@
         };
     }
 
-    private string GenerateNextInvoiceNumber(List<Invoice> invoices)
-    {
-        var currentMonth = DateTime.Now.Month;
-        var nextInvoiceNumber = 1;
-        
-        if (invoices.Any())
-        {
-            var invoiceFromCurrentMonth = invoices
-                .Where(x => int.Parse(x.InvoiceNumber.Value?.Substring(5, 2)!) == currentMonth)
-                .OrderByDescending(x => x.InvoiceNumber.Value?[..4])
-                .FirstOrDefault()?.InvoiceNumber.Value;
-
-            nextInvoiceNumber = invoiceFromCurrentMonth != null ? 
-                int.Parse(invoiceFromCurrentMonth?.Substring(1, 3)!) + 1 : 1;
-        }
-        
-        var invoiceNumber = $"F{nextInvoiceNumber:000}-{DateTime.Now.Month:00}-{DateTime.Now.Year}";
-        return invoiceNumber;
-    }
-
-    private DateTime LastDayOfTheMonth() => new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1).AddDays(-1);
-
-    public void Open()
-    {
-        _addModalDisplay = "block;";
-        _addModalClass = "Show";
-        _showBackdrop = true;
-        StateHasChanged();
-    }
-    
-    public void Open(Invoice invoiceToClone, List<Invoice> invoices)
-    {
-        _addModalDisplay = "block;";
-        _addModalClass = "Show";
-        _showBackdrop = true;
-        _requestModel = CloneInvoiceData(invoiceToClone, invoices);
-        StateHasChanged();
-    }
-    
-    // public void Update(Invoice invoiceToClone, List<Invoice> invoices)
-    // {
-    //     _addModalDisplay = "block;";
-    //     _addModalClass = "Show";
-    //     _showBackdrop = true;
-    //     _requestModel = CloneInvoiceData(invoiceToClone, invoices);
-    //     StateHasChanged();
-    // }
-
     private void Close()
     {
         _addModalDisplay = "none";
@@ -397,11 +350,20 @@
         { Name = string.Empty, PriceNet = 0, NumberOfUnits = 1, UnitName = string.Empty, Vat = 23, PriceGross = 0 });
     }
 
-    private async Task Create()
+    public async Task Update()
     {
         var invoice = _requestModel.ToDomainModel();
-        await _mediator.Send(new CreateInvoiceCommand { Invoice = invoice });
+        await _mediator.Send(new UpdateInvoiceCommand { Invoice = invoice });
         await OnInvoiceAdded.InvokeAsync(invoice);
         Close();
+    }
+    
+    public void Open(Invoice invoiceToClone, List<Invoice> invoices)
+    {
+        _addModalDisplay = "block;";
+        _addModalClass = "Show";
+        _showBackdrop = true;
+        _requestModel = CloneInvoiceData(invoiceToClone, invoices);
+        StateHasChanged();
     }
 }

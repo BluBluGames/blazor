@@ -23,7 +23,8 @@ public class InvoiceRepository : IInvoiceRepository
     {
         var idFilter = Builders<Invoice>.Filter.Eq(i => i.Id, id);
 
-        return await _database.Invoices.Find(idFilter).FirstOrDefaultAsync();    }
+        return await _database.Invoices.Find(idFilter).FirstOrDefaultAsync();
+    }
 
     public async Task<List<Invoice>> FetchInvoiceByYearAndMonth(string year, string month)
     {

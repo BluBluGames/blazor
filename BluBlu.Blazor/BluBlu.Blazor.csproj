@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
         <PackageReference Include="MediatR" Version="10.0.1" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.1" />
@@ -26,6 +27,8 @@
       <ProjectReference Include="..\BluBlu.Auth.Infrastructure\BluBlu.Auth.Infrastructure.csproj" />
       <ProjectReference Include="..\BluBlu.Invoices.Domain\BluBlu.Invoices.Domain.csproj" />
       <ProjectReference Include="..\BluBlu.Invoices.Infrastructure\BluBlu.Invoices.Infrastructure.csproj" />
+      <ProjectReference Include="..\BluBlu.Stocks.Domain\BluBlu.Stocks.Domain.csproj" />
+      <ProjectReference Include="..\BluBlu.Stocks.Infrastructure\BluBlu.Stocks.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -40,6 +43,10 @@
       <None Update="blublu-logo.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\js" />
     </ItemGroup>
 
 </Project>

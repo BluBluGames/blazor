@@ -1,7 +1,4 @@
-﻿using BluBlu.Invoices.Domain.ContractorsEntity.ValueObjects;
-using BluBlu.Invoices.Domain.ContractorsEntity.ValueObjects.AddressVO;
-
-namespace BluBlu.Blazor.Pages.Contractors.Requests;
+﻿namespace BluBlu.Blazor.Pages.Contractors.Requests;
 
 public class CreateContractorCommand
 {

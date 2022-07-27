@@ -25,6 +25,7 @@
         {
             <h1>@Error</h1>
             <AddModal @ref="AddModal" OnInvoiceAdded="@HandleAddInvoice"></AddModal>
+            <UpdateModal @ref="UpdateModal" OnInvoiceAdded="@HandleUpdateInvoice"></UpdateModal>
             <button @onclick="() => AddModal.Open()" type="button" class="btn btn-success w-25">Add</button>
             
             <table class="table">
@@ -50,7 +51,8 @@
                             <button type="button" @onclick="() => CreatePdf(invoice, true)" class="btn btn-info w-25">Generate</button>
                             <button type="button" @onclick="() => CreatePdf(invoice, false)" class="btn btn-info w-25">Generate (NoLogo)</button>
                             <button type="button" @onclick="() => Delete(invoice.Id)" class="btn btn-danger me-2 w-25">Delete</button>
-                            <button type="button" @onclick="() => AddModal.Open(invoice)" class="btn btn-danger me-2 w-25">Add Similar</button>
+                            <button type="button" @onclick="() => AddModal.Open(invoice, _invoices)" class="btn btn-danger me-2 w-25">Add Similar</button>
+                            <button type="button" @onclick="() => UpdateModal.Open(invoice, _invoices)" class="btn btn-danger me-2 w-25">Update</button>
                         </td>
                     </tr>
                 }
@@ -65,6 +67,7 @@
 @code {
     private List<Invoice> _invoices = new();
     private AddModal AddModal { get; set; } = new();
+    private UpdateModal UpdateModal { get; set; } = new();
     private string Error { get; set; } = string.Empty;
     protected override async Task OnInitializedAsync()
     {
@@ -108,10 +111,18 @@
 
     private async Task<Unit> CreatePdf(Invoice invoice, bool isWithLogo)
     {
-        return await _mediator.Send(new CreatePdfCommand { Invoice = invoice, IsWithLogo = isWithLogo});
+        await _mediator.Send(new CreatePdfCommand { Invoice = invoice, IsWithLogo = isWithLogo, NavigationManager = _navigationManager});
+        _navigationManager.NavigateTo($"api/DownloadPdf/{invoice.InvoiceNumber}", true);
+        return Unit.Value;
     }
 
     private async Task HandleAddInvoice(Invoice invoice)
+    {
+        _invoices.Clear();
+        _invoices = await GetAll();
+    }
+    
+    private async Task HandleUpdateInvoice(Invoice invoice)
     {
         _invoices.Clear();
         _invoices = await GetAll();

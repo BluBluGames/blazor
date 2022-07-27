@@ -11,7 +11,7 @@ public class Product
     [BsonElement("PriceNet")] public PriceNet PriceNet { get; set; } = new();
     [BsonElement("UnitName")] public UnitName UnitName { get; set; } = new();
     [BsonElement("Vat")] public Vat Vat { get; set; } = new();
-    [BsonElement("IsVatZw")] public IsVatZw IsVatZw { get; set; } = new();
+    [BsonElement("IsVatZw")] public IsVatZw IsVatZw { get; set; }
     [BsonElement("PriceGross")] public PriceGross PriceGross { get; set; } = null!;
     [BsonElement("LegalBasisForTaxExemption")] public LegalBasisForTaxExemption? LegalBasisForTaxExemption { get; set; }
 

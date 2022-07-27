@@ -13,7 +13,6 @@ public class GetAllInvoicesQueryHandler : IRequestHandler<GetAllInvoicesQuery, L
 
     public async Task<List<Invoice>> Handle(GetAllInvoicesQuery request, CancellationToken cancellationToken)
     {
-        var asd = await _invoicesRepository.FetchInvoicesAll();
         return await _invoicesRepository.FetchInvoicesAll();
     }
 }

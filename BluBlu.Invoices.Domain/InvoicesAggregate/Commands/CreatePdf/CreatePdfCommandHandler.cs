@@ -35,6 +35,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         SetSummaryTable(request, helveticaBold, helvetica, document, sumGross);
             
         document.Close();
+        
         return await Task.FromResult(Unit.Value);
     }
     
@@ -212,7 +213,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
             new Paragraph("FAKTURA ").SetFont(helvetica).SetFontSize(14)
                 .Add(new Text($"{request.Invoice.InvoiceNumber.Value}\n").SetFont(helveticaBold))
                 .Add($"data wystawienia: {request.Invoice.DateOfInvoice.Value.ToShortDateString()}\n").SetFont(helvetica)
-                .Add($"data wydania towaru: {request.Invoice.DateOfRelease.Value.ToShortDateString()}").SetFont(helvetica)
+                .Add($"data sprzedaży: {request.Invoice.DateOfRelease.Value.ToShortDateString()}").SetFont(helvetica)
                 .SetTextAlignment(TextAlignment.RIGHT);
 
         var dateCell = new Cell().Add(invoiceDate).SetVerticalAlignment(VerticalAlignment.MIDDLE);
@@ -345,7 +346,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         var summaryTable = new Table(UnitValue.CreatePercentArray(4)).SetWidth(UnitValue.CreatePercentValue(70));
             
         AddCell("Razem do zapłaty:", false);
-        AddCell($"{sumGross:0.00}", true, 15);
+        AddCell($"{sumGross:0.00} PLN", true, 15);
         AddCell("Termin płatności:", false);
         AddCell($"{request.Invoice.DateOfPayment.Value.ToShortDateString()}", true);
         AddCell("Forma płatności:", false);

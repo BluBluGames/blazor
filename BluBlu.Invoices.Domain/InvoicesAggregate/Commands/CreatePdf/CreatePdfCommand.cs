@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Components;
 
 namespace BluBlu.Invoices.Domain.InvoicesAggregate.Commands.CreatePdf
 {
@@ -6,5 +7,6 @@ namespace BluBlu.Invoices.Domain.InvoicesAggregate.Commands.CreatePdf
     {
         public Invoice Invoice { get; set; } = null!;
         public bool IsWithLogo { get; set; }
+        public NavigationManager NavigationManager { get; set; }
     }
 }
