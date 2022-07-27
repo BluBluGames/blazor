@@ -12,12 +12,18 @@ using BluBlu.Invoices.Infrastructure.Connection;
 using BluBlu.Invoices.Infrastructure.Contractors;
 using BluBlu.Invoices.Infrastructure.Invoices;
 using BluBlu.Invoices.Infrastructure.Products;
+using BluBlu.Stocks.Domain;
+using BluBlu.Stocks.Domain.CountryExchangeEntity;
+using BluBlu.Stocks.Domain.StockEntity;
+using BluBlu.Stocks.Infrastructure.Connection;
+using BluBlu.Stocks.Infrastructure.CountryExchanges;
+using BluBlu.Stocks.Infrastructure.Stocks;
 using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionDev"); //prod has different connection string
 builder.Services.AddDbContext<AuthDbContext>(options => options.UseNpgsql(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -30,12 +36,19 @@ builder.Services.AddDefaultIdentity<BluBluIdentity>(options => options.SignIn.Re
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddMediatR(typeof(InvoicesDomainEmptyClass));
+builder.Services.AddMediatR(typeof(InvoicesDomainEmptyClass), typeof(StocksDomainEmptyClass));
+builder.Services.AddAutoMapper(typeof(StocksDomainEmptyClass));
+
 builder.Services.Configure<InvoicesOptions>(builder.Configuration.GetSection("MongoClient"));
-builder.Services.AddSingleton<IInvoicesDatabase, InvoicesDatabase>();
+builder.Services.AddScoped<IInvoicesDatabase, InvoicesDatabase>();
 builder.Services.AddTransient<IInvoiceRepository, InvoiceRepository>();
-builder.Services.AddTransient<IContractorsRepository, ContractorsRepository>();
 builder.Services.AddTransient<IProductsRepository, ProductsRepository>();
+builder.Services.AddTransient<IContractorsRepository, ContractorsRepository>();
+
+builder.Services.Configure<StocksOptions>(builder.Configuration.GetSection("MongoClient"));
+builder.Services.AddScoped<IStocksDatabase, StocksDatabase>();
+builder.Services.AddTransient<IStockRepository, StockRepository>();
+builder.Services.AddTransient<ICountryExchangeRepository, CountryExchangeRepository>();
 
 var app = builder.Build();
 

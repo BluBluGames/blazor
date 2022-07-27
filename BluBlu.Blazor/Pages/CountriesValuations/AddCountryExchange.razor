@@ -1,0 +1,71 @@
+﻿@page "/add-country-exchange"
+@using MediatR
+@using Microsoft.AspNetCore.Components
+@using BluBlu.Stocks.Domain.CountryExchangeEntity.Commands.Create
+@using BluBlu.Stocks.Common.Enums
+@inject IMediator _mediator
+
+<EditForm class="col-12" Model="@_command" OnValidSubmit="@Create">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <div class="row">
+        <div class="col-4">
+            <h3>CountryExchange</h3>
+            <p>
+                <label for="Country">Country</label>
+                <InputSelect class="w-100" id="Country" @bind-Value="_command.Country">
+                    @foreach (var country in Enum.GetValues(typeof(CountryType)))
+                    {
+                        <option value="@country">@country</option>
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => _command.Country)"></ValidationMessage>
+            </p>
+
+            <p>
+                <label for="YearOfCalculation">Year of Calculation</label>
+                <InputDate class="w-100" id="YearOfCalculation" @bind-Value="_command.YearOfCalculation"/>
+                <ValidationMessage For="@(() => _command.YearOfCalculation)"></ValidationMessage>
+            </p>
+
+            <p>
+                <label for="PE">PE</label>
+                <InputNumber class="w-100" id="PE" @bind-Value="_command.PE"/>
+                <ValidationMessage For="@(() => _command.PE)"></ValidationMessage>
+            </p>
+
+            <p>
+                <label for="CAPE">CAPE</label>
+                <InputNumber class="w-100" id="CAPE" @bind-Value="_command.CAPE"/>
+                <ValidationMessage For="@(() => _command.CAPE)"></ValidationMessage>
+            </p>
+
+            <p>
+                <label for="PBV">PBV</label>
+                <InputNumber class="w-100" id="PBV" @bind-Value="_command.PBV"/>
+                <ValidationMessage For="@(() => _command.PBV)"></ValidationMessage>
+            </p>
+
+            <p>
+                <label for="DividendYield">DividendYield</label>
+                <InputNumber class="w-100" id="DividendYield" @bind-Value="_command.DividendYield"/>
+                <ValidationMessage For="@(() => _command.DividendYield)"></ValidationMessage>
+            </p>
+
+        </div>
+    </div>
+</EditForm>
+<div class="row">
+     <div class="modal-footer col-12">
+         <button type="submit" class="btn btn-primary" @onclick="() => Create()">Save changes</button>
+     </div>
+</div>
+
+
+@code {
+    private Requests.CreateCountryExchangeCommand _command = new();
+    
+    private async Task Create()
+    {
+        await _mediator.Send(new CreateCountryExchangeCommand { CountryExchange = _command.ToDomainModel() });
+    }
+}
