@@ -26,16 +26,18 @@
         }
         else
         {
-            <h1>@Error</h1>
+            <h1 class="text-center">@Error</h1>
             <AddModal @ref="AddModal" OnInvoiceAdded="@HandleAddInvoice"></AddModal>
             <UpdateModal @ref="UpdateModal" OnInvoiceAdded="@HandleUpdateInvoice"></UpdateModal>
-            <button @onclick="() => AddModal.Open()" type="button" class="btn btn-success w-25">Add</button>
-            <button type="button" class="btn btn-success w-25" @onclick="() => GetAll()">Get All Invoices</button>
-            <button type="button" class="btn btn-success w-25" @onclick="() => GetAllFromCurrentAndTwoPreviousMonths()">GetAll From This And Two Previous Months</button>
-            <button type="button" class="btn btn-success w-25" @onclick="() => GetAllFromCurrentMonth()">GetAll From This Month</button>
-            <button type="button" class="btn btn-success w-25" @onclick="() => GetAllFromPreviousMonth()">GetAll From Previous Month</button>
+            <div class="d-flex justify-content-end mb-3">
+                <button @onclick="() => AddModal.Open()" type="button" class="btn btn-primary me-2">Add</button>
+                <button type="button" class="btn btn-primary me-2" @onclick="() => GetAll()">Get All Invoices</button>
+                <button type="button" class="btn btn-info me-2" @onclick="() => GetAllFromCurrentAndTwoPreviousMonths()">GetAll From This And Two Previous Months</button>
+                <button type="button" class="btn btn-info me-2" @onclick="() => GetAllFromCurrentMonth()">GetAll From This Month</button>
+                <button type="button" class="btn btn-info me-2" @onclick="() => GetAllFromPreviousMonth()">GetAll From Previous Month</button>
+            </div>
             
-            <table class="table">
+            <table class="table text-light">
                 <thead>
                 <tr>
                     <th>Invoice Number</th>
@@ -54,12 +56,13 @@
                         <td>@invoice.Buyer.Name</td>
                         <td>@invoice.DateOfPayment</td>
                         <td>
-                            <button type="button" class="btn @(invoice.IsPaid ? "btn-success" : "btn-warning") btn-success me-2 w-">Paid</button>
-                            <button type="button" @onclick="() => CreatePdf(invoice, true)" class="btn btn-info w-25">Generate</button>
-                            <button type="button" @onclick="() => CreatePdf(invoice, false)" class="btn btn-info w-25">Generate (NoLogo)</button>
-                            <button type="button" @onclick="() => Delete(invoice.Id)" class="btn btn-danger me-2 w-25">Delete</button>
-                            <button type="button" @onclick="() => AddModal.Open(invoice, _invoices)" class="btn btn-danger me-2 w-25">Add Similar</button>
-                            <button type="button" @onclick="() => UpdateModal.Open(invoice, _invoices)" class="btn btn-danger me-2 w-25">Update</button>
+                            <div class="d-flex justify-content-end">
+                                <button type="button" @onclick="() => CreatePdf(invoice, true)" class="btn btn-secondary me-2 w-100">Generate</button>
+                                <button type="button" @onclick="() => CreatePdf(invoice, false)" class="btn btn-secondary me-2 w-100">Generate (NoLogo)</button>
+                                <button type="button" @onclick="() => AddModal.Open(invoice, _invoices)" class="btn btn-primary me-2 w-100">Add Similar</button>
+                                <button type="button" @onclick="() => UpdateModal.Open(invoice, _invoices)" class="btn btn-warning me-2 w-100">Update</button>
+                                <button type="button" @onclick="() => Delete(invoice.Id)" class="btn btn-danger me-2 w-100">Delete</button>
+                            </div>
                         </td>
                     </tr>
                 }
@@ -71,6 +74,7 @@
         @{ _navigationManager.NavigateTo("/403"); }
     </NotAuthorized>
 </AuthorizeView>
+
 @code {
     private List<Invoice> _invoices = new();
     private AddModal AddModal { get; set; } = new();
