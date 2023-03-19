@@ -11,6 +11,7 @@ namespace BluBlu.Blazor.Pages.Invoices.Requests;
 
 public class InvoiceRequestModel
 {
+    public string Id { get; set; } = null!;
     public string InvoiceNumber { get; set; } = null!;
     public DateTime DateOfInvoice { get; set; }
     public DateTime DateOfRelease { get; set; }
@@ -27,6 +28,7 @@ public class InvoiceRequestModel
     public BluBlu.Invoices.Domain.InvoicesAggregate.Invoice ToDomainModel()
     {
         return new(
+            Id,
             new(InvoiceNumber),
             new(DateOfInvoice),
             new(DateOfRelease),

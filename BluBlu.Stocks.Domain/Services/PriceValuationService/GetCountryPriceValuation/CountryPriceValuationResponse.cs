@@ -5,7 +5,7 @@ namespace BluBlu.Stocks.Domain.Services.PriceValuationService.GetCountryPriceVal
 
 public class CountryPriceValuationResponse
 {
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
     public PEValuation PEValuation { get; set; }
     public PBVValuation PBVValuation { get; set; }
     public CAPEValuation CAPEValuation { get; set; }

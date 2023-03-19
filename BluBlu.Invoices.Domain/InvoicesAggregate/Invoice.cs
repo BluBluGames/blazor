@@ -26,6 +26,7 @@ public class Invoice
     }
 
     public Invoice(
+        string id,
         InvoiceNumber invoiceNumber,
         DateOfInvoice dateOfInvoice,
         DateOfRelease dateOfRelease,
@@ -39,6 +40,7 @@ public class Invoice
         Contractor buyer,
         ICollection<ProductWithNumberOfUnits> products)
     {
+        Id = id;
         InvoiceNumber = invoiceNumber;
         DateOfInvoice = dateOfInvoice;
         DateOfRelease = dateOfRelease;

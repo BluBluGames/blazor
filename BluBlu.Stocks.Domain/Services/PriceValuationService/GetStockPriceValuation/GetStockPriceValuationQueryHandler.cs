@@ -18,7 +18,7 @@ public class GetStockPriceValuationQueryHandler : IRequestHandler<GetStockPriceV
         var stock = await _stockRepository.FetchStockById(request.Id);
 
         var returnObject = new StockPriceValuation();
-        returnObject.PEValuation = stock.PE.Value switch
+        returnObject.PeValuation = stock.PE.Value switch
         {
             <= 5 => PEValuation.GreatDeal,
             > 5 and <= 8 => PEValuation.Cheap,
@@ -26,7 +26,7 @@ public class GetStockPriceValuationQueryHandler : IRequestHandler<GetStockPriceV
             > 16 and <= 20 => PEValuation.Expensive,
             > 20 => PEValuation.BubbleTerritory
         };
-        returnObject.CAPEValuation = stock.CAPE.Value switch
+        returnObject.CapeValuation = stock.CAPE.Value switch
         {
             <= 12 => CAPEValuation.GreatDeal,
             > 12 and <= 16 => CAPEValuation.Cheap,

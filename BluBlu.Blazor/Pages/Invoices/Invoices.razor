@@ -8,6 +8,9 @@
 @using BluBlu.Invoices.Domain.InvoicesAggregate.Commands.Delete
 @using BluBlu.Invoices.Domain.InvoicesAggregate.Commands.Update
 @using BluBlu.Invoices.Domain.InvoicesAggregate.Queries.GetAll
+@using BluBlu.Invoices.Domain.InvoicesAggregate.Queries.GetAllFromCurrentAndTwoPreviousMonths
+@using BluBlu.Invoices.Domain.InvoicesAggregate.Queries.GetAllFromCurrentMonth
+@using BluBlu.Invoices.Domain.InvoicesAggregate.Queries.GetAllFromPreviousMonth
 @using BluBlu.Invoices.Domain.InvoicesAggregate.Queries.GetById
 
 @inject IMediator _mediator
@@ -27,6 +30,10 @@
             <AddModal @ref="AddModal" OnInvoiceAdded="@HandleAddInvoice"></AddModal>
             <UpdateModal @ref="UpdateModal" OnInvoiceAdded="@HandleUpdateInvoice"></UpdateModal>
             <button @onclick="() => AddModal.Open()" type="button" class="btn btn-success w-25">Add</button>
+            <button type="button" class="btn btn-success w-25" @onclick="() => GetAll()">Get All Invoices</button>
+            <button type="button" class="btn btn-success w-25" @onclick="() => GetAllFromCurrentAndTwoPreviousMonths()">GetAll From This And Two Previous Months</button>
+            <button type="button" class="btn btn-success w-25" @onclick="() => GetAllFromCurrentMonth()">GetAll From This Month</button>
+            <button type="button" class="btn btn-success w-25" @onclick="() => GetAllFromPreviousMonth()">GetAll From Previous Month</button>
             
             <table class="table">
                 <thead>
@@ -73,7 +80,7 @@
     {
         try
         {
-            _invoices = await GetAll();
+            _invoices = await GetAllFromCurrentAndTwoPreviousMonths();
         }
         catch (Exception e)
         {
@@ -84,9 +91,28 @@
     
     private async Task<List<Invoice>> GetAll()
     {
-        return await _mediator.Send(new GetAllInvoicesQuery());
+        _invoices = await _mediator.Send(new GetAllInvoicesQuery());
+        return _invoices;
     }
     
+    private async Task<List<Invoice>> GetAllFromCurrentAndTwoPreviousMonths()
+    {
+        _invoices = await _mediator.Send(new GetInvoicesForCurrentAndTwoPreviousMonthsQuery{CurrentDate = DateOnly.FromDateTime(DateTime.Today)});
+        return _invoices;
+    }
+    
+    private async Task<List<Invoice>> GetAllFromCurrentMonth()
+    {
+        _invoices = await _mediator.Send(new GetInvoicesForCurrentMonthQuery{CurrentDate = DateOnly.FromDateTime(DateTime.Today)});
+        return _invoices;
+    }
+    
+    private async Task<List<Invoice>> GetAllFromPreviousMonth()
+    {
+        _invoices = await _mediator.Send(new GetInvoicesFromPreviousMonthQuery{CurrentDate = DateOnly.FromDateTime(DateTime.Today)});
+        return _invoices;
+    }
+
     private async Task<Invoice> GetById(string id)
     {
         return await _mediator.Send(new GetInvoiceByIdQuery { Id = id });
@@ -119,12 +145,12 @@
     private async Task HandleAddInvoice(Invoice invoice)
     {
         _invoices.Clear();
-        _invoices = await GetAll();
+        _invoices = await GetAllFromCurrentAndTwoPreviousMonths();
     }
     
     private async Task HandleUpdateInvoice(Invoice invoice)
     {
         _invoices.Clear();
-        _invoices = await GetAll();
+        _invoices = await GetAllFromCurrentAndTwoPreviousMonths();
     }
 }

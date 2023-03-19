@@ -5,11 +5,11 @@ namespace BluBlu.Stocks.Domain.Services.PriceValuationService.GetStockPriceValua
 
 public class StockPriceValuation
 {
-    public Country Country { get; set; }
-    public PEValuation PEValuation { get; set; }
-    public CAPEValuation CAPEValuation { get; set; }
-    public PSValuation PSValuation { get; set; }
-    public PBVValuation PBVValuation { get; set; }
+    public Country Country { get; set; } = null!;
+    public PEValuation PeValuation { get; set; }
+    public CAPEValuation CapeValuation { get; set; }
+    public PSValuation PsValuation { get; set; }
+    public PBVValuation PbvValuation { get; set; }
     public FScoreValuation FScoreValuation { get; set; }
     public ROEValuation ROEValuation { get; set; }
     public decimal DividendYield { get; set; }

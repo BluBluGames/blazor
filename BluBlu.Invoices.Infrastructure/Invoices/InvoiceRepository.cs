@@ -54,4 +54,56 @@ public class InvoiceRepository : IInvoiceRepository
     {
         return await _database.Invoices.DeleteOneAsync(i => i.Id == id);
     }
+
+    public async Task<List<Invoice>> FetchInvoicesForCurrentAndTwoPreviousMonths(DateOnly currentDate)
+    {
+        var currentYear = currentDate.Year;
+        var currentMonth = currentDate.Month;
+
+        // Calculate the year and month for the previous two months, accounting for January
+        var previousYear = currentYear;
+        var previousMonth = currentMonth - 2;
+        
+        if (previousMonth < 1)
+        {
+            previousMonth += 12;
+            previousYear -= 1;
+        }
+
+        // Construct filters for the current and previous two months
+        var currentMonthFilter = Builders<Invoice>.Filter.Regex(i => i.InvoiceNumber, new BsonRegularExpression($"{currentMonth}-{currentYear}"));
+        var previousMonthFilter = Builders<Invoice>.Filter.Regex(i => i.InvoiceNumber, new BsonRegularExpression($"{previousMonth}-{previousYear}"));
+        var twoMonthsAgoFilter = Builders<Invoice>.Filter.Regex(i => i.InvoiceNumber, new BsonRegularExpression($"{previousMonth + 1}-{previousYear}"));
+
+        // Combine the filters using a logical OR operator
+        var combinedFilter = Builders<Invoice>.Filter.Or(currentMonthFilter, previousMonthFilter, twoMonthsAgoFilter);
+
+        // Fetch the invoices matching the combined filter
+        return await (await _database.Invoices.FindAsync(combinedFilter)).ToListAsync();
+    }
+
+    public async Task<List<Invoice>> FetchInvoicesForCurrentMonth(DateOnly requestCurrentDate)
+    {
+        var currentYear = requestCurrentDate.Year;
+        var currentMonth = requestCurrentDate.Month;
+
+        // Construct filter for the current month
+        var currentMonthFilter = Builders<Invoice>.Filter.Regex(i => i.InvoiceNumber, new BsonRegularExpression($"{currentMonth}-{currentYear}"));
+
+        // Fetch the invoices matching the current month filter
+        return await (await _database.Invoices.FindAsync(currentMonthFilter)).ToListAsync();
+    }
+
+    public async Task<List<Invoice>> FetchInvoicesForPreviousMonth(DateOnly requestCurrentDate)
+    {
+        var previousMonth = requestCurrentDate.AddMonths(-1);
+        var year = previousMonth.Year;
+        var month = previousMonth.Month;
+
+        // Construct filter for the previous month
+        var previousMonthFilter = Builders<Invoice>.Filter.Regex(i => i.InvoiceNumber, new BsonRegularExpression($"{month:00}-{year}"));
+
+        // Fetch the invoices matching the previous month filter
+        return await (await _database.Invoices.FindAsync(previousMonthFilter)).ToListAsync();
+    }
 }

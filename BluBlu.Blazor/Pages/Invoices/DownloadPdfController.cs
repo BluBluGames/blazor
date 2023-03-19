@@ -12,6 +12,6 @@ public class DownloadPdfController : ControllerBase
     public IActionResult DownloadInvoiceFile([FromRoute] string invoiceNumber)
     {
         var fileStream = new FileStream($"./{invoiceNumber}.pdf", FileMode.Open, FileAccess.Read, FileShare.None, 4096, FileOptions.DeleteOnClose);
-        return File(fileStream, System.Net.Mime.MediaTypeNames.Application.Octet,            $"{invoiceNumber}.pdf");
+        return File(fileStream, System.Net.Mime.MediaTypeNames.Application.Octet, $"{invoiceNumber}.pdf");
     }
 }

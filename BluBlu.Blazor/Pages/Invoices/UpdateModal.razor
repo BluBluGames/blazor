@@ -11,7 +11,8 @@
         <div class="modal-content container-fluid">
             <div class="row">
                 <div class="modal-header col-12">
-                    <h2 class="modal-title">Add Invoice</h2>
+                    <h2 class="modal-title">Update Invoice</h2>
+                    <button type="button" class="btn btn-primary" @onclick="(e) => GenerateNextInvoiceNumberForPreviousMonth(_invoices)">Set invoice for previous month</button>
                 </div>
             </div>
 
@@ -234,6 +235,10 @@
                                             <label for="@idIsVatZw">Is Vat Zw</label>
                                             <ValidationMessage For="@(() => _requestModel.Products.ToList()[product.index].IsVatZw)"></ValidationMessage>
                                         </div>
+                                        
+                                        <div class="col-1">
+                                            <button type="button" class="btn btn-primary" @onclick="(e) => RecalculateFromBruttoToNetto(_requestModel.Products.ToList()[product.index].PriceNet, _requestModel.Products.ToList()[product.index].Vat, product.index)">Recalculate Brutto to Netto</button>
+                                        </div>
                                     </div>
                                 }
                             
@@ -269,6 +274,7 @@
     private string _addModalDisplay = "none;";
     private string _addModalClass = "";
     private bool _showBackdrop;
+    private List<Invoice> _invoices = null!;
 
     private InvoiceRequestModel _requestModel = new()
     {
@@ -288,8 +294,10 @@
     
     private InvoiceRequestModel CloneInvoiceData(Invoice invoiceToClone, List<Invoice> invoices)
     {
+        _invoices = invoices;
         return new InvoiceRequestModel
         {
+            Id = invoiceToClone.Id,
             InvoiceNumber = invoiceToClone.InvoiceNumber.ToString() ?? string.Empty,
             DateOfInvoice = invoiceToClone.DateOfInvoice,
             DateOfRelease = invoiceToClone.DateOfRelease,
@@ -336,6 +344,50 @@
         };
     }
 
+    private void GenerateNextInvoiceNumberForPreviousMonth(List<Invoice> invoices)
+    {
+        var currentMonth = DateTime.Now.AddMonths(-1).Month;
+        var nextInvoiceNumber = 1;
+        
+        if (invoices.Any())
+        {
+            var invoiceFromCurrentMonth = invoices
+                .Where(x => int.Parse(x.InvoiceNumber.Value?.Substring(5, 2)!) == currentMonth)
+                .OrderByDescending(x => x.InvoiceNumber.Value?[..4])
+                .FirstOrDefault()?.InvoiceNumber.Value;
+
+            nextInvoiceNumber = invoiceFromCurrentMonth != null ? 
+                int.Parse(invoiceFromCurrentMonth?.Substring(1, 3)!) + 1 : 1;
+        }
+        
+        _requestModel.InvoiceNumber = $"F{nextInvoiceNumber:000}-{DateTime.Now.AddMonths(-1).Month:00}-{DateTime.Now.Year}";
+        
+        var year = DateTime.Now.Year;
+        var month = DateTime.Now.Month;
+        if (month == 1)
+        {
+            year -= 1;
+        }
+        _requestModel.InvoiceNumber = $"F{nextInvoiceNumber:000}-{DateTime.Now.AddMonths(-1).Month:00}-{year}";
+        SetLastDayOfPreviousMonth();
+    }
+
+    private void SetLastDayOfPreviousMonth()
+    {
+        DateTime today = DateTime.Now;
+        int year = today.Year;
+        int month = today.Month;
+    // Subtract one month from the current date to get the previous month
+        DateTime previousMonth = new DateTime(year, month, 1).AddMonths(-1);
+    // Use the DateTime.DaysInMonth method to get the number of days in the previous month
+        int lastDayOfPreviousMonth = DateTime.DaysInMonth(previousMonth.Year, previousMonth.Month);
+    // Create a new DateTime object for the last day of the previous month
+        DateTime lastDay = new DateTime(previousMonth.Year, previousMonth.Month, lastDayOfPreviousMonth);
+        _requestModel.DateOfInvoice = lastDay;
+        _requestModel.DateOfRelease = lastDay;
+        _requestModel.DateOfPayment = lastDay.AddDays(14);
+    }
+    
     private void Close()
     {
         _addModalDisplay = "none";
@@ -353,7 +405,7 @@
     public async Task Update()
     {
         var invoice = _requestModel.ToDomainModel();
-        await _mediator.Send(new UpdateInvoiceCommand { Invoice = invoice });
+        await _mediator.Send(new UpdateInvoiceCommand { Id = invoice.Id, Invoice = invoice });
         await OnInvoiceAdded.InvokeAsync(invoice);
         Close();
     }
@@ -365,5 +417,17 @@
         _showBackdrop = true;
         _requestModel = CloneInvoiceData(invoiceToClone, invoices);
         StateHasChanged();
+    }
+    
+    private void RecalculateFromBruttoToNetto(decimal priceNet, decimal vat, int index)
+    {
+    // Calculate the VAT multiplier
+        decimal vatMultiplier = vat / 100 + 1;
+    
+    // Calculate the net price from the gross price and VAT
+        decimal priceNetNew = Math.Round(priceNet / vatMultiplier, 2);
+        
+    // Update the price net for the product in the list
+        _requestModel.Products.ToList()[index].PriceNet = priceNetNew;
     }
 }

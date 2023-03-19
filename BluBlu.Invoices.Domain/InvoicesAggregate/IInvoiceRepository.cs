@@ -10,4 +10,7 @@ public interface IInvoiceRepository
     Task<Invoice> CreateInvoice(Invoice invoice);
     Task<Invoice> UpdateInvoice(string id, Invoice invoice);
     Task<DeleteResult> DeleteInvoice(string id);
+    Task<List<Invoice>> FetchInvoicesForCurrentAndTwoPreviousMonths(DateOnly currentDate);
+    Task<List<Invoice>> FetchInvoicesForCurrentMonth(DateOnly requestCurrentDate);
+    Task<List<Invoice>> FetchInvoicesForPreviousMonth(DateOnly requestCurrentDate);
 }

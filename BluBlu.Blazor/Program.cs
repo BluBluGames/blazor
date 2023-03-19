@@ -12,12 +12,6 @@ using BluBlu.Invoices.Infrastructure.Connection;
 using BluBlu.Invoices.Infrastructure.Contractors;
 using BluBlu.Invoices.Infrastructure.Invoices;
 using BluBlu.Invoices.Infrastructure.Products;
-using BluBlu.Stocks.Domain;
-using BluBlu.Stocks.Domain.CountryExchangeEntity;
-using BluBlu.Stocks.Domain.StockEntity;
-using BluBlu.Stocks.Infrastructure.Connection;
-using BluBlu.Stocks.Infrastructure.CountryExchanges;
-using BluBlu.Stocks.Infrastructure.Stocks;
 using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,19 +30,14 @@ builder.Services.AddDefaultIdentity<BluBluIdentity>(options => options.SignIn.Re
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddMediatR(typeof(InvoicesDomainEmptyClass), typeof(StocksDomainEmptyClass));
-builder.Services.AddAutoMapper(typeof(StocksDomainEmptyClass));
+builder.Services.AddMediatR(typeof(InvoicesDomainEmptyClass), typeof(InvoicesDomainEmptyClass));
+builder.Services.AddAutoMapper(typeof(InvoicesDomainEmptyClass));
 
 builder.Services.Configure<InvoicesOptions>(builder.Configuration.GetSection("MongoClient"));
 builder.Services.AddScoped<IInvoicesDatabase, InvoicesDatabase>();
 builder.Services.AddTransient<IInvoiceRepository, InvoiceRepository>();
 builder.Services.AddTransient<IProductsRepository, ProductsRepository>();
 builder.Services.AddTransient<IContractorsRepository, ContractorsRepository>();
-
-builder.Services.Configure<StocksOptions>(builder.Configuration.GetSection("MongoClient"));
-builder.Services.AddScoped<IStocksDatabase, StocksDatabase>();
-builder.Services.AddTransient<IStockRepository, StockRepository>();
-builder.Services.AddTransient<ICountryExchangeRepository, CountryExchangeRepository>();
 
 var app = builder.Build();
 

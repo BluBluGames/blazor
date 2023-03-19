@@ -7,6 +7,6 @@ namespace BluBlu.Invoices.Domain.InvoicesAggregate.Commands.CreatePdf
     {
         public Invoice Invoice { get; set; } = null!;
         public bool IsWithLogo { get; set; }
-        public NavigationManager NavigationManager { get; set; }
+        public NavigationManager NavigationManager { get; set; } = null!;
     }
 }

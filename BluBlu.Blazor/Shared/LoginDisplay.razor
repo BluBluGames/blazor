@@ -1,11 +1,15 @@
 <AuthorizeView>
     <Authorized>
-        <form method="post" action="Identity/Account/LogOut">
-            <button type="submit" class="nav-link btn btn-link">Log out</button>
-        </form>
-        <a href="Identity/Account/Register">Register</a>
+        <div class="d-flex justify-content-end align-items-center">
+            <a href="Identity/Account/Register" class="btn btn-outline-light me-2">Register</a>
+            <form method="post" action="Identity/Account/LogOut">
+                <button type="submit" class="btn btn-outline-light">Log out</button>
+            </form>
+        </div>
     </Authorized>
     <NotAuthorized>
-        <a href="Identity/Account/Login">Log in</a>
+        <div class="d-flex justify-content-end align-items-center">
+            <a href="Identity/Account/Login" class="btn btn-outline-light">Log in</a>
+        </div>
     </NotAuthorized>
 </AuthorizeView>
