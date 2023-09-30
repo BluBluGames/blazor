@@ -1,26 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluBlu.Blazor", "BluBlu.Blazor\BluBlu.Blazor.csproj", "{0C3C794A-CF9B-4B81-954A-3009CB570807}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluBlu.Blazor", "BluBlu.Blazor\BluBlu.Blazor.csproj", "{0C3C794A-CF9B-4B81-954A-3009CB570807}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "front-end", "front-end", "{76149E02-FF82-4091-9F7A-838167711274}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "back-end", "back-end", "{5B614378-B965-48A6-9E51-32F9099F0DC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluBlu.Invoices.Domain", "BluBlu.Invoices.Domain\BluBlu.Invoices.Domain.csproj", "{C90E10EC-427F-4793-9276-2E0543508D81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluBlu.Invoices.Domain", "BluBlu.Invoices.Domain\BluBlu.Invoices.Domain.csproj", "{C90E10EC-427F-4793-9276-2E0543508D81}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "invoices", "invoices", "{89FFD223-B2E1-4698-9A5A-423A31B47770}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluBlu.Invoices.Infrastructure", "BluBlu.Invoices.Infrastructure\BluBlu.Invoices.Infrastructure.csproj", "{FA6B571B-4808-41D1-8A46-E82BE40F673D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluBlu.Invoices.Infrastructure", "BluBlu.Invoices.Infrastructure\BluBlu.Invoices.Infrastructure.csproj", "{FA6B571B-4808-41D1-8A46-E82BE40F673D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "auth", "auth", "{6764957A-B5AD-4A60-889E-3120919615D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluBlu.Auth.Domain", "BluBlu.Auth.Domain\BluBlu.Auth.Domain.csproj", "{D9CAFDAD-E50B-4F9E-8BE6-60A53F98904E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluBlu.Auth.Domain", "BluBlu.Auth.Domain\BluBlu.Auth.Domain.csproj", "{D9CAFDAD-E50B-4F9E-8BE6-60A53F98904E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluBlu.Auth.Infrastructure", "BluBlu.Auth.Infrastructure\BluBlu.Auth.Infrastructure.csproj", "{46D2C362-1A80-4C5E-A4D0-CA9AFBB8BAE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluBlu.Auth.Infrastructure", "BluBlu.Auth.Infrastructure\BluBlu.Auth.Infrastructure.csproj", "{46D2C362-1A80-4C5E-A4D0-CA9AFBB8BAE4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{E1337299-C623-4EFB-BEAF-C7DD8F6410C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluBlu.Common.Domain", "BluBlu.Common.Domain\BluBlu.Common.Domain.csproj", "{CF142221-30DD-4108-A591-B5BD90A0E76A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluBlu.Common.Domain", "BluBlu.Common.Domain\BluBlu.Common.Domain.csproj", "{CF142221-30DD-4108-A591-B5BD90A0E76A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tasks", "tasks", "{61DE407A-18AA-40E9-9A2D-9DA82CA69A45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,15 +58,22 @@ Global
 		{CF142221-30DD-4108-A591-B5BD90A0E76A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF142221-30DD-4108-A591-B5BD90A0E76A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0C3C794A-CF9B-4B81-954A-3009CB570807} = {76149E02-FF82-4091-9F7A-838167711274}
-		{89FFD223-B2E1-4698-9A5A-423A31B47770} = {5B614378-B965-48A6-9E51-32F9099F0DC4}
 		{C90E10EC-427F-4793-9276-2E0543508D81} = {89FFD223-B2E1-4698-9A5A-423A31B47770}
+		{89FFD223-B2E1-4698-9A5A-423A31B47770} = {5B614378-B965-48A6-9E51-32F9099F0DC4}
 		{FA6B571B-4808-41D1-8A46-E82BE40F673D} = {89FFD223-B2E1-4698-9A5A-423A31B47770}
 		{6764957A-B5AD-4A60-889E-3120919615D2} = {5B614378-B965-48A6-9E51-32F9099F0DC4}
 		{D9CAFDAD-E50B-4F9E-8BE6-60A53F98904E} = {6764957A-B5AD-4A60-889E-3120919615D2}
 		{46D2C362-1A80-4C5E-A4D0-CA9AFBB8BAE4} = {6764957A-B5AD-4A60-889E-3120919615D2}
 		{E1337299-C623-4EFB-BEAF-C7DD8F6410C5} = {5B614378-B965-48A6-9E51-32F9099F0DC4}
 		{CF142221-30DD-4108-A591-B5BD90A0E76A} = {E1337299-C623-4EFB-BEAF-C7DD8F6410C5}
+		{61DE407A-18AA-40E9-9A2D-9DA82CA69A45} = {5B614378-B965-48A6-9E51-32F9099F0DC4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {092337C0-D62F-48DC-A2ED-DA3388D7236F}
 	EndGlobalSection
 EndGlobal

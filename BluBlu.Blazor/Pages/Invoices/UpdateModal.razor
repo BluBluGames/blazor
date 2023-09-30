@@ -24,6 +24,24 @@
                             <div class="col-4">
                                 <h3>Invoice Details</h3>
                                 <p>
+                                    <InputSelect class="form-control" @bind-Value="_requestModel.SelectedLanguage">
+                                        @foreach (var lang in _languages)
+                                        {
+                                            <option value="@lang.Key">@lang.Value</option>
+                                        }
+                                    </InputSelect>
+                                    <label for="Language" style="color: #f5f5f5;">Language</label>
+                                </p>
+                                <p>
+                                    <InputSelect class="form-control" @bind-Value="_requestModel.SelectedLogo">
+                                        @foreach (var logo in logoFiles)
+                                        {
+                                            <option value="@logo">@logo</option>
+                                        }
+                                    </InputSelect>
+                                    <label for="Logo" style="color: #f5f5f5;">Logo</label>
+                                </p>
+                                <p>
                                     <InputText class="w-100" id="InvoiceNumber" @bind-Value="_requestModel.InvoiceNumber"/>
                                     <label for="InvoiceNumber">Invoice Number</label>
                                     <ValidationMessage For="@(() => _requestModel.InvoiceNumber)"></ValidationMessage>
@@ -57,6 +75,12 @@
                                     <InputText class="w-100" id="AccountNumber" @bind-Value="_requestModel.AccountNumber"/>
                                     <label for="AccountNumber">Account Number</label>
                                     <ValidationMessage For="@(() => _requestModel.AccountNumber)"></ValidationMessage>
+                                </p>
+
+                                <p>
+                                    <InputText class="w-100" id="BicSwift" @bind-Value="_requestModel.BicSwift" />
+                                    <label for="BicSwift">Bic/Swift</label>
+                                    <ValidationMessage For="@(() => _requestModel.BicSwift)"></ValidationMessage>
                                 </p>
 
                                 <p>
@@ -275,15 +299,36 @@
     private string _addModalClass = "";
     private bool _showBackdrop;
     private List<Invoice> _invoices = null!;
+    private List<string> logoFiles = new List<string>();
+    private Dictionary<string, string> _languages = new Dictionary<string, string>
+    {
+        { "en", "English" },
+        { "pl", "Polish" },
+    };
+
+    protected override void OnInitialized()
+    {
+        var logoDirectoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./Storage/Img");
+        if (Directory.Exists(logoDirectoryPath))
+        {
+            logoFiles = Directory.GetFiles(logoDirectoryPath)
+                                 .Where(file => file.EndsWith(".png") || file.EndsWith(".jpg")) // filter png files
+                                 .Select(Path.GetFileName) // if you only want to display file names
+                                 .ToList();
+        }
+    }
 
     private InvoiceRequestModel _requestModel = new()
     {
         InvoiceNumber = string.Empty,
+        SelectedLanguage = string.Empty,
+        SelectedLogo = string.Empty,
         DateOfInvoice = DateTime.Now,
         DateOfRelease = DateTime.Now,
         DateOfPayment = DateTime.Now.AddDays(14),
         FormOfPayment = string.Empty,
         AccountNumber = string.Empty,
+        BicSwift = string.Empty,
         IsPaymentDivided = false,
         IsPaid = false,
         Remarks = string.Empty,
@@ -299,11 +344,14 @@
         {
             Id = invoiceToClone.Id,
             InvoiceNumber = invoiceToClone.InvoiceNumber.ToString() ?? string.Empty,
+            SelectedLanguage = invoiceToClone.SelectedLanguage.Value ?? string.Empty,
+            SelectedLogo = invoiceToClone.SelectedLogo.Value ?? string.Empty,
             DateOfInvoice = invoiceToClone.DateOfInvoice,
             DateOfRelease = invoiceToClone.DateOfRelease,
             DateOfPayment = invoiceToClone.DateOfPayment,
             FormOfPayment = invoiceToClone.FormOfPayment.Value ?? string.Empty,
             AccountNumber = invoiceToClone.AccountNumber.Value ?? string.Empty,
+            BicSwift = invoiceToClone.BicSwift.Value ?? string.Empty,
             IsPaymentDivided = invoiceToClone.IsPaymentDivided.Value,
             IsPaid = invoiceToClone.IsPaid.Value,
             Remarks = invoiceToClone.Remarks?.Value ?? string.Empty,

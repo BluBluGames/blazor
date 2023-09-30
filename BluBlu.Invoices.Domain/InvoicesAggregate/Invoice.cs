@@ -9,11 +9,14 @@ public class Invoice
 {
     [BsonId] [BsonRepresentation(BsonType.ObjectId)] [BsonIgnoreIfDefault] public string Id { get; set; } = null!;
     [BsonElement("InvoiceNumber")] public InvoiceNumber InvoiceNumber { get; set; } = new();
+    [BsonElement("SelectedLanguage")] public SelectedLanguage SelectedLanguage { get; set; } = new();
+    [BsonElement("SelectedLogo")] public SelectedLogo SelectedLogo { get; set; } = new();
     [BsonElement("DateOfInvoice")] public DateOfInvoice DateOfInvoice { get; set; } = new();
     [BsonElement("DateOfRelease")] public DateOfRelease DateOfRelease { get; set; } = new();
     [BsonElement("DateOfPayment")] public DateOfPayment DateOfPayment { get; set; } = new();
     [BsonElement("FormOfPayment")] public FormOfPayment FormOfPayment { get; set; } = new();
     [BsonElement("AccountNumber")] public AccountNumber AccountNumber { get; set; } = new();
+    [BsonElement("BicSwift")] public BicSwift BicSwift { get; set; } = new();
     [BsonElement("IsPaymentDivided")] public IsPaymentDivided IsPaymentDivided { get; set; } = new();
     [BsonElement("IsPaid")] public IsPaid IsPaid { get; set; } = new();
     [BsonElement("Remarks")] public Remarks? Remarks { get; set; }
@@ -28,11 +31,14 @@ public class Invoice
     public Invoice(
         string id,
         InvoiceNumber invoiceNumber,
+        SelectedLanguage selectedLanguage,
+        SelectedLogo selectedLogo,
         DateOfInvoice dateOfInvoice,
         DateOfRelease dateOfRelease,
         DateOfPayment dateOfPayment,
         FormOfPayment formOfPayment,
         AccountNumber accountNumber,
+        BicSwift bicSwift,
         IsPaymentDivided isPaymentDivided,
         IsPaid isPaid,
         Remarks? remarks,
@@ -42,11 +48,14 @@ public class Invoice
     {
         Id = id;
         InvoiceNumber = invoiceNumber;
+        SelectedLanguage = selectedLanguage;
+        SelectedLogo = selectedLogo;
         DateOfInvoice = dateOfInvoice;
         DateOfRelease = dateOfRelease;
         DateOfPayment = dateOfPayment;
         FormOfPayment = formOfPayment;
         AccountNumber = accountNumber;
+        BicSwift = bicSwift;
         IsPaymentDivided = isPaymentDivided;
         IsPaid = isPaid;
         Remarks = remarks;

@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Text.RegularExpressions;
 using BluBlu.Invoices.Domain.InvoicesAggregate.ValueObjects;
 using iText.IO.Font;
@@ -14,11 +13,21 @@ using iText.Layout.Element;
 using iText.Layout.Properties;
 using MediatR;
 using Path = System.IO.Path;
+using BluBlu.Invoices.Domain.Localization;
 
 namespace BluBlu.Invoices.Domain.InvoicesAggregate.Commands.CreatePdf;
 
 public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
 {
+    private readonly InvoiceValuesCalculatorService _invoiceValuesCalculatorService;
+    private readonly IJsonLocalizationService _localize;
+
+    public CreatePdfCommandHandler(IJsonLocalizationService jsonLocalizationService)
+    {
+        _localize = jsonLocalizationService;
+        _invoiceValuesCalculatorService = new InvoiceValuesCalculatorService();
+    }
+
     public async Task<Unit> Handle(CreatePdfCommand request, CancellationToken cancellationToken)
     {
         await using var stream = new MemoryStream();
@@ -27,16 +36,16 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         using var document = new Document(pdfDocument, PageSize.A4);
             
         var (helvetica, helveticaBold) = SetFonts();
-        SetSummedPrices(request, out var sumNet, out var sumVat, out var sumGross, out var sumByVat);
-            
+        var summedPrices = _invoiceValuesCalculatorService.CalculateValues(request.Invoice.Products);
+
         SetHeaderTable(request, helvetica, helveticaBold, document);
         SetContractorsTable(request, helveticaBold, helvetica, document);
-        SetProductsTable(request, helvetica, helveticaBold, document, sumNet, sumVat, sumGross, sumByVat);
-        SetSummaryTable(request, helveticaBold, helvetica, document, sumGross);
+        SetProductsTable(request, helvetica, helveticaBold, document, summedPrices.SumNet, summedPrices.SumVat, summedPrices.SumGross, summedPrices.SumByVat);
+        SetSummaryTable(request, helveticaBold, helvetica, document, summedPrices.SumGross);
             
         document.Close();
         
-        return await Task.FromResult(Unit.Value);
+        return await Task.FromResult(Unit.Value); 
     }
     
     private (PdfFont helvetica, PdfFont helveticaBold) SetFonts()
@@ -45,67 +54,13 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         var helveticaBold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD, PdfEncodings.CP1257);
         return (helvetica, helveticaBold);
     }
-    
-    private void SetSummedPrices(CreatePdfCommand request, out decimal sumNet, out decimal sumVat, out decimal sumGross,
-        out SortedDictionary<string, PriceByVat> sumByVat)
-    {
-        sumNet = 0m;
-        sumVat = 0m;
-        sumGross = 0m;
-    
-        sumByVat = new SortedDictionary<string, PriceByVat>();
-    
-        foreach (var product in request.Invoice.Products)
-        {
-            sumNet = Math.Round(sumNet + product.Product.PriceNet.Value * product.NumberOfUnits.Value, 2);
-            sumVat = Math.Round(sumVat + product.Product.PriceNet.Value * product.NumberOfUnits.Value * product.Product.Vat.Value / 100, 2);
-            sumGross = Math.Round(
-                sumGross + product.Product.PriceNet.Value * product.NumberOfUnits.Value +
-                product.Product.PriceNet.Value * product.NumberOfUnits.Value * product.Product.Vat.Value / 100, 2);
-    
-            var key = product.Product.Vat.Value switch
-            {
-                0 => product.Product.IsVatZw.Value ? "zw" : "0",
-                _ => product.Product.Vat.Value.ToString(CultureInfo.InvariantCulture)
-            };
-    
-            if (sumByVat.ContainsKey(key))
-            {
-                // var (_, value) = sumByVat.Single(s => Math.Abs(int.Parse(s.Key) - product.Product.Vat.Value) < 0.1);
-    
-                var (_, value) = sumByVat.Single(s =>
-                    Math.Abs(s.Key == "zw" ? 0 : int.Parse(s.Key) - product.Product.Vat.Value) < 0.1m);
-                    
-                value.NetPrice = Math.Round(value.NetPrice + product.Product.PriceNet.Value * product.NumberOfUnits.Value, 2);
-                value.VatPrice =
-                    Math.Round(value.VatPrice + product.Product.PriceNet.Value * product.NumberOfUnits.Value * product.Product.Vat.Value / 100, 2);
-                value.GrossPrice =
-                    Math.Round(
-                        value.GrossPrice + product.Product.PriceNet.Value * product.NumberOfUnits.Value +
-                        product.Product.PriceNet.Value * product.NumberOfUnits.Value * product.Product.Vat.Value / 100, 2);
-            }
-            else
-            {
-                sumByVat.Add(key , new PriceByVat
-                {
-                    NetPrice = Math.Round(product.Product.PriceNet.Value * product.NumberOfUnits.Value, 2),
-                    VatPrice = Math.Round(product.Product.PriceNet.Value * product.NumberOfUnits.Value * product.Product.Vat.Value / 100, 2),
-                    GrossPrice =
-                        Math.Round(
-                            product.Product.PriceNet.Value * product.NumberOfUnits.Value +
-                            product.Product.PriceNet.Value * product.NumberOfUnits.Value * product.Product.Vat.Value / 100, 2),
-                    IsVatZw = product.Product.IsVatZw.Value
-                });
-            }
-        }
-    }
-    
+        
     private void SetContractorsTable(CreatePdfCommand request, PdfFont helveticaBold, PdfFont helvetica, Document document)
     {
         var contractorsTable = new Table(UnitValue.CreatePercentArray(2)).UseAllAvailableWidth();
     
-        var seller = new Paragraph("SPRZEDAWCA:\n");
-        var buyer = new Paragraph("NABYWCA:\n").SetTextAlignment(TextAlignment.RIGHT);
+        var seller = new Paragraph($"{_localize.Get("Seller", request.Invoice.SelectedLanguage.Value)}:\n");
+        var buyer = new Paragraph($"{_localize.Get("Buyer", request.Invoice.SelectedLanguage.Value)}:\n").SetTextAlignment(TextAlignment.RIGHT);
     
         if (string.IsNullOrWhiteSpace(request.Invoice.Seller.Address.Street.Value))
         {
@@ -123,9 +78,10 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
                         $"{request.Invoice.Seller.Address.PostCode.Value} {request.Invoice.Seller.Address.PostCity.Value} {request.Invoice.Seller.Address.BuildingNumber.Value}\n")
                     .SetFont(helvetica);
             }
-                
+
+            seller.Add($"{request.Invoice.Seller.Address.Country}\n").SetFont(helvetica);
             if (string.IsNullOrWhiteSpace(request.Invoice.Seller.Nip?.Value) == false)
-                seller.Add($"NIP: {request.Invoice.Seller.Nip.Value}").SetFont(helvetica);
+                seller.Add($"{_localize.Get("VatRegistrationNo", request.Invoice.SelectedLanguage.Value)}: PL {request.Invoice.Seller.Nip.Value}").SetFont(helvetica);
         }
         else
         {
@@ -144,8 +100,11 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
             }
             seller.Add($"{request.Invoice.Seller.Address.PostCode.Value} {request.Invoice.Seller.Address.PostCity.Value}\n")
                 .SetFont(helvetica);
+
+            seller.Add($"{request.Invoice.Seller.Address.Country}\n").SetFont(helvetica);
+
             if (string.IsNullOrWhiteSpace(request.Invoice.Seller.Nip?.Value) == false)
-                seller.Add($"NIP: {request.Invoice.Seller.Nip.Value}").SetFont(helvetica);
+                seller.Add($"{_localize.Get("VatRegistrationNo", request.Invoice.SelectedLanguage.Value)}: PL {request.Invoice.Seller.Nip.Value}").SetFont(helvetica);
         }
     
         if (string.IsNullOrWhiteSpace(request.Invoice.Buyer.Address.Street.Value))
@@ -164,9 +123,10 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
                         $"{request.Invoice.Buyer.Address.PostCode.Value} {request.Invoice.Buyer.Address.PostCity.Value} {request.Invoice.Buyer.Address.BuildingNumber.Value}\n")
                     .SetFont(helvetica);
             }
-    
+            buyer.Add($"{request.Invoice.Buyer.Address.Country}\n").SetFont(helvetica);
+
             if (string.IsNullOrWhiteSpace(request.Invoice.Buyer.Nip?.Value) == false)
-                buyer.Add($"NIP: {request.Invoice.Buyer.Nip.Value}").SetFont(helvetica);
+                buyer.Add($"{_localize.Get("VatRegistrationNo", request.Invoice.SelectedLanguage.Value)}").SetFont(helvetica);
         }
         else
         {
@@ -184,11 +144,13 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
                         $"{request.Invoice.Buyer.Address.Street.Value} {request.Invoice.Buyer.Address.BuildingNumber.Value}\n")
                     .SetFont(helvetica);
             }
-                
+
             buyer.Add($"{request.Invoice.Buyer.Address.PostCode.Value} {request.Invoice.Buyer.Address.PostCity.Value}\n")
                 .SetFont(helvetica);
+
+            buyer.Add($"{request.Invoice.Buyer.Address.Country}\n").SetFont(helvetica);
             if (string.IsNullOrWhiteSpace(request.Invoice.Buyer.Nip?.Value) == false)
-                buyer.Add($"NIP: {request.Invoice.Buyer.Nip.Value}").SetFont(helvetica);
+                buyer.Add($"{_localize.Get("VatRegistrationNo", request.Invoice.SelectedLanguage.Value)}: BE {request.Invoice.Buyer.Nip.Value}").SetFont(helvetica);
         }
     
         var sellerCell = new Cell().Add(seller);
@@ -205,51 +167,44 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
     
     private void SetHeaderTable(CreatePdfCommand request, PdfFont helvetica, PdfFont helveticaBold, Document document)
     {
-        var headerTable = new Table(UnitValue.CreatePercentArray(2)).UseAllAvailableWidth();
+        try
+        {
+            var headerTable = new Table(UnitValue.CreatePercentArray(2)).UseAllAvailableWidth();
 
-        SetLogo(request, headerTable);
-            
-        var invoiceDate =
-            new Paragraph("FAKTURA ").SetFont(helvetica).SetFontSize(14)
-                .Add(new Text($"{request.Invoice.InvoiceNumber.Value}\n").SetFont(helveticaBold))
-                .Add($"data wystawienia: {request.Invoice.DateOfInvoice.Value.ToShortDateString()}\n").SetFont(helvetica)
-                .Add($"data sprzedaży: {request.Invoice.DateOfRelease.Value.ToShortDateString()}").SetFont(helvetica)
-                .SetTextAlignment(TextAlignment.RIGHT);
+            //TODO create a module to download and add images - then move SetLogo download logic to it
+            SetLogo(request, headerTable);
 
-        var dateCell = new Cell().Add(invoiceDate).SetVerticalAlignment(VerticalAlignment.MIDDLE);
-        dateCell.SetBorder(Border.NO_BORDER);
-        headerTable.AddCell(dateCell);
-        headerTable.SetMarginBottom(20);
-            
-        document.Add(headerTable);
+            var invoiceDate =
+                new Paragraph($"{_localize.Get("Invoice", request.Invoice.SelectedLanguage.Value)} ").SetFont(helvetica).SetFontSize(14)
+                    .Add(new Text($"{request.Invoice.InvoiceNumber.Value}\n").SetFont(helveticaBold))
+                    .Add($"{_localize.Get("DateOfIssue", request.Invoice.SelectedLanguage.Value)}: {request.Invoice.DateOfInvoice.Value.ToShortDateString()}\n").SetFont(helvetica)
+                    .Add($"{_localize.Get("DateOfSale", request.Invoice.SelectedLanguage.Value)}: {request.Invoice.DateOfRelease.Value.ToShortDateString()}").SetFont(helvetica)
+                    .SetTextAlignment(TextAlignment.RIGHT);
+
+            var dateCell = new Cell().Add(invoiceDate).SetVerticalAlignment(VerticalAlignment.MIDDLE);
+            dateCell.SetBorder(Border.NO_BORDER);
+            headerTable.AddCell(dateCell);
+            headerTable.SetMarginBottom(20);
+
+            document.Add(headerTable);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 
     private void SetLogo(CreatePdfCommand request, Table headerTable)
     {
         Image? logo;
-        if (request.IsWithLogo == false)
+        string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"./Storage/Img/{request.Invoice.SelectedLogo.Value}");
+
+        if (!File.Exists(logoPath))
         {
-            logo = new Image(ImageDataFactory.Create(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "blank-logo.png")));
+            logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./Storage/Img/blank-logo.png");
         }
-        else
-        {
-            try
-            {
-                logo = new Image(ImageDataFactory.Create(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "blublu-logo.png")));
-            }
-            catch (Exception)
-            {
-                try
-                {
-                    logo = new Image(ImageDataFactory.Create(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "blublu-logo.jpg")));
-                }
-                catch (Exception)
-                {
-                    logo = new Image(ImageDataFactory.Create(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "blank-logo.png")));
-                    //TODO come up with better idea
-                }
-            }
-        }
+
+        logo = new Image(ImageDataFactory.Create(logoPath));
 
         logo.ScaleToFit(128, 128);
         var image = new Paragraph().Add(logo);
@@ -269,18 +224,18 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         SortedDictionary<string, PriceByVat> sumByVat)
     {
         var productsTable = new Table(UnitValue.CreatePercentArray(18)).UseAllAvailableWidth();
-            
-        AddCell("LP.", false, true, 1, 6);
-        AddCell("NAZWA", false, true, 4, 6);
-        AddCell("PODSTAWA ZWOLNIENIA", false, true, 2, 6);
-        AddCell("CENA", false, true, 1, 6);
-        AddCell("ILOŚĆ", false, true, 1, 6);
-        AddCell("J.M.", false, true, 1, 6);
-        AddCell("KWOTA NETTO", false, true, 2, 6);
-        AddCell("STAWKA VAT", false, true, 2, 6);
-        AddCell("VAT", false, true, 2, 6);
-        AddCell("KWOTA BRUTTO", false, true, 3, 6);
-    
+
+        AddCell(_localize.Get("SerialNumber", request.Invoice.SelectedLanguage.Value), false, true, 1, 6);
+        AddCell(_localize.Get("Name", request.Invoice.SelectedLanguage.Value), false, true, 4, 6);
+        AddCell(_localize.Get("ExemptionBasis", request.Invoice.SelectedLanguage.Value), false, true, 2, 6);
+        AddCell(_localize.Get("Price", request.Invoice.SelectedLanguage.Value), false, true, 1, 6);
+        AddCell(_localize.Get("Quantity", request.Invoice.SelectedLanguage.Value), false, true, 1, 6);
+        AddCell(_localize.Get("UnitOfMeasure", request.Invoice.SelectedLanguage.Value), false, true, 1, 6);
+        AddCell(_localize.Get("NetAmount", request.Invoice.SelectedLanguage.Value), false, true, 2, 6);
+        AddCell(_localize.Get("VatRate", request.Invoice.SelectedLanguage.Value), false, true, 2, 6);
+        AddCell(_localize.Get("Vat", request.Invoice.SelectedLanguage.Value), false, true, 2, 6);
+        AddCell(_localize.Get("GrossAmount", request.Invoice.SelectedLanguage.Value), false, true, 3, 6);
+
         var count = 1;
         foreach (var product in request.Invoice.Products)
         {
@@ -301,7 +256,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         AddCell("", true, false, 4);
         AddCell("", true, false, 2);
         AddCell("", true, false, 1);
-        AddCell("Razem", true, true, 2);
+        AddCell(_localize.Get("Total", request.Invoice.SelectedLanguage.Value), true, true, 2);
         AddCell($"{sumNet:0.00}", true, false, 2);
         AddCell("", true, false, 2);
         AddCell($"{sumVat:0.00}", true, false, 2);
@@ -313,9 +268,9 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
             AddCell("", true, false, 4);
             AddCell("", true, false, 2);
             AddCell("", true, false, 1);
-            AddCell("w tym", true, true, 2);
+            AddCell(_localize.Get("Includes", request.Invoice.SelectedLanguage.Value), true, true, 2);
             AddCell($"{value.NetPrice:0.00}", true, false, 2);
-            AddCell(value.IsVatZw ? "zw" : $"{key}%", true, false, 2);
+            AddCell(value.IsVatZw ? _localize.Get("ZW", request.Invoice.SelectedLanguage.Value) : $"{key}%", true, false, 2);
             AddCell($"{value.VatPrice:0.00}", true, false, 2);
             AddCell($"{value.GrossPrice:0.00}", true, false, 3);
         }
@@ -340,29 +295,46 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
             productsTable.AddCell(cell);
         }
     }
-        
+
     private void SetSummaryTable(CreatePdfCommand request, PdfFont helveticaBold, PdfFont helvetica, Document document, decimal sumGross)
     {
         var summaryTable = new Table(UnitValue.CreatePercentArray(4)).SetWidth(UnitValue.CreatePercentValue(70));
-            
-        AddCell("Razem do zapłaty:", false);
-        AddCell($"{sumGross:0.00} PLN", true, 15);
-        AddCell("Termin płatności:", false);
+        AddCell(_localize.Get("TotalAmountDue", request.Invoice.SelectedLanguage.Value), false);
+        string currentCurrency = "EUR";
+
+        switch (currentCurrency)
+        {
+            case "PLN":
+                AddCell($"{sumGross:0.00} {_localize.Get("PolishZloty", "currency")}", true, 15);
+                break;
+            case "EUR":
+                AddCell($"{sumGross:0.00} {_localize.Get("Euro", "currency")}", true, 15);
+                break;
+            case "USD":
+                AddCell($"{sumGross:0.00} {_localize.Get("Dollar", "currency")}", true, 15);
+                break;
+            default:
+                break;
+        }
+
+        AddCell(_localize.Get("PaymentDueDate", request.Invoice.SelectedLanguage.Value), false);
         AddCell($"{request.Invoice.DateOfPayment.Value.ToShortDateString()}", true);
-        AddCell("Forma płatności:", false);
+        AddCell(_localize.Get("PaymentDueDate", request.Invoice.SelectedLanguage.Value), false);
         AddCell($"{request.Invoice.FormOfPayment}", true);
-        AddCell("Numer konta:", false);
-        AddCell($"{PrepareAccountNumber(request.Invoice.AccountNumber.Value!)}", true);
-        AddCell("Płatność podzielona:", false);
+        AddCell(_localize.Get("AccountNumber", request.Invoice.SelectedLanguage.Value), false);
+        AddCell($"PL {PrepareAccountNumber(request.Invoice.AccountNumber.Value!)}", true);
+        AddCell(_localize.Get("BIC/SWIFT", request.Invoice.SelectedLanguage.Value), false);
+        AddCell($"{request.Invoice.BicSwift}", true);
+        AddCell(_localize.Get("SplitPayment", request.Invoice.SelectedLanguage.Value), false);
         AddCell($"{PreparePaymentDivided(request.Invoice.IsPaymentDivided)}", true);
-        AddCell("Uwagi:", false);
+        AddCell(_localize.Get("Remarks", request.Invoice.SelectedLanguage.Value), false);
         AddCell($"{request.Invoice.Remarks}", true);
             
         document.Add(summaryTable);
     
         string PreparePaymentDivided(bool isDivided)
         {
-            return isDivided ? "TAK" : "NIE";
+            return isDivided ? _localize.Get("Yes", request.Invoice.SelectedLanguage.Value) : _localize.Get("No", request.Invoice.SelectedLanguage.Value);
         }
             
         string PrepareAccountNumber(string number)

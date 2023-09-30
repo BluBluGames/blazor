@@ -13,6 +13,8 @@ using BluBlu.Invoices.Infrastructure.Contractors;
 using BluBlu.Invoices.Infrastructure.Invoices;
 using BluBlu.Invoices.Infrastructure.Products;
 using MediatR;
+using BluBlu.Invoices.Domain.Localization;
+using BluBlu.Invoices.Infrastructure.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +40,7 @@ builder.Services.AddScoped<IInvoicesDatabase, InvoicesDatabase>();
 builder.Services.AddTransient<IInvoiceRepository, InvoiceRepository>();
 builder.Services.AddTransient<IProductsRepository, ProductsRepository>();
 builder.Services.AddTransient<IContractorsRepository, ContractorsRepository>();
+builder.Services.AddTransient<IJsonLocalizationService, JsonLocalizationService>();
 
 var app = builder.Build();
 

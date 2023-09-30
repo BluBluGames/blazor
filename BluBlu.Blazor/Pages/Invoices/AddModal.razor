@@ -5,74 +5,95 @@
 @using BluBlu.Invoices.Domain.InvoicesAggregate.Commands.Create
 @inject IMediator _mediator
 
-<div class="modal @_addModalClass" tabindex="-1" role="dialog" style="display:@_addModalDisplay">
+<div class="modal @_addModalClass bg-dark text-light" tabindex="-1" role="dialog" style="display:@_addModalDisplay">
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-        <div class="modal-content container-fluid">
+        <div class="modal-content container-fluid bg-dark text-light">
             <div class="row">
                 <div class="modal-header col-12">
-                    <h2 class="modal-title">Add Invoice</h2>
-                    <button type="button" class="btn btn-primary" @onclick="(e) => GenerateNextInvoiceNumberForPreviousMonth(_invoices)">Set invoice for previous month</button>
+                    <h2 class="modal-title text-light">Add Invoice</h2>
+                    <button type="button" class="btn btn-primary bg-cyan" @onclick="(e) => GenerateNextInvoiceNumberForPreviousMonth(_invoices)">Set invoice for previous month</button>
                 </div>
             </div>
-
+<div class="row">
+    <div class="modal-body col-12" style="background-color: #424848">
+        <EditForm class="col-12" Model="@_requestModel" OnValidSubmit="@Create">
+            <DataAnnotationsValidator></DataAnnotationsValidator>
             <div class="row">
-                <div class="modal-body col-12">
-                    <EditForm class="col-12" Model="@_requestModel" OnValidSubmit="@Create">
-                        <DataAnnotationsValidator></DataAnnotationsValidator>
-                        <div class="row">
-                            <div class="col-4">
-                                <h3>Invoice Details</h3>
-                                <p>
-                                    <InputText class="w-100" id="InvoiceNumber" @bind-Value="_requestModel.InvoiceNumber"/>
-                                    <label for="InvoiceNumber">Invoice Number</label>
-                                    <ValidationMessage For="@(() => _requestModel.InvoiceNumber)"></ValidationMessage>
-                                </p>
+                <div class="col-4">
+                    <h3 style="color: #79b9d1;">Invoice Details</h3>
+                    <p>
+                        <InputSelect class="form-control" @bind-Value="_requestModel.SelectedLanguage">
+                            @foreach (var lang in _languages)
+                            {
+                                <option value="@lang.Key">@lang.Value</option>
+                            }
+                        </InputSelect>
+                        <label for="Language" style="color: #f5f5f5;">Language</label>
+                    </p>
+                    <p>
+                        <InputSelect class="form-control" @bind-Value="_requestModel.SelectedLogo">
+                            @foreach (var logo in logoFiles)
+                            {
+                                <option value="@logo">@logo</option>
+                            }
+                        </InputSelect>
+                        <label for="Logo" style="color: #f5f5f5;">Logo</label>
+                    </p>
+                    <p>
+                        <InputText class="w-100" id="InvoiceNumber" @bind-Value="_requestModel.InvoiceNumber" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
+                        <label for="InvoiceNumber" style="color: #f5f5f5;">Invoice Number</label>
+                        <ValidationMessage For="@(() => _requestModel.InvoiceNumber)" style="color: red;"></ValidationMessage>
+                    </p>
 
-                                <p>
-                                    <InputDate class="w-100" id="DateOfInvoice" @bind-Value="_requestModel.DateOfInvoice"/>
-                                    <label for="DateOfInvoice">Date of invoice</label>
-                                    <ValidationMessage For="@(() => _requestModel.DateOfInvoice)"></ValidationMessage>
-                                </p>
+                    <p>
+                        <InputDate class="w-100" id="DateOfInvoice" @bind-Value="_requestModel.DateOfInvoice" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
+                        <label for="DateOfInvoice" style="color: #f5f5f5;">Date of invoice</label>
+                        <ValidationMessage For="@(() => _requestModel.DateOfInvoice)" style="color: red;"></ValidationMessage>
+                    </p>
 
-                                <p>
-                                    <InputDate class="w-100" id="DateOfRelease" @bind-Value="_requestModel.DateOfRelease"/>
-                                    <label for="DateOfRelease">Date of release</label>
-                                    <ValidationMessage For="@(() => _requestModel.DateOfRelease)"></ValidationMessage>
-                                </p>
+                    <p>
+                        <InputDate class="w-100" id="DateOfRelease" @bind-Value="_requestModel.DateOfRelease" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
+                        <label for="DateOfRelease" style="color: #f5f5f5;">Date of release</label>
+                        <ValidationMessage For="@(() => _requestModel.DateOfRelease)" style="color: red;"></ValidationMessage>
+                    </p>
 
-                                <p>
-                                    <InputDate class="w-100" id="DateOfPayment" @bind-Value="_requestModel.DateOfPayment"/>
-                                    <label for="FormOfPayment">Date Of Payment</label>
-                                    <ValidationMessage For="@(() => _requestModel.DateOfPayment)"></ValidationMessage>
-                                </p>
+                    <p>
+                        <InputDate class="w-100" id="DateOfPayment" @bind-Value="_requestModel.DateOfPayment" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
+                        <label for="FormOfPayment" style="color: #f5f5f5;">Date Of Payment</label>
+                        <ValidationMessage For="@(() => _requestModel.DateOfPayment)" style="color: red;"></ValidationMessage>
+                    </p>
 
+                    <p>
+                        <InputText class="w-100" id="FormOfPayment" @bind-Value="_requestModel.FormOfPayment" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
+                        <label for="FormOfPayment" style="color: #f5f5f5;">Form of payment</label>
+                        <ValidationMessage For="@(() => _requestModel.FormOfPayment)" style="color: red;"></ValidationMessage>
+                    </p>
                                 <p>
-                                    <InputText class="w-100" id="FormOfPayment" @bind-Value="_requestModel.FormOfPayment"/>
-                                    <label for="FormOfPayment">Form of payment</label>
-                                    <ValidationMessage For="@(() => _requestModel.FormOfPayment)"></ValidationMessage>
-                                </p>
-
-                                <p>
-                                    <InputText class="w-100" id="AccountNumber" @bind-Value="_requestModel.AccountNumber"/>
-                                    <label for="AccountNumber">Account Number</label>
+                                    <InputText class="w-100" id="AccountNumber" @bind-Value="_requestModel.AccountNumber" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
+                                    <label for="AccountNumber" style="color: #f5f5f5;">Account Number</label>
                                     <ValidationMessage For="@(() => _requestModel.AccountNumber)"></ValidationMessage>
                                 </p>
+                                <p>
+                                    <InputText class="w-100" id="BicSwift" @bind-Value="_requestModel.BicSwift" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
+                                    <label for="BicSwift" style="color: #f5f5f5;">Bic/Swift</label>
+                                    <ValidationMessage For="@(() => _requestModel.BicSwift)"></ValidationMessage>
+                                </p>
 
                                 <p>
-                                    <InputCheckbox id="IsPaymentDivided" @bind-Value="_requestModel.IsPaymentDivided"/>
-                                    <label for="FormOfPayment">Is Payment Divided</label>
+                                    <InputCheckbox id="IsPaymentDivided" @bind-Value="_requestModel.IsPaymentDivided" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
+                                    <label for="FormOfPayment" style="color: #f5f5f5;">Is Payment Divided</label>
                                     <ValidationMessage For="@(() => _requestModel.IsPaymentDivided)"></ValidationMessage>
                                 </p>
 
                                 <p>
-                                    <InputCheckbox id="IsPaid" @bind-Value="_requestModel.IsPaid"/>
-                                    <label for="FormOfPayment">Is Paid</label>
+                                    <InputCheckbox id="IsPaid" @bind-Value="_requestModel.IsPaid" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
+                                    <label for="FormOfPayment" style="color: #f5f5f5;">Is Paid</label>
                                     <ValidationMessage For="@(() => _requestModel.IsPaid)"></ValidationMessage>
                                 </p>
 
                                 <p>
-                                    <InputTextArea class="w-100" id="Remarks" @bind-Value="_requestModel.Remarks"/>
-                                    <label for="Remarks">Remarks</label>
+                                    <InputTextArea class="w-100" id="Remarks" @bind-Value="_requestModel.Remarks" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
+                                    <label for="Remarks" style="color: #f5f5f5;">Remarks</label>
                                     <ValidationMessage For="@(() => _requestModel.Remarks)"></ValidationMessage>
                                 </p>
                             </div>
@@ -275,14 +296,25 @@
     private bool _showBackdrop;
     private List<Invoice> _invoices = null!;
 
+    private Dictionary<string, string> _languages = new Dictionary<string, string>
+    {
+        { "en", "English" },
+        { "pl", "Polish" },
+    };
+
+    private List<string> logoFiles = new List<string>();
+
     private InvoiceRequestModel _requestModel = new()
     {
         InvoiceNumber = string.Empty,
+        SelectedLanguage = string.Empty,
+        SelectedLogo = string.Empty,
         DateOfInvoice = DateTime.Now,
         DateOfRelease = DateTime.Now,
         DateOfPayment = DateTime.Now.AddDays(14),
         FormOfPayment = string.Empty,
         AccountNumber = string.Empty,
+        BicSwift = string.Empty,
         IsPaymentDivided = false,
         IsPaid = false,
         Remarks = string.Empty,
@@ -290,6 +322,18 @@
         Buyer = new ContractorRequestModel {Name = string.Empty, AddressStreet = string.Empty, AddressPostCity = string.Empty, AddressCountry = string.Empty, AddressPostCode = string.Empty, AddressBuildingNumber = string.Empty, AddressFlatNumber = string.Empty, Nip = string.Empty},
         Products = new List<ProductRequestModel>()
     };
+
+    protected override void OnInitialized()
+    {
+        var logoDirectoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./Storage/Img");
+        if (Directory.Exists(logoDirectoryPath))
+        {
+            logoFiles = Directory.GetFiles(logoDirectoryPath)
+                                 .Where(file => file.EndsWith(".png") || file.EndsWith(".jpg")) // filter png files
+                                 .Select(Path.GetFileName) // if you only want to display file names
+                                 .ToList();
+        }
+    }
     
     private InvoiceRequestModel CloneInvoiceData(Invoice invoiceToClone, List<Invoice> invoices)
     {
@@ -297,11 +341,14 @@
         return new InvoiceRequestModel
         {
             InvoiceNumber = GenerateNextInvoiceNumber(invoices),
+            SelectedLanguage = invoiceToClone.SelectedLanguage.Value ?? string.Empty,
+            SelectedLogo = invoiceToClone.SelectedLogo.Value ?? string.Empty,
             DateOfInvoice = LastDayOfTheMonth(),
             DateOfRelease = LastDayOfTheMonth(),
             DateOfPayment = LastDayOfTheMonth().AddDays(14),
             FormOfPayment = invoiceToClone.FormOfPayment?.Value ?? string.Empty,
             AccountNumber = invoiceToClone.AccountNumber?.Value ?? string.Empty,
+            BicSwift = invoiceToClone.BicSwift?.Value ?? string.Empty,
             IsPaymentDivided = invoiceToClone.IsPaymentDivided.Value,
             IsPaid = invoiceToClone.IsPaid.Value,
             Remarks = invoiceToClone.Remarks?.Value ?? string.Empty,

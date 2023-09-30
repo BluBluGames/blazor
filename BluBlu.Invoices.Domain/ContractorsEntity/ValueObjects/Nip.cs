@@ -18,8 +18,8 @@ public class Nip : NumericStringValueObject
         if (Value != null && Value.Equals(EmptyValue))
             throw new ArgumentException("NIP cannot consist of only zeros", nameof(value));
 
-        if (!IsChecksumValid(Value))
-            throw new ArgumentException("Invalid NIP", nameof(value));
+        //if (!IsChecksumValid(Value))
+            //throw new ArgumentException("Invalid NIP", nameof(value));
     }
 
     private bool IsChecksumValid(string? value)
