@@ -22,7 +22,7 @@
                 <div class="col-4">
                     <h3 style="color: #79b9d1;">Invoice Details</h3>
                     <p>
-                        <InputSelect class="form-control" @bind-Value="_requestModel.SelectedLanguage">
+                        <InputSelect class="form-control" @bind-Value="_requestModel.SelectedLanguage" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;">
                             @foreach (var lang in _languages)
                             {
                                 <option value="@lang.Key">@lang.Value</option>
@@ -31,7 +31,7 @@
                         <label for="Language" style="color: #f5f5f5;">Language</label>
                     </p>
                     <p>
-                        <InputSelect class="form-control" @bind-Value="_requestModel.SelectedLogo">
+                        <InputSelect class="form-control" @bind-Value="_requestModel.SelectedLogo" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;">
                             @foreach (var logo in logoFiles)
                             {
                                 <option value="@logo">@logo</option>
@@ -104,49 +104,49 @@
                                         class="w-100"
                                         id="SellerNip"
                                         @bind-Value="_requestModel.Seller.Nip"
-                                        />
+                                               style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                     <label for="SellerNip">Nip</label>
                                     <ValidationMessage For="@(() => _requestModel.Seller.Nip)"></ValidationMessage>
                                 </p>
                             
                                 <p>
-                                    <InputText class="w-100" id="SellerName" @bind-Value="_requestModel.Seller.Name"/>
+                                    <InputText class="w-100" id="SellerName" @bind-Value="_requestModel.Seller.Name" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                     <label for="SellerName">Name</label>
                                     <ValidationMessage For="@(() => _requestModel.Seller.Name)"></ValidationMessage>
                                 </p>
                                 
                                 <p>
-                                    <InputText class="w-100" id="SellerStreet" @bind-Value="_requestModel.Seller.AddressStreet"/>
+                                    <InputText class="w-100" id="SellerStreet" @bind-Value="_requestModel.Seller.AddressStreet" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                     <label for="SellerStreet">Street</label>
                                     <ValidationMessage For="@(() => _requestModel.Seller.AddressStreet)"></ValidationMessage>
                                 </p>
                                 
                                 <p>
-                                    <InputText class="w-100" id="SellerCity" @bind-Value="_requestModel.Seller.AddressPostCity"/>
+                                    <InputText class="w-100" id="SellerCity" @bind-Value="_requestModel.Seller.AddressPostCity" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                     <label for="SellerCity">City</label>
                                     <ValidationMessage For="@(() => _requestModel.Seller.AddressPostCity)"></ValidationMessage>
                                 </p>
                                 
                                 <p>
-                                    <InputText class="w-100" id="SellerCountry" @bind-Value="_requestModel.Seller.AddressCountry"/>
+                                    <InputText class="w-100" id="SellerCountry" @bind-Value="_requestModel.Seller.AddressCountry" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                     <label for="SellerCountry">Country</label>
                                     <ValidationMessage For="@(() => _requestModel.Seller.AddressCountry)"></ValidationMessage>
                                 </p>
                                 
                                 <p>
-                                    <InputText class="w-100" id="SellerPostCode" @bind-Value="_requestModel.Seller.AddressPostCode"/>
+                                    <InputText class="w-100" id="SellerPostCode" @bind-Value="_requestModel.Seller.AddressPostCode" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                     <label for="SellerPostCode">Post Code</label>
                                     <ValidationMessage For="@(() => _requestModel.Seller.AddressPostCode)"></ValidationMessage>
                                 </p>
                                 
                                 <p>
-                                    <InputText class="w-100" id="SellerBuildingNumber" @bind-Value="_requestModel.Seller.AddressBuildingNumber"/>
+                                    <InputText class="w-100" id="SellerBuildingNumber" @bind-Value="_requestModel.Seller.AddressBuildingNumber" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                     <label for="SellerBuildingNumber">Building Number</label>
                                     <ValidationMessage For="@(() => _requestModel.Seller.AddressBuildingNumber)"></ValidationMessage>
                                 </p>
                                 
                                 <p>
-                                    <InputText class="w-100" id="SellerFlatNumber" @bind-Value="_requestModel.Seller.AddressFlatNumber"/>
+                                    <InputText class="w-100" id="SellerFlatNumber" @bind-Value="_requestModel.Seller.AddressFlatNumber" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                     <label for="SellerFlatNumber">Flat Number</label>
                                     <ValidationMessage For="@(() => _requestModel.Seller.AddressFlatNumber)"></ValidationMessage>
                                 </p>
@@ -154,49 +154,49 @@
                             <div class="col-4">
                                 <h3>Buyer Details</h3>
                                 <p>
-                                    <InputText class="w-100" id="BuyerNip" @bind-Value="_requestModel.Buyer.Nip"/>
+                                    <InputText class="w-100" id="BuyerNip" @bind-Value="_requestModel.Buyer.Nip" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
                                     <label for="BuyerNip">Nip</label>
                                     <ValidationMessage For="@(() => _requestModel.Buyer.Nip)"></ValidationMessage>
                                 </p>
                             
                                 <p>
-                                    <InputText class="w-100" id="BuyerName" @bind-Value="_requestModel.Buyer.Name"/>
+                                    <InputText class="w-100" id="BuyerName" @bind-Value="_requestModel.Buyer.Name" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                     <label for="BuyerName">Name</label>
                                     <ValidationMessage For="@(() => _requestModel.Buyer.Name)"></ValidationMessage>
                                 </p>
                             
                                 <p>
-                                    <InputText class="w-100" id="BuyerStreet" @bind-Value="_requestModel.Buyer.AddressStreet"/>
+                                    <InputText class="w-100" id="BuyerStreet" @bind-Value="_requestModel.Buyer.AddressStreet" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
                                     <label for="BuyerStreet">Street</label>
                                     <ValidationMessage For="@(() => _requestModel.Buyer.AddressStreet)"></ValidationMessage>
                                 </p>
                             
                                 <p>
-                                    <InputText class="w-100" id="BuyerCity" @bind-Value="_requestModel.Buyer.AddressPostCity"/>
+                                    <InputText class="w-100" id="BuyerCity" @bind-Value="_requestModel.Buyer.AddressPostCity" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
                                     <label for="BuyerCity">City</label>
                                     <ValidationMessage For="@(() => _requestModel.Buyer.AddressPostCity)"></ValidationMessage>
                                 </p>
                             
                                 <p>
-                                    <InputText class="w-100" id="BuyerCountry" @bind-Value="_requestModel.Buyer.AddressCountry"/>
+                                    <InputText class="w-100" id="BuyerCountry" @bind-Value="_requestModel.Buyer.AddressCountry" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
                                     <label for="BuyerCountry">Country</label>
                                     <ValidationMessage For="@(() => _requestModel.Buyer.AddressCountry)"></ValidationMessage>
                                 </p>
                             
                                 <p>
-                                    <InputText class="w-100" id="BuyerPostCode" @bind-Value="_requestModel.Buyer.AddressPostCode"/>
+                                    <InputText class="w-100" id="BuyerPostCode" @bind-Value="_requestModel.Buyer.AddressPostCode" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                     <label for="BuyerPostCode">Post Code</label>
                                     <ValidationMessage For="@(() => _requestModel.Buyer.AddressPostCode)"></ValidationMessage>
                                 </p>
                             
                                 <p>
-                                    <InputText class="w-100" id="BuyerBuildingNumber" @bind-Value="_requestModel.Buyer.AddressBuildingNumber"/>
+                                    <InputText class="w-100" id="BuyerBuildingNumber" @bind-Value="_requestModel.Buyer.AddressBuildingNumber" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
                                     <label for="BuyerPostCode">Building Number</label>
                                     <ValidationMessage For="@(() => _requestModel.Buyer.AddressBuildingNumber)"></ValidationMessage>
                                 </p>
                             
                                 <p>
-                                    <InputText class="w-100" id="BuyerFlatNumber" @bind-Value="_requestModel.Buyer.AddressFlatNumber"/>
+                                    <InputText class="w-100" id="BuyerFlatNumber" @bind-Value="_requestModel.Buyer.AddressFlatNumber" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                     <label for="BuyerFlatNumber">Flat Number</label>
                                     <ValidationMessage For="@(() => _requestModel.Buyer.AddressFlatNumber)"></ValidationMessage>
                                 </p>
@@ -215,43 +215,43 @@
                             
                                     <div class="row g-2">
                                         <div class="col-4">
-                                            <InputText class="w-100" id="@idName" @bind-Value="_requestModel.Products.ToList()[product.index].Name"/>
+                                            <InputText class="w-100" id="@idName" @bind-Value="_requestModel.Products.ToList()[product.index].Name" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                             <label for="@idName">Name</label>
                                             <ValidationMessage For="@(() => _requestModel.Products.ToList()[product.index].Name)"></ValidationMessage>
                                         </div>
                             
                                         <div class="col-4">
-                                            <InputText class="w-100" id="@idLegalBasisForTaxExemption" @bind-Value="_requestModel.Products.ToList()[product.index].LegalBasisForTaxExemption"/>
+                                            <InputText class="w-100" id="@idLegalBasisForTaxExemption" @bind-Value="_requestModel.Products.ToList()[product.index].LegalBasisForTaxExemption" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                             <label for="@idLegalBasisForTaxExemption">Tax Exemption Basis</label>
                                             <ValidationMessage For="@(() => _requestModel.Products.ToList()[product.index].LegalBasisForTaxExemption)"></ValidationMessage>
                                         </div>
                             
                                         <div class="col-2">
-                                            <InputNumber class="w-100" id="@idPriceNet" @bind-Value="_requestModel.Products.ToList()[product.index].PriceNet"/>
+                                            <InputNumber class="w-100" id="@idPriceNet" @bind-Value="_requestModel.Products.ToList()[product.index].PriceNet" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
                                             <label for="@idPriceNet">Price per Unit</label>
                                             <ValidationMessage For="@(() => _requestModel.Products.ToList()[product.index].PriceNet)"></ValidationMessage>
                                         </div>
                             
                                         <div class="col-1">
-                                            <InputNumber class="w-100" id="@idNumberOfUnits" @bind-Value="_requestModel.Products.ToList()[product.index].NumberOfUnits"/>
+                                            <InputNumber class="w-100" id="@idNumberOfUnits" @bind-Value="_requestModel.Products.ToList()[product.index].NumberOfUnits" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                             <label for="@idNumberOfUnits">Units</label>
                                             <ValidationMessage For="@(() => _requestModel.Products.ToList()[product.index].NumberOfUnits)"></ValidationMessage>
                                         </div>
                             
                                         <div class="col-1">
-                                            <InputText class="w-100" id="@idUnitName" @bind-Value="_requestModel.Products.ToList()[product.index].UnitName"/>
+                                            <InputText class="w-100" id="@idUnitName" @bind-Value="_requestModel.Products.ToList()[product.index].UnitName" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
                                             <label for="@idUnitName">Unit Name</label>
                                             <ValidationMessage For="@(() => _requestModel.Products.ToList()[product.index].UnitName)"></ValidationMessage>
                                         </div>
                             
                                         <div class="col-1">
-                                            <InputNumber class="w-100" id="@idVat" @bind-Value="_requestModel.Products.ToList()[product.index].Vat"/>
+                                            <InputNumber class="w-100" id="@idVat" @bind-Value="_requestModel.Products.ToList()[product.index].Vat" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                             <label for="@idVat">Vat</label>
                                             <ValidationMessage For="@(() => _requestModel.Products.ToList()[product.index].Vat)"></ValidationMessage>
                                         </div>
                             
                                         <div class="col-1">
-                                            <InputCheckbox class="w-100" id="@idIsVatZw" @bind-Value="_requestModel.Products.ToList()[product.index].IsVatZw"/>
+                                            <InputCheckbox class="w-100" id="@idIsVatZw" @bind-Value="_requestModel.Products.ToList()[product.index].IsVatZw" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                             <label for="@idIsVatZw">Is Vat Zw</label>
                                             <ValidationMessage For="@(() => _requestModel.Products.ToList()[product.index].IsVatZw)"></ValidationMessage>
                                         </div>
@@ -302,7 +302,7 @@
         { "pl", "Polish" },
     };
 
-    private List<string> logoFiles = new List<string>();
+    private List<string?> logoFiles = new List<string?>();
 
     private InvoiceRequestModel _requestModel = new()
     {

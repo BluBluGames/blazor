@@ -1,0 +1,45 @@
+﻿/* AddModal.razor.css */
+
+.modal.bg-dark.text-light {
+    display: var(--modal-display, none);
+}
+
+.modal-dialog.modal-xl.modal-dialog-centered {
+    /* any specific styles for this class if needed */
+}
+
+.modal-content.container-fluid.bg-dark.text-light {
+    background-color: #424848;
+    color: #f5f5f5;
+}
+
+.modal-header {
+    /* any specific styles for this class if needed */
+}
+
+.modal-title.text-light {
+    color: #f5f5f5;
+}
+
+.btn.btn-primary.bg-cyan {
+    background-color: cyan;
+    color: #fff;
+}
+
+.modal-body {
+    background-color: #424848;
+}
+
+.col-4 h3 {
+    color: #79b9d1;
+}
+
+.form-control {
+    background-color: #424848;
+    color: #f5f5f5;
+    border-color: #79b9d1;
+}
+
+label[for="Language"] {
+    color: #f5f5f5;
+}

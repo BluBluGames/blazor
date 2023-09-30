@@ -59,8 +59,8 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
     {
         var contractorsTable = new Table(UnitValue.CreatePercentArray(2)).UseAllAvailableWidth();
     
-        var seller = new Paragraph($"{_localize.Get("Seller", request.Invoice.SelectedLanguage.Value)}:\n");
-        var buyer = new Paragraph($"{_localize.Get("Buyer", request.Invoice.SelectedLanguage.Value)}:\n").SetTextAlignment(TextAlignment.RIGHT);
+        var seller = new Paragraph($"{_localize.Get("Seller", request.Invoice.SelectedLanguage.Value!)}:\n");
+        var buyer = new Paragraph($"{_localize.Get("Buyer", request.Invoice.SelectedLanguage.Value!)}:\n").SetTextAlignment(TextAlignment.RIGHT);
     
         if (string.IsNullOrWhiteSpace(request.Invoice.Seller.Address.Street.Value))
         {
@@ -81,7 +81,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
 
             seller.Add($"{request.Invoice.Seller.Address.Country}\n").SetFont(helvetica);
             if (string.IsNullOrWhiteSpace(request.Invoice.Seller.Nip?.Value) == false)
-                seller.Add($"{_localize.Get("VatRegistrationNo", request.Invoice.SelectedLanguage.Value)}: PL {request.Invoice.Seller.Nip.Value}").SetFont(helvetica);
+                seller.Add($"{_localize.Get("VatRegistrationNo", request.Invoice.SelectedLanguage.Value!)}: PL {request.Invoice.Seller.Nip.Value}").SetFont(helvetica);
         }
         else
         {
@@ -104,7 +104,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
             seller.Add($"{request.Invoice.Seller.Address.Country}\n").SetFont(helvetica);
 
             if (string.IsNullOrWhiteSpace(request.Invoice.Seller.Nip?.Value) == false)
-                seller.Add($"{_localize.Get("VatRegistrationNo", request.Invoice.SelectedLanguage.Value)}: PL {request.Invoice.Seller.Nip.Value}").SetFont(helvetica);
+                seller.Add($"{_localize.Get("VatRegistrationNo", request.Invoice.SelectedLanguage.Value!)}: PL {request.Invoice.Seller.Nip.Value}").SetFont(helvetica);
         }
     
         if (string.IsNullOrWhiteSpace(request.Invoice.Buyer.Address.Street.Value))
@@ -126,7 +126,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
             buyer.Add($"{request.Invoice.Buyer.Address.Country}\n").SetFont(helvetica);
 
             if (string.IsNullOrWhiteSpace(request.Invoice.Buyer.Nip?.Value) == false)
-                buyer.Add($"{_localize.Get("VatRegistrationNo", request.Invoice.SelectedLanguage.Value)}").SetFont(helvetica);
+                buyer.Add($"{_localize.Get("VatRegistrationNo", request.Invoice.SelectedLanguage.Value!)}").SetFont(helvetica);
         }
         else
         {
@@ -150,7 +150,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
 
             buyer.Add($"{request.Invoice.Buyer.Address.Country}\n").SetFont(helvetica);
             if (string.IsNullOrWhiteSpace(request.Invoice.Buyer.Nip?.Value) == false)
-                buyer.Add($"{_localize.Get("VatRegistrationNo", request.Invoice.SelectedLanguage.Value)}: BE {request.Invoice.Buyer.Nip.Value}").SetFont(helvetica);
+                buyer.Add($"{_localize.Get("VatRegistrationNo", request.Invoice.SelectedLanguage.Value!)}: BE {request.Invoice.Buyer.Nip.Value}").SetFont(helvetica);
         }
     
         var sellerCell = new Cell().Add(seller);
@@ -175,10 +175,10 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
             SetLogo(request, headerTable);
 
             var invoiceDate =
-                new Paragraph($"{_localize.Get("Invoice", request.Invoice.SelectedLanguage.Value)} ").SetFont(helvetica).SetFontSize(14)
+                new Paragraph($"{_localize.Get("Invoice", request.Invoice.SelectedLanguage.Value!)} ").SetFont(helvetica).SetFontSize(14)
                     .Add(new Text($"{request.Invoice.InvoiceNumber.Value}\n").SetFont(helveticaBold))
-                    .Add($"{_localize.Get("DateOfIssue", request.Invoice.SelectedLanguage.Value)}: {request.Invoice.DateOfInvoice.Value.ToShortDateString()}\n").SetFont(helvetica)
-                    .Add($"{_localize.Get("DateOfSale", request.Invoice.SelectedLanguage.Value)}: {request.Invoice.DateOfRelease.Value.ToShortDateString()}").SetFont(helvetica)
+                    .Add($"{_localize.Get("DateOfIssue", request.Invoice.SelectedLanguage.Value!)}: {request.Invoice.DateOfInvoice.Value.ToShortDateString()}\n").SetFont(helvetica)
+                    .Add($"{_localize.Get("DateOfSale", request.Invoice.SelectedLanguage.Value!)}: {request.Invoice.DateOfRelease.Value.ToShortDateString()}").SetFont(helvetica)
                     .SetTextAlignment(TextAlignment.RIGHT);
 
             var dateCell = new Cell().Add(invoiceDate).SetVerticalAlignment(VerticalAlignment.MIDDLE);
@@ -225,16 +225,16 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
     {
         var productsTable = new Table(UnitValue.CreatePercentArray(18)).UseAllAvailableWidth();
 
-        AddCell(_localize.Get("SerialNumber", request.Invoice.SelectedLanguage.Value), false, true, 1, 6);
-        AddCell(_localize.Get("Name", request.Invoice.SelectedLanguage.Value), false, true, 4, 6);
-        AddCell(_localize.Get("ExemptionBasis", request.Invoice.SelectedLanguage.Value), false, true, 2, 6);
-        AddCell(_localize.Get("Price", request.Invoice.SelectedLanguage.Value), false, true, 1, 6);
-        AddCell(_localize.Get("Quantity", request.Invoice.SelectedLanguage.Value), false, true, 1, 6);
-        AddCell(_localize.Get("UnitOfMeasure", request.Invoice.SelectedLanguage.Value), false, true, 1, 6);
-        AddCell(_localize.Get("NetAmount", request.Invoice.SelectedLanguage.Value), false, true, 2, 6);
-        AddCell(_localize.Get("VatRate", request.Invoice.SelectedLanguage.Value), false, true, 2, 6);
-        AddCell(_localize.Get("Vat", request.Invoice.SelectedLanguage.Value), false, true, 2, 6);
-        AddCell(_localize.Get("GrossAmount", request.Invoice.SelectedLanguage.Value), false, true, 3, 6);
+        AddCell(_localize.Get("SerialNumber", request.Invoice.SelectedLanguage.Value!), false, true, 1, 6);
+        AddCell(_localize.Get("Name", request.Invoice.SelectedLanguage.Value!), false, true, 4, 6);
+        AddCell(_localize.Get("ExemptionBasis", request.Invoice.SelectedLanguage.Value!), false, true, 2, 6);
+        AddCell(_localize.Get("Price", request.Invoice.SelectedLanguage.Value!), false, true, 1, 6);
+        AddCell(_localize.Get("Quantity", request.Invoice.SelectedLanguage.Value!), false, true, 1, 6);
+        AddCell(_localize.Get("UnitOfMeasure", request.Invoice.SelectedLanguage.Value!), false, true, 1, 6);
+        AddCell(_localize.Get("NetAmount", request.Invoice.SelectedLanguage.Value!), false, true, 2, 6);
+        AddCell(_localize.Get("VatRate", request.Invoice.SelectedLanguage.Value!), false, true, 2, 6);
+        AddCell(_localize.Get("Vat", request.Invoice.SelectedLanguage.Value!), false, true, 2, 6);
+        AddCell(_localize.Get("GrossAmount", request.Invoice.SelectedLanguage.Value!), false, true, 3, 6);
 
         var count = 1;
         foreach (var product in request.Invoice.Products)
@@ -256,7 +256,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         AddCell("", true, false, 4);
         AddCell("", true, false, 2);
         AddCell("", true, false, 1);
-        AddCell(_localize.Get("Total", request.Invoice.SelectedLanguage.Value), true, true, 2);
+        AddCell(_localize.Get("Total", request.Invoice.SelectedLanguage.Value!), true, true, 2);
         AddCell($"{sumNet:0.00}", true, false, 2);
         AddCell("", true, false, 2);
         AddCell($"{sumVat:0.00}", true, false, 2);
@@ -268,9 +268,9 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
             AddCell("", true, false, 4);
             AddCell("", true, false, 2);
             AddCell("", true, false, 1);
-            AddCell(_localize.Get("Includes", request.Invoice.SelectedLanguage.Value), true, true, 2);
+            AddCell(_localize.Get("Includes", request.Invoice.SelectedLanguage.Value!), true, true, 2);
             AddCell($"{value.NetPrice:0.00}", true, false, 2);
-            AddCell(value.IsVatZw ? _localize.Get("ZW", request.Invoice.SelectedLanguage.Value) : $"{key}%", true, false, 2);
+            AddCell(value.IsVatZw ? _localize.Get("ZW", request.Invoice.SelectedLanguage.Value!) : $"{key}%", true, false, 2);
             AddCell($"{value.VatPrice:0.00}", true, false, 2);
             AddCell($"{value.GrossPrice:0.00}", true, false, 3);
         }
@@ -299,7 +299,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
     private void SetSummaryTable(CreatePdfCommand request, PdfFont helveticaBold, PdfFont helvetica, Document document, decimal sumGross)
     {
         var summaryTable = new Table(UnitValue.CreatePercentArray(4)).SetWidth(UnitValue.CreatePercentValue(70));
-        AddCell(_localize.Get("TotalAmountDue", request.Invoice.SelectedLanguage.Value), false);
+        AddCell(_localize.Get("TotalAmountDue", request.Invoice.SelectedLanguage.Value!), false);
         string currentCurrency = "EUR";
 
         switch (currentCurrency)
@@ -317,24 +317,24 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
                 break;
         }
 
-        AddCell(_localize.Get("PaymentDueDate", request.Invoice.SelectedLanguage.Value), false);
+        AddCell(_localize.Get("PaymentDueDate", request.Invoice.SelectedLanguage.Value!), false);
         AddCell($"{request.Invoice.DateOfPayment.Value.ToShortDateString()}", true);
-        AddCell(_localize.Get("PaymentDueDate", request.Invoice.SelectedLanguage.Value), false);
+        AddCell(_localize.Get("PaymentDueDate", request.Invoice.SelectedLanguage.Value!), false);
         AddCell($"{request.Invoice.FormOfPayment}", true);
-        AddCell(_localize.Get("AccountNumber", request.Invoice.SelectedLanguage.Value), false);
+        AddCell(_localize.Get("AccountNumber", request.Invoice.SelectedLanguage.Value!), false);
         AddCell($"PL {PrepareAccountNumber(request.Invoice.AccountNumber.Value!)}", true);
-        AddCell(_localize.Get("BIC/SWIFT", request.Invoice.SelectedLanguage.Value), false);
+        AddCell(_localize.Get("BIC/SWIFT", request.Invoice.SelectedLanguage.Value!), false);
         AddCell($"{request.Invoice.BicSwift}", true);
-        AddCell(_localize.Get("SplitPayment", request.Invoice.SelectedLanguage.Value), false);
+        AddCell(_localize.Get("SplitPayment", request.Invoice.SelectedLanguage.Value!), false);
         AddCell($"{PreparePaymentDivided(request.Invoice.IsPaymentDivided)}", true);
-        AddCell(_localize.Get("Remarks", request.Invoice.SelectedLanguage.Value), false);
+        AddCell(_localize.Get("Remarks", request.Invoice.SelectedLanguage.Value!), false);
         AddCell($"{request.Invoice.Remarks}", true);
             
         document.Add(summaryTable);
     
         string PreparePaymentDivided(bool isDivided)
         {
-            return isDivided ? _localize.Get("Yes", request.Invoice.SelectedLanguage.Value) : _localize.Get("No", request.Invoice.SelectedLanguage.Value);
+            return isDivided ? _localize.Get("Yes", request.Invoice.SelectedLanguage.Value!) : _localize.Get("No", request.Invoice.SelectedLanguage.Value!);
         }
             
         string PrepareAccountNumber(string number)

@@ -33,7 +33,7 @@ public class InvoiceRequestModel
             new(DateOfPayment),
             new(FormOfPayment),
             new(AccountNumber),
-            new(BicSwift),
+            string.IsNullOrWhiteSpace(BicSwift) ? null : new(BicSwift),
             new(IsPaymentDivided),
             new(IsPaid),
             string.IsNullOrWhiteSpace(Remarks) ? null : new(Remarks),

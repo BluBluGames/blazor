@@ -16,7 +16,7 @@ public class Invoice
     [BsonElement("DateOfPayment")] public DateOfPayment DateOfPayment { get; set; } = new();
     [BsonElement("FormOfPayment")] public FormOfPayment FormOfPayment { get; set; } = new();
     [BsonElement("AccountNumber")] public AccountNumber AccountNumber { get; set; } = new();
-    [BsonElement("BicSwift")] public BicSwift BicSwift { get; set; } = new();
+    [BsonElement("BicSwift")] public BicSwift? BicSwift { get; set; }
     [BsonElement("IsPaymentDivided")] public IsPaymentDivided IsPaymentDivided { get; set; } = new();
     [BsonElement("IsPaid")] public IsPaid IsPaid { get; set; } = new();
     [BsonElement("Remarks")] public Remarks? Remarks { get; set; }
@@ -38,7 +38,7 @@ public class Invoice
         DateOfPayment dateOfPayment,
         FormOfPayment formOfPayment,
         AccountNumber accountNumber,
-        BicSwift bicSwift,
+        BicSwift? bicSwift,
         IsPaymentDivided isPaymentDivided,
         IsPaid isPaid,
         Remarks? remarks,
