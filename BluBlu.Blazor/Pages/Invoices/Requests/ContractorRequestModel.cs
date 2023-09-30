@@ -10,4 +10,5 @@ public class ContractorRequestModel
     public string AddressBuildingNumber { get; set; } = null!;
     public string AddressFlatNumber { get; set; } = null!;
     public string Nip { get; set; } = null!;
+    public string NipPrefix { get; set; } = null!;
 }

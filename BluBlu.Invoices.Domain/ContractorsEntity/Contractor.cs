@@ -10,15 +10,17 @@ public class Contractor
     [BsonElement("Name")] public Name Name { get; set; } = null!;
     [BsonElement("Address")] public Address Address { get; set; } = null!;
     [BsonElement("Nip")] public Nip? Nip { get; set; } = null!;
+    [BsonElement("NipPrefix")] public NipPrefix? NipPrefix { get; set; } = null!;
 
     public Contractor()
     {
     }
 
-    public Contractor(Name name, Address address, Nip? nip)
+    public Contractor(Name name, Address address, Nip? nip, NipPrefix? nipPrefix)
     {
         Name = name;
         Address = address;
         Nip = nip;
+        NipPrefix = nipPrefix;
     }
 }

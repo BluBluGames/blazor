@@ -12,6 +12,7 @@ public class InvoiceRequestModel
     public DateTime DateOfRelease { get; set; }
     public DateTime DateOfPayment { get; set; }
     public string FormOfPayment { get; set; } = null!;
+    public string AccountPrefix { get; set; } = null!;
     public string AccountNumber { get; set; } = null!;
     public string BicSwift { get; set; } = null!;
     public bool IsPaymentDivided { get; set; }
@@ -32,6 +33,7 @@ public class InvoiceRequestModel
             new(DateOfRelease),
             new(DateOfPayment),
             new(FormOfPayment),
+            string.IsNullOrWhiteSpace(AccountPrefix) ? null : new(AccountPrefix),
             new(AccountNumber),
             string.IsNullOrWhiteSpace(BicSwift) ? null : new(BicSwift),
             new(IsPaymentDivided),
@@ -46,7 +48,8 @@ public class InvoiceRequestModel
                     new(Seller.AddressPostCode),
                     new(Seller.AddressBuildingNumber),
                     string.IsNullOrWhiteSpace(Seller.AddressFlatNumber) ? null : new(Seller.AddressFlatNumber)),
-                string.IsNullOrWhiteSpace(Seller.Nip) ? null : new(Seller.Nip)),
+                string.IsNullOrWhiteSpace(Seller.Nip) ? null : new(Seller.Nip),
+                string.IsNullOrWhiteSpace(Seller.NipPrefix) ? null : new(Seller.NipPrefix)),
             new(
                 new(Buyer.Name),
                 new(
@@ -56,7 +59,8 @@ public class InvoiceRequestModel
                     new(Buyer.AddressPostCode),
                     new(Buyer.AddressBuildingNumber),
                     string.IsNullOrWhiteSpace(Buyer.AddressFlatNumber) ? null : new(Buyer.AddressFlatNumber)),
-                string.IsNullOrWhiteSpace(Buyer.Nip) ? null : new(Buyer.Nip)),
+                string.IsNullOrWhiteSpace(Buyer.Nip) ? null : new(Buyer.Nip),
+                string.IsNullOrWhiteSpace(Buyer.NipPrefix) ? null : new(Buyer.NipPrefix)),
             Products.Select(product => new ProductWithNumberOfUnits(
                     new(
                         new(product.Name),

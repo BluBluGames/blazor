@@ -22,15 +22,16 @@ public class Nip : NumericStringValueObject
             //throw new ArgumentException("Invalid NIP", nameof(value));
     }
 
-    private bool IsChecksumValid(string? value)
-    {
-        var calculationDigits = value?.Substring(0, value.Length - 1);
-        var controlDigit = int.Parse(value?.Substring(value.Length - 1, 1)!);
+    //ONLY WORKS WITH POLISH NIP
+    //private bool IsChecksumValid(string? value)
+    //{
+    //    var calculationDigits = value?.Substring(0, value.Length - 1);
+    //    var controlDigit = int.Parse(value?.Substring(value.Length - 1, 1)!);
 
-        var factors = new[] { 6, 5, 7, 2, 3, 4, 5, 6, 7 };
+    //    var factors = new[] { 6, 5, 7, 2, 3, 4, 5, 6, 7 };
 
-        var sum = calculationDigits!.Select((v, i) => factors[i] * (int)char.GetNumericValue(v)).Sum();
+    //    var sum = calculationDigits!.Select((v, i) => factors[i] * (int)char.GetNumericValue(v)).Sum();
 
-        return sum % 11 == controlDigit;
-    }
+    //    return sum % 11 == controlDigit;
+    //}
 }

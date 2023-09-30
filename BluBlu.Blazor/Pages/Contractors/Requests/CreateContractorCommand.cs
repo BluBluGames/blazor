@@ -10,6 +10,7 @@ public class CreateContractorCommand
     public string AddressBuildingNumber { get; set; } = null!;
     public string AddressFlatNumber { get; set; } = null!;
     public string Nip { get; set; } = null!;
+    public string NipPrefix { get; set; } = null!;
 
     public BluBlu.Invoices.Domain.ContractorsEntity.Contractor ToDomainModel()
         => new(
@@ -20,6 +21,8 @@ public class CreateContractorCommand
                 new(AddressCountry),
                 new(AddressPostCode),
                 new(AddressBuildingNumber),
-                new(AddressFlatNumber)),
-            new(Nip));
+                new(AddressFlatNumber)
+            ),
+            new(Nip),
+            new(NipPrefix));
 }

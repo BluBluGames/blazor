@@ -68,11 +68,31 @@
                         <label for="FormOfPayment" style="color: #f5f5f5;">Form of payment</label>
                         <ValidationMessage For="@(() => _requestModel.FormOfPayment)" style="color: red;"></ValidationMessage>
                     </p>
-                                <p>
-                                    <InputText class="w-100" id="AccountNumber" @bind-Value="_requestModel.AccountNumber" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
-                                    <label for="AccountNumber" style="color: #f5f5f5;">Account Number</label>
+                                <div class="mb-2">
+                                    <!-- Input group -->
+                                    <div class="d-flex align-items-center mb-2">
+                                        <!-- Prefix Dropdown -->
+                                        <InputSelect @bind-Value="_requestModel.AccountPrefix"
+                                                     class="form-control mr-2"
+                                                     style="width: auto; background-color: #424848; color: #f5f5f5; border-color: #79b9d1;">
+                                            @foreach (var prefix in _countryPrefixes)
+                                            {
+                                                <option value="@prefix">@prefix</option>
+                                            }
+                                        </InputSelect>
+
+                                        <!-- AccountNumber InputText -->
+                                        <InputText class="form-control"
+                                                   id="AccountNumber"
+                                                   @bind-Value="_requestModel.AccountNumber"
+                                                   style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
+                                    </div>
+
+                                    <!-- Label and validation message -->
+                                    <label for="AccountNumber" class="d-block">Account Number</label>
                                     <ValidationMessage For="@(() => _requestModel.AccountNumber)"></ValidationMessage>
-                                </p>
+                                </div>
+
                                 <p>
                                     <InputText class="w-100" id="BicSwift" @bind-Value="_requestModel.BicSwift" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                     <label for="BicSwift" style="color: #f5f5f5;">Bic/Swift</label>
@@ -99,15 +119,25 @@
                             </div>
                             <div class="col-4">
                                 <h3>Seller Details</h3>
-                                <p>
-                                    <InputText
-                                        class="w-100"
-                                        id="SellerNip"
-                                        @bind-Value="_requestModel.Seller.Nip"
+                                <div class="d-flex align-items-center mb-2">
+                                    <!-- Prefix Dropdown -->
+                                    <InputSelect @bind-Value="_requestModel.Seller.NipPrefix"
+                                                 class="form-control mr-2"
+                                                 style="width: auto; background-color: #424848; color: #f5f5f5; border-color: #79b9d1;">
+                                        @foreach (var prefix in _countryPrefixes)
+                                        {
+                                            <option value="@prefix">@prefix</option>
+                                        }
+                                    </InputSelect>
+
+                                    <!-- NIP InputText -->
+                                    <InputText class="form-control"
+                                               id="SellerNip"
+                                               @bind-Value="_requestModel.Seller.Nip"
                                                style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
-                                    <label for="SellerNip">Nip</label>
-                                    <ValidationMessage For="@(() => _requestModel.Seller.Nip)"></ValidationMessage>
-                                </p>
+                                </div>
+                                <label for="SellerNip">Nip</label>
+                                <ValidationMessage For="@(() => _requestModel.Seller.Nip)"></ValidationMessage>
                             
                                 <p>
                                     <InputText class="w-100" id="SellerName" @bind-Value="_requestModel.Seller.Name" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
@@ -153,11 +183,25 @@
                             </div>
                             <div class="col-4">
                                 <h3>Buyer Details</h3>
-                                <p>
-                                    <InputText class="w-100" id="BuyerNip" @bind-Value="_requestModel.Buyer.Nip" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
-                                    <label for="BuyerNip">Nip</label>
-                                    <ValidationMessage For="@(() => _requestModel.Buyer.Nip)"></ValidationMessage>
-                                </p>
+                                <div class="d-flex align-items-center mb-2">
+                                    <!-- Prefix Dropdown -->
+                                    <InputSelect @bind-Value="_requestModel.Buyer.NipPrefix"
+                                                 class="form-control mr-2"
+                                                 style="width: auto; background-color: #424848; color: #f5f5f5; border-color: #79b9d1;">
+                                        @foreach (var prefix in _countryPrefixes)
+                                        {
+                                            <option value="@prefix">@prefix</option>
+                                        }
+                                    </InputSelect>
+
+                                    <!-- NIP InputText -->
+                                    <InputText class="form-control"
+                                               id="BuyerNip"
+                                               @bind-Value="_requestModel.Buyer.Nip"
+                                               style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
+                                </div>
+                                <label for="BuyerNip">Nip</label>
+                                <ValidationMessage For="@(() => _requestModel.Buyer.Nip)"></ValidationMessage>
                             
                                 <p>
                                     <InputText class="w-100" id="BuyerName" @bind-Value="_requestModel.Buyer.Name" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
@@ -295,6 +339,7 @@
     private string _addModalClass = "";
     private bool _showBackdrop;
     private List<Invoice> _invoices = null!;
+    private List<string> _countryPrefixes = new List<string> { "PL", "BE", "" };
 
     private Dictionary<string, string> _languages = new Dictionary<string, string>
     {
@@ -313,13 +358,14 @@
         DateOfRelease = DateTime.Now,
         DateOfPayment = DateTime.Now.AddDays(14),
         FormOfPayment = string.Empty,
+        AccountPrefix = string.Empty,
         AccountNumber = string.Empty,
         BicSwift = string.Empty,
         IsPaymentDivided = false,
         IsPaid = false,
         Remarks = string.Empty,
-        Seller = new ContractorRequestModel {Name = string.Empty, AddressStreet = string.Empty, AddressPostCity = string.Empty, AddressCountry = string.Empty, AddressPostCode = string.Empty, AddressBuildingNumber = string.Empty, AddressFlatNumber = string.Empty, Nip = string.Empty},
-        Buyer = new ContractorRequestModel {Name = string.Empty, AddressStreet = string.Empty, AddressPostCity = string.Empty, AddressCountry = string.Empty, AddressPostCode = string.Empty, AddressBuildingNumber = string.Empty, AddressFlatNumber = string.Empty, Nip = string.Empty},
+            Seller = new ContractorRequestModel { Name = string.Empty, AddressStreet = string.Empty, AddressPostCity = string.Empty, AddressCountry = string.Empty, AddressPostCode = string.Empty, AddressBuildingNumber = string.Empty, AddressFlatNumber = string.Empty, Nip = string.Empty, NipPrefix = string.Empty },
+            Buyer = new ContractorRequestModel { Name = string.Empty, AddressStreet = string.Empty, AddressPostCity = string.Empty, AddressCountry = string.Empty, AddressPostCode = string.Empty, AddressBuildingNumber = string.Empty, AddressFlatNumber = string.Empty, Nip = string.Empty, NipPrefix = string.Empty },
         Products = new List<ProductRequestModel>()
     };
 
@@ -347,6 +393,7 @@
             DateOfRelease = LastDayOfTheMonth(),
             DateOfPayment = LastDayOfTheMonth().AddDays(14),
             FormOfPayment = invoiceToClone.FormOfPayment?.Value ?? string.Empty,
+                AccountPrefix = invoiceToClone.AccountPrefix?.Value ?? string.Empty,
             AccountNumber = invoiceToClone.AccountNumber?.Value ?? string.Empty,
             BicSwift = invoiceToClone.BicSwift?.Value ?? string.Empty,
             IsPaymentDivided = invoiceToClone.IsPaymentDivided.Value,
@@ -361,7 +408,8 @@
                 AddressPostCode = invoiceToClone.Seller.Address.PostCode.Value ?? string.Empty, 
                 AddressBuildingNumber = invoiceToClone.Seller.Address.BuildingNumber.Value ?? string.Empty, 
                 AddressFlatNumber = invoiceToClone.Seller.Address.FlatNumber?.Value ?? string.Empty, 
-                Nip = invoiceToClone.Seller.Nip?.Value ?? string.Empty
+                Nip = invoiceToClone.Seller.Nip?.Value ?? string.Empty,
+                NipPrefix = invoiceToClone.Seller.NipPrefix?.Value ?? string.Empty
             },
             Buyer = new ContractorRequestModel 
             {
@@ -372,8 +420,8 @@
                 AddressPostCode = invoiceToClone.Buyer.Address.PostCode.Value ?? string.Empty,
                 AddressBuildingNumber = invoiceToClone.Buyer.Address.BuildingNumber.Value ?? string.Empty,
                 AddressFlatNumber = invoiceToClone.Buyer.Address.FlatNumber?.Value ?? string.Empty,
-                Nip = invoiceToClone.Buyer.Nip?.Value ?? string.Empty
-        
+                Nip = invoiceToClone.Buyer.Nip?.Value ?? string.Empty,
+                NipPrefix = invoiceToClone.Buyer.NipPrefix?.Value ?? string.Empty
             },
             Products = invoiceToClone.Products.Select(product => new ProductRequestModel
             {
