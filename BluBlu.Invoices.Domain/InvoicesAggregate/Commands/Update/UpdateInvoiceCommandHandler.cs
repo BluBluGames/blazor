@@ -4,9 +4,9 @@ namespace BluBlu.Invoices.Domain.InvoicesAggregate.Commands.Update
 {
     public class UpdateInvoiceCommandHandler : IRequestHandler<UpdateInvoiceCommand, Invoice>
     {
-        private readonly IInvoiceRepository _invoiceRepository;
+        private readonly IInvoiceRepositoryMongo _invoiceRepository;
 
-        public UpdateInvoiceCommandHandler(IInvoiceRepository invoiceRepository)
+        public UpdateInvoiceCommandHandler(IInvoiceRepositoryMongo invoiceRepository)
         {
             _invoiceRepository = invoiceRepository;
         }

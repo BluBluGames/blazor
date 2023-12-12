@@ -24,7 +24,7 @@
                             <div class="col-4">
                                 <h3 style="color: #79b9d1;">Invoice Details</h3>
                                 <p>
-                                    <InputSelect class="form-control" @bind-Value="_requestModel.SelectedLanguage" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;">
+                                    <InputSelect id="Language" class="form-control" @bind-Value="_requestModel.SelectedLanguage" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;">
                                         @foreach (var lang in _languages)
                                         {
                                             <option value="@lang.Key">@lang.Value</option>
@@ -32,6 +32,21 @@
                                     </InputSelect>
                                     <label for="Language" style="color: #f5f5f5;">Language</label>
                                 </p>
+
+                                <p>
+                                    <!-- Prefix Dropdown -->
+                                    <InputSelect @bind-Value="_requestModel.Currency"
+                                                 id="Currency"
+                                                 class="form-control"
+                                                 style="width: auto; background-color: #424848; color: #f5f5f5; border-color: #79b9d1;">
+                                        @foreach (var prefix in _currencyPrefixes)
+                                        {
+                                            <option value="@prefix">@prefix</option>
+                                        }
+                                    </InputSelect>
+                                    <label for="Currency">Currency</label>
+                                </p>
+
                                 <p>
                                     <InputSelect class="form-control" @bind-Value="_requestModel.SelectedLogo" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;">
                                         @foreach (var logo in logoFiles)
@@ -303,8 +318,9 @@
                                             <ValidationMessage For="@(() => _requestModel.Products.ToList()[product.index].IsVatZw)"></ValidationMessage>
                                         </div>
                                         
-                                        <div class="col-1">
+                                        <div class="col-4">
                                             <button type="button" class="btn btn-primary" @onclick="(e) => RecalculateFromBruttoToNetto(_requestModel.Products.ToList()[product.index].PriceNet, _requestModel.Products.ToList()[product.index].Vat, product.index)">Recalculate Brutto to Netto</button>
+                                            <button type="button" class="btn btn-danger" @onclick="(e) => RemoveProduct(product)">Remove</button>
                                         </div>
                                     </div>
                                 }
@@ -344,6 +360,7 @@
     private List<Invoice> _invoices = null!;
     private List<string?> logoFiles = new List<string?>();
     private List<string> _countryPrefixes = new List<string> { "PL", "BE", "" };
+    private List<string> _currencyPrefixes = new List<string> { "PLN", "EUR", "USD" };
 
     private Dictionary<string, string> _languages = new Dictionary<string, string>
     {
@@ -366,6 +383,7 @@
     private InvoiceRequestModel _requestModel = new()
     {
         InvoiceNumber = string.Empty,
+        Currency = string.Empty,
         SelectedLanguage = string.Empty,
         SelectedLogo = string.Empty,
         DateOfInvoice = DateTime.Now,
@@ -378,8 +396,8 @@
         IsPaymentDivided = false,
         IsPaid = false,
         Remarks = string.Empty,
-            Seller = new ContractorRequestModel { Name = string.Empty, AddressStreet = string.Empty, AddressPostCity = string.Empty, AddressCountry = string.Empty, AddressPostCode = string.Empty, AddressBuildingNumber = string.Empty, AddressFlatNumber = string.Empty, Nip = string.Empty, NipPrefix = string.Empty },
-            Buyer = new ContractorRequestModel { Name = string.Empty, AddressStreet = string.Empty, AddressPostCity = string.Empty, AddressCountry = string.Empty, AddressPostCode = string.Empty, AddressBuildingNumber = string.Empty, AddressFlatNumber = string.Empty, Nip = string.Empty, NipPrefix = string.Empty },
+            Seller = new TenantRequestModel { Name = string.Empty, AddressStreet = string.Empty, AddressPostCity = string.Empty, AddressCountry = string.Empty, AddressPostCode = string.Empty, AddressBuildingNumber = string.Empty, AddressFlatNumber = string.Empty, Nip = string.Empty, NipPrefix = string.Empty },
+            Buyer = new TenantRequestModel { Name = string.Empty, AddressStreet = string.Empty, AddressPostCity = string.Empty, AddressCountry = string.Empty, AddressPostCode = string.Empty, AddressBuildingNumber = string.Empty, AddressFlatNumber = string.Empty, Nip = string.Empty, NipPrefix = string.Empty },
         Products = new List<ProductRequestModel>()
     };
     
@@ -390,6 +408,7 @@
         {
             Id = invoiceToClone.Id,
             InvoiceNumber = invoiceToClone.InvoiceNumber.ToString() ?? string.Empty,
+            Currency = invoiceToClone.Currency.ToString() ?? string.Empty,
             SelectedLanguage = invoiceToClone.SelectedLanguage.Value ?? string.Empty,
             SelectedLogo = invoiceToClone.SelectedLogo.Value ?? string.Empty,
             DateOfInvoice = invoiceToClone.DateOfInvoice,
@@ -402,7 +421,7 @@
             IsPaymentDivided = invoiceToClone.IsPaymentDivided.Value,
             IsPaid = invoiceToClone.IsPaid.Value,
             Remarks = invoiceToClone.Remarks?.Value ?? string.Empty,
-            Seller = new ContractorRequestModel
+            Seller = new TenantRequestModel
             {
                 Name = invoiceToClone.Seller.Name.Value ?? string.Empty, 
                 AddressStreet = invoiceToClone.Seller.Address.Street.Value ?? string.Empty, 
@@ -414,7 +433,7 @@
                 Nip = invoiceToClone.Seller.Nip?.Value ?? string.Empty,
                 NipPrefix = invoiceToClone.Seller.NipPrefix?.Value ?? string.Empty
             },
-            Buyer = new ContractorRequestModel 
+            Buyer = new TenantRequestModel 
             {
                 Name = invoiceToClone.Buyer.Name.Value ?? string.Empty,
                 AddressStreet = invoiceToClone.Buyer.Address.Street.Value ?? string.Empty,
@@ -525,5 +544,10 @@
         
     // Update the price net for the product in the list
         _requestModel.Products.ToList()[index].PriceNet = priceNetNew;
+    }
+
+    private void RemoveProduct(dynamic product)
+    {
+        _requestModel.Products.Remove(product.value);
     }
 }

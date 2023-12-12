@@ -4,9 +4,9 @@ namespace BluBlu.Invoices.Domain.ContractorsEntity.Commands;
 
 public class CreateContractorCommandHandler : IRequestHandler<CreateContractorCommand, Contractor>
 {
-    private readonly IContractorsRepository _contractorsRepository;
+    private readonly IContractorsRepositoryMongo _contractorsRepository;
 
-    public CreateContractorCommandHandler(IContractorsRepository contractorsRepository)
+    public CreateContractorCommandHandler(IContractorsRepositoryMongo contractorsRepository)
     {
         _contractorsRepository = contractorsRepository;
     }

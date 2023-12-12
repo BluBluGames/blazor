@@ -6,6 +6,7 @@ public class InvoiceRequestModel
 {
     public string Id { get; set; } = null!;
     public string InvoiceNumber { get; set; } = null!;
+    public string Currency { get; set; } = null!;
     public string SelectedLanguage { get; set; } = null!;
     public string SelectedLogo { get; set; } = null!;
     public DateTime DateOfInvoice { get; set; }
@@ -18,8 +19,8 @@ public class InvoiceRequestModel
     public bool IsPaymentDivided { get; set; }
     public bool IsPaid { get; set; }
     public string Remarks { get; set; } = null!;
-    public ContractorRequestModel Seller { get; set; } = null!;
-    public ContractorRequestModel Buyer { get; set; } = null!;
+    public TenantRequestModel Seller { get; set; } = null!;
+    public TenantRequestModel Buyer { get; set; } = null!;
     public ICollection<ProductRequestModel> Products { get; set; } = null!;
     
     public BluBlu.Invoices.Domain.InvoicesAggregate.Invoice ToDomainModel()
@@ -27,6 +28,7 @@ public class InvoiceRequestModel
         return new(
             Id,
             new(InvoiceNumber),
+            new(Currency),
             new(SelectedLanguage),
             new(SelectedLogo),
             new(DateOfInvoice),

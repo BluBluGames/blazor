@@ -4,9 +4,9 @@ namespace BluBlu.Invoices.Domain.InvoicesAggregate.Commands.Create;
 
 public class CreateInvoiceCommandHandler : IRequestHandler<CreateInvoiceCommand, Invoice>
 {
-    private readonly IInvoiceRepository _invoiceRepository;
+    private readonly IInvoiceRepositoryMongo _invoiceRepository;
 
-    public CreateInvoiceCommandHandler(IInvoiceRepository invoiceRepository)
+    public CreateInvoiceCommandHandler(IInvoiceRepositoryMongo invoiceRepository)
     {
         _invoiceRepository = invoiceRepository;
     }

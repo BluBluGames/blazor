@@ -5,9 +5,9 @@ namespace BluBlu.Invoices.Domain.InvoicesAggregate.Commands.Delete
 {
     public class DeleteInvoiceCommandHandler : IRequestHandler<DeleteInvoiceCommand, DeleteResult>
     {
-        private readonly IInvoiceRepository _invoiceRepository;
+        private readonly IInvoiceRepositoryMongo _invoiceRepository;
 
-        public DeleteInvoiceCommandHandler(IInvoiceRepository invoiceRepository)
+        public DeleteInvoiceCommandHandler(IInvoiceRepositoryMongo invoiceRepository)
         {
             _invoiceRepository = invoiceRepository;
         }

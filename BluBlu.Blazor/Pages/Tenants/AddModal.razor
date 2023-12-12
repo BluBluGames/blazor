@@ -1,0 +1,95 @@
+﻿@using BluBlu.Tenants.Domain.TenantsEntity;
+@using BluBlu.Tenants.Domain.TenantsEntity.Commands;
+@using MediatR;
+@using System.Linq
+
+@inject IMediator _mediator
+
+<div class="modal @_addModalClass bg-dark text-light" tabindex="-1" role="dialog" style="display:@_addModalDisplay">
+    <div class="row">
+        <div class="modal-body col-12" style="background-color: #424848">
+            <EditForm class="col-12" Model="@_requestModel" OnValidSubmit="@Create">
+                <DataAnnotationsValidator></DataAnnotationsValidator>
+                <div class="row">
+                    <div class="col-4">
+                        <h3 style="color: #79b9d1;">Tenant</h3>
+
+                        <p>
+                            <InputText class="w-100" id="Name" @bind-Value="_requestModel.Name" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
+                            <label for="Name" style="color: #f5f5f5;">Name</label>
+                            <ValidationMessage For="@(() => _requestModel.Name)" style="color: red;"></ValidationMessage>
+                        </p>
+                        
+                        <p>
+                            <InputText class="w-100" id="Schema" @bind-Value="_requestModel.Schema" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
+                            <label for="Schema" style="color: #f5f5f5;">Schema</label>
+                            <ValidationMessage For="@(() => _requestModel.Schema)" style="color: red;"></ValidationMessage>
+                        </p>
+
+                        </div>
+                    </div>
+
+            </EditForm>
+
+        </div>
+        <div class="row">
+            <div class="modal-footer col-12">
+                <button type="submit" class="btn btn-primary" @onclick="() => Create()">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Close()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@if (_showBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+@code {
+    [Parameter]
+    public EventCallback<Tenant> OnInvoiceAdded { get; set; }
+
+    private string _addModalDisplay = "none;";
+    private string _addModalClass = "";
+    private bool _showBackdrop;
+    private List<Tenant> _tenants = null!;
+
+    private List<string?> logoFiles = new List<string?>();
+
+    private TenantRequestModel _requestModel = new()
+    {
+        Name = string.Empty,
+        Schema = string.Empty
+    };
+
+    protected override void OnInitialized()
+    {
+    }
+    
+    public void Open()
+    {
+        _addModalDisplay = "block;";
+        _addModalClass = "Show";
+        _showBackdrop = true;
+        StateHasChanged();
+    }
+    
+    private void Close()
+    {
+        _addModalDisplay = "none";
+        _addModalClass = "";
+        _showBackdrop = false;
+        StateHasChanged();
+    }
+    
+    private async Task Create()
+    {
+        var tenant = _requestModel.ToDomainModel();
+        await _mediator.Send(new CreateTenantCommand { Tenant = tenant });
+        await OnInvoiceAdded.InvokeAsync(tenant);
+        Close();
+    }
+}

@@ -1,0 +1,41 @@
+﻿@page "/tenants"
+@layout AdminLayout
+@using BluBlu.Tenants.Domain.TenantsEntity;
+@using MediatR;
+@using BluBlu.Blazor.Shared.Layouts
+
+@inject IMediator _mediator
+@inject NavigationManager _navigationManager
+
+@*<AuthorizeView>    *@
+    @*<Authorized> *@
+        @if (false)
+        {
+            <p>
+                <em>Loading...</em>
+            </p>
+        }
+        else
+        {
+            <h1 class="text-center">@Error</h1>
+            <AddModal @ref="AddModal" OnInvoiceAdded="@HandleAddTenant"></AddModal>
+            <button @onclick="() => AddModal.Open()" type="button" class="btn btn-primary me-2">Add</button>
+            
+        }
+    @*</Authorized>*@
+    @*<NotAuthorized>*@
+        @*@{ _navigationManager.NavigateTo("/403"); }*@
+    @*</NotAuthorized>*@
+@*</AuthorizeView>*@
+
+@code {
+    private AddModal AddModal { get; set; } = new();
+    private string Error { get; set; } = string.Empty;
+    protected override async Task OnInitializedAsync()
+    {
+    }
+    
+    private async Task HandleAddTenant(Tenant tenant)
+    {
+    }
+}

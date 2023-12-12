@@ -4,9 +4,9 @@ namespace BluBlu.Invoices.Domain.InvoicesAggregate.Queries.GetAllFromCurrentAndT
 
 public class GetInvoicesForCurrentAndTwoPreviousMonthsQueryHandler : IRequestHandler<GetInvoicesForCurrentAndTwoPreviousMonthsQuery, List<Invoice>>
 {
-    private readonly IInvoiceRepository _invoicesRepository;
+    private readonly IInvoiceRepositoryMongo _invoicesRepository;
 
-    public GetInvoicesForCurrentAndTwoPreviousMonthsQueryHandler(IInvoiceRepository invoicesRepository)
+    public GetInvoicesForCurrentAndTwoPreviousMonthsQueryHandler(IInvoiceRepositoryMongo invoicesRepository)
     {
         _invoicesRepository = invoicesRepository;
     }

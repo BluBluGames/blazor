@@ -22,7 +22,7 @@
                 <div class="col-4">
                     <h3 style="color: #79b9d1;">Invoice Details</h3>
                     <p>
-                        <InputSelect class="form-control" @bind-Value="_requestModel.SelectedLanguage" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;">
+                        <InputSelect id="Language" class="form-control" @bind-Value="_requestModel.SelectedLanguage" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;">
                             @foreach (var lang in _languages)
                             {
                                 <option value="@lang.Key">@lang.Value</option>
@@ -30,6 +30,21 @@
                         </InputSelect>
                         <label for="Language" style="color: #f5f5f5;">Language</label>
                     </p>
+
+                    <p>
+                        <!-- Prefix Dropdown -->
+                        <InputSelect @bind-Value="_requestModel.Currency"
+                                        id="Currency"
+                                        class="form-control"
+                                        style="width: auto; background-color: #424848; color: #f5f5f5; border-color: #79b9d1;">
+                            @foreach (var prefix in _currencyPrefixes)
+                            {
+                                <option value="@prefix">@prefix</option>
+                            }
+                        </InputSelect>
+                        <label for="Currency">Currency</label>
+                    </p>
+
                     <p>
                         <InputSelect class="form-control" @bind-Value="_requestModel.SelectedLogo" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;">
                             @foreach (var logo in logoFiles)
@@ -68,31 +83,11 @@
                         <label for="FormOfPayment" style="color: #f5f5f5;">Form of payment</label>
                         <ValidationMessage For="@(() => _requestModel.FormOfPayment)" style="color: red;"></ValidationMessage>
                     </p>
-                                <div class="mb-2">
-                                    <!-- Input group -->
-                                    <div class="d-flex align-items-center mb-2">
-                                        <!-- Prefix Dropdown -->
-                                        <InputSelect @bind-Value="_requestModel.AccountPrefix"
-                                                     class="form-control mr-2"
-                                                     style="width: auto; background-color: #424848; color: #f5f5f5; border-color: #79b9d1;">
-                                            @foreach (var prefix in _countryPrefixes)
-                                            {
-                                                <option value="@prefix">@prefix</option>
-                                            }
-                                        </InputSelect>
-
-                                        <!-- AccountNumber InputText -->
-                                        <InputText class="form-control"
-                                                   id="AccountNumber"
-                                                   @bind-Value="_requestModel.AccountNumber"
-                                                   style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
-                                    </div>
-
-                                    <!-- Label and validation message -->
-                                    <label for="AccountNumber" class="d-block">Account Number</label>
+                                <p>
+                                    <InputText class="w-100" id="AccountNumber" @bind-Value="_requestModel.AccountNumber" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
+                                    <label for="AccountNumber" style="color: #f5f5f5;">Account Number</label>
                                     <ValidationMessage For="@(() => _requestModel.AccountNumber)"></ValidationMessage>
-                                </div>
-
+                                </p>
                                 <p>
                                     <InputText class="w-100" id="BicSwift" @bind-Value="_requestModel.BicSwift" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                     <label for="BicSwift" style="color: #f5f5f5;">Bic/Swift</label>
@@ -124,7 +119,7 @@
                                     <InputSelect @bind-Value="_requestModel.Seller.NipPrefix"
                                                  class="form-control mr-2"
                                                  style="width: auto; background-color: #424848; color: #f5f5f5; border-color: #79b9d1;">
-                                        @foreach (var prefix in _countryPrefixes)
+                                        @foreach (var prefix in _nipPrefixes)
                                         {
                                             <option value="@prefix">@prefix</option>
                                         }
@@ -188,7 +183,7 @@
                                     <InputSelect @bind-Value="_requestModel.Buyer.NipPrefix"
                                                  class="form-control mr-2"
                                                  style="width: auto; background-color: #424848; color: #f5f5f5; border-color: #79b9d1;">
-                                        @foreach (var prefix in _countryPrefixes)
+                                        @foreach (var prefix in _nipPrefixes)
                                         {
                                             <option value="@prefix">@prefix</option>
                                         }
@@ -299,10 +294,11 @@
                                             <label for="@idIsVatZw">Is Vat Zw</label>
                                             <ValidationMessage For="@(() => _requestModel.Products.ToList()[product.index].IsVatZw)"></ValidationMessage>
                                         </div>
-                                        
-                                        <div class="col-1">
-                                            <button type="button" class="btn btn-primary" @onclick="(e) => RecalculateFromBruttoToNetto(_requestModel.Products.ToList()[product.index].PriceNet, _requestModel.Products.ToList()[product.index].Vat, product.index)">Recalculate Brutto to Netto</button>
-                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <button type="button" class="btn btn-primary" @onclick="(e) => RecalculateFromBruttoToNetto(_requestModel.Products.ToList()[product.index].PriceNet, _requestModel.Products.ToList()[product.index].Vat, product.index)">Recalculate Brutto to Netto</button>
+                                        <button type="button" class="btn btn-danger" @onclick="(e) => RemoveProduct(product)">Remove</button>
                                     </div>
                                 }
                             
@@ -339,7 +335,8 @@
     private string _addModalClass = "";
     private bool _showBackdrop;
     private List<Invoice> _invoices = null!;
-    private List<string> _countryPrefixes = new List<string> { "PL", "BE", "" };
+    private List<string> _nipPrefixes = new List<string> { "PL", "BE" };
+    private List<string> _currencyPrefixes = new List<string> { "PLN", "EUR", "USD" };
 
     private Dictionary<string, string> _languages = new Dictionary<string, string>
     {
@@ -358,14 +355,13 @@
         DateOfRelease = DateTime.Now,
         DateOfPayment = DateTime.Now.AddDays(14),
         FormOfPayment = string.Empty,
-        AccountPrefix = string.Empty,
         AccountNumber = string.Empty,
         BicSwift = string.Empty,
         IsPaymentDivided = false,
         IsPaid = false,
         Remarks = string.Empty,
-            Seller = new ContractorRequestModel { Name = string.Empty, AddressStreet = string.Empty, AddressPostCity = string.Empty, AddressCountry = string.Empty, AddressPostCode = string.Empty, AddressBuildingNumber = string.Empty, AddressFlatNumber = string.Empty, Nip = string.Empty, NipPrefix = string.Empty },
-            Buyer = new ContractorRequestModel { Name = string.Empty, AddressStreet = string.Empty, AddressPostCity = string.Empty, AddressCountry = string.Empty, AddressPostCode = string.Empty, AddressBuildingNumber = string.Empty, AddressFlatNumber = string.Empty, Nip = string.Empty, NipPrefix = string.Empty },
+            Seller = new TenantRequestModel { Name = string.Empty, AddressStreet = string.Empty, AddressPostCity = string.Empty, AddressCountry = string.Empty, AddressPostCode = string.Empty, AddressBuildingNumber = string.Empty, AddressFlatNumber = string.Empty, Nip = string.Empty, NipPrefix = string.Empty },
+            Buyer = new TenantRequestModel { Name = string.Empty, AddressStreet = string.Empty, AddressPostCity = string.Empty, AddressCountry = string.Empty, AddressPostCode = string.Empty, AddressBuildingNumber = string.Empty, AddressFlatNumber = string.Empty, Nip = string.Empty, NipPrefix = string.Empty },
         Products = new List<ProductRequestModel>()
     };
 
@@ -387,19 +383,19 @@
         return new InvoiceRequestModel
         {
             InvoiceNumber = GenerateNextInvoiceNumber(invoices),
+            Currency = invoiceToClone.Currency.Value ?? string.Empty,
             SelectedLanguage = invoiceToClone.SelectedLanguage.Value ?? string.Empty,
             SelectedLogo = invoiceToClone.SelectedLogo.Value ?? string.Empty,
             DateOfInvoice = LastDayOfTheMonth(),
             DateOfRelease = LastDayOfTheMonth(),
             DateOfPayment = LastDayOfTheMonth().AddDays(14),
             FormOfPayment = invoiceToClone.FormOfPayment?.Value ?? string.Empty,
-                AccountPrefix = invoiceToClone.AccountPrefix?.Value ?? string.Empty,
             AccountNumber = invoiceToClone.AccountNumber?.Value ?? string.Empty,
             BicSwift = invoiceToClone.BicSwift?.Value ?? string.Empty,
             IsPaymentDivided = invoiceToClone.IsPaymentDivided.Value,
             IsPaid = invoiceToClone.IsPaid.Value,
             Remarks = invoiceToClone.Remarks?.Value ?? string.Empty,
-            Seller = new ContractorRequestModel
+            Seller = new TenantRequestModel
             {
                 Name = invoiceToClone.Seller.Name.Value ?? string.Empty, 
                 AddressStreet = invoiceToClone.Seller.Address.Street.Value ?? string.Empty, 
@@ -411,7 +407,7 @@
                 Nip = invoiceToClone.Seller.Nip?.Value ?? string.Empty,
                 NipPrefix = invoiceToClone.Seller.NipPrefix?.Value ?? string.Empty
             },
-            Buyer = new ContractorRequestModel 
+            Buyer = new TenantRequestModel 
             {
                 Name = invoiceToClone.Buyer.Name.Value ?? string.Empty,
                 AddressStreet = invoiceToClone.Buyer.Address.Street.Value ?? string.Empty,
@@ -421,7 +417,7 @@
                 AddressBuildingNumber = invoiceToClone.Buyer.Address.BuildingNumber.Value ?? string.Empty,
                 AddressFlatNumber = invoiceToClone.Buyer.Address.FlatNumber?.Value ?? string.Empty,
                 Nip = invoiceToClone.Buyer.Nip?.Value ?? string.Empty,
-                NipPrefix = invoiceToClone.Buyer.NipPrefix?.Value ?? string.Empty
+                NipPrefix = invoiceToClone.Seller.NipPrefix?.Value ?? string.Empty
             },
             Products = invoiceToClone.Products.Select(product => new ProductRequestModel
             {
@@ -553,14 +549,15 @@
 
     private void RecalculateFromBruttoToNetto(decimal priceNet, decimal vat, int index)
     {
-    // Calculate the VAT multiplier
         decimal vatMultiplier = vat / 100 + 1;
     
-    // Calculate the net price from the gross price and VAT
         decimal priceNetNew = Math.Round(priceNet / vatMultiplier, 2);
         
-    // Update the price net for the product in the list
         _requestModel.Products.ToList()[index].PriceNet = priceNetNew;
     }
 
+    private void RemoveProduct(dynamic product)
+    {
+        _requestModel.Products.Remove(product.value);
+    }
 }

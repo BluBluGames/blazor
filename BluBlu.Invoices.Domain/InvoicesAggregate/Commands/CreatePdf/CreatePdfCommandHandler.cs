@@ -300,22 +300,8 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
     {
         var summaryTable = new Table(UnitValue.CreatePercentArray(4)).SetWidth(UnitValue.CreatePercentValue(70));
         AddCell(_localize.Get("TotalAmountDue", request.Invoice.SelectedLanguage.Value!), false);
-        string currentCurrency = "EUR";
 
-        switch (currentCurrency)
-        {
-            case "PLN":
-                AddCell($"{sumGross:0.00} {_localize.Get("PolishZloty", "currency")}", true, 15);
-                break;
-            case "EUR":
-                AddCell($"{sumGross:0.00} {_localize.Get("Euro", "currency")}", true, 15);
-                break;
-            case "USD":
-                AddCell($"{sumGross:0.00} {_localize.Get("Dollar", "currency")}", true, 15);
-                break;
-            default:
-                break;
-        }
+        AddCell($"{sumGross:0.00} {request.Invoice.Currency.Value}", true, 15);
 
         AddCell(_localize.Get("PaymentDueDate", request.Invoice.SelectedLanguage.Value!), false);
         AddCell($"{request.Invoice.DateOfPayment.Value.ToShortDateString()}", true);

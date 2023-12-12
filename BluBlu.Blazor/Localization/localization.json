@@ -58,10 +58,5 @@
     "Yes": "TAK",
     "BIC/SWIFT": "BIC/SWIFT",
     "No": "NIE"
-  },
-  "currency": {
-    "Dollar": "USD",
-    "Euro": "EUR",
-    "PolishZloty":  "PLN"
   }
 }

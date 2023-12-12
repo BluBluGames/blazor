@@ -5,9 +5,9 @@ namespace BluBlu.Invoices.Domain.InvoicesAggregate.ProductsEntity.Commands;
 
 public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Product>
 {
-    private readonly IProductsRepository _productsRepository;
+    private readonly IProductsRepositoryMongo _productsRepository;
 
-    public CreateProductCommandHandler(IProductsRepository productsRepository)
+    public CreateProductCommandHandler(IProductsRepositoryMongo productsRepository)
     {
         _productsRepository = productsRepository;
     }

@@ -15,8 +15,12 @@ using BluBlu.Invoices.Infrastructure.Products;
 using MediatR;
 using BluBlu.Invoices.Domain.Localization;
 using BluBlu.Invoices.Infrastructure.Localization;
+using BluBlu.Tenants.Infrastructure;
+using BluBlu.Tenants.Domain.TenantsEntity;
+using BluBlu.Tenants.Domain.TenantsEntity.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionDev"); //prod has different connection string
@@ -28,18 +32,25 @@ builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuth
 builder.Services.AddDefaultIdentity<BluBluIdentity>(options => options.SignIn.RequireConfirmedAccount = true) //Define User Class
     .AddRoles<IdentityRole>() //Allows defining user roles
     .AddEntityFrameworkStores<AuthDbContext>(); //Without this cant make first migration to in Auth.Infrastucture
-// --AUTH
+                                                // --AUTH
+
+    //"InvoicesConnectionString"
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddMediatR(typeof(InvoicesDomainEmptyClass), typeof(InvoicesDomainEmptyClass));
+builder.Services.AddMediatR(typeof(InvoicesDomainEmptyClass), typeof(TenantsDomainEmptyClass));
+builder.Services.AddTransient<IRequestHandler<CreateTenantCommand, Tenant>, CreateTenantCommandHandler>();
+
 builder.Services.AddAutoMapper(typeof(InvoicesDomainEmptyClass));
 
-builder.Services.Configure<InvoicesOptions>(builder.Configuration.GetSection("MongoClient"));
-builder.Services.AddScoped<IInvoicesDatabase, InvoicesDatabase>();
-builder.Services.AddTransient<IInvoiceRepository, InvoiceRepository>();
-builder.Services.AddTransient<IProductsRepository, ProductsRepository>();
-builder.Services.AddTransient<IContractorsRepository, ContractorsRepository>();
+builder.Services.Configure<InvoicesOptionsMongo>(builder.Configuration.GetSection("MongoClient"));
+builder.Services.Configure<DapperDbSettings>(builder.Configuration.GetSection("DapperSettings"));
+
+builder.Services.AddScoped<IInvoicesDatabaseMongo, InvoicesDatabaseMongo>();
+builder.Services.AddTransient<ITenantsRepository, TenantsRepository>();
+builder.Services.AddTransient<IInvoiceRepositoryMongo, InvoiceRepositoryMongo>();
+builder.Services.AddTransient<IProductsRepositoryMongo, ProductsRepositoryMongo>();
+builder.Services.AddTransient<IContractorsRepositoryMongo, ContractorsRepositoryMongo>();
 builder.Services.AddTransient<IJsonLocalizationService, JsonLocalizationService>();
 
 var app = builder.Build();

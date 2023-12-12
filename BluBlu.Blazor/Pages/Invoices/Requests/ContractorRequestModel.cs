@@ -1,6 +1,6 @@
 ﻿namespace BluBlu.Blazor.Pages.Invoices.Requests;
 
-public class ContractorRequestModel
+public class TenantRequestModel
 {
     public string Name { get; set; } = null!;
     public string AddressStreet { get; set; } = null!;

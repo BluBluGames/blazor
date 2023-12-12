@@ -4,9 +4,9 @@ namespace BluBlu.Invoices.Domain.InvoicesAggregate.Queries.GetByInvoiceNumber
 {
     public class GetInvoicesByYearAndMonthQueryHandler : IRequestHandler<GetInvoicesByYearAndMonthQuery,  List<Invoice>>
     {
-        private readonly IInvoiceRepository _invoiceRepository;
+        private readonly IInvoiceRepositoryMongo _invoiceRepository;
 
-        public GetInvoicesByYearAndMonthQueryHandler(IInvoiceRepository invoiceRepository)
+        public GetInvoicesByYearAndMonthQueryHandler(IInvoiceRepositoryMongo invoiceRepository)
         {
             _invoiceRepository = invoiceRepository;
         }

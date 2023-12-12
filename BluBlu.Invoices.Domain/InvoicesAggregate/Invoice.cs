@@ -9,6 +9,7 @@ public class Invoice
 {
     [BsonId] [BsonRepresentation(BsonType.ObjectId)] [BsonIgnoreIfDefault] public string Id { get; set; } = null!;
     [BsonElement("InvoiceNumber")] public InvoiceNumber InvoiceNumber { get; set; } = new();
+    [BsonElement("Currency")] public Currency Currency { get; set; } = new();
     [BsonElement("SelectedLanguage")] public SelectedLanguage SelectedLanguage { get; set; } = new();
     [BsonElement("SelectedLogo")] public SelectedLogo SelectedLogo { get; set; } = new();
     [BsonElement("DateOfInvoice")] public DateOfInvoice DateOfInvoice { get; set; } = new();
@@ -32,13 +33,14 @@ public class Invoice
     public Invoice(
         string id,
         InvoiceNumber invoiceNumber,
+        Currency currency,
         SelectedLanguage selectedLanguage,
         SelectedLogo selectedLogo,
         DateOfInvoice dateOfInvoice,
         DateOfRelease dateOfRelease,
         DateOfPayment dateOfPayment,
         FormOfPayment formOfPayment,
-        AccountPrefix accountPrefix,
+        AccountPrefix? accountPrefix,
         AccountNumber accountNumber,
         BicSwift? bicSwift,
         IsPaymentDivided isPaymentDivided,
@@ -50,6 +52,7 @@ public class Invoice
     {
         Id = id;
         InvoiceNumber = invoiceNumber;
+        Currency = currency;
         SelectedLanguage = selectedLanguage;
         SelectedLogo = selectedLogo;
         DateOfInvoice = dateOfInvoice;

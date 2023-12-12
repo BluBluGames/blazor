@@ -12,14 +12,12 @@
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
         <PackageReference Include="MediatR" Version="10.0.1" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
-        <PackageReference Include="Npgsql" Version="6.0.2" />
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.22">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
@@ -27,6 +25,8 @@
       <ProjectReference Include="..\BluBlu.Auth.Infrastructure\BluBlu.Auth.Infrastructure.csproj" />
       <ProjectReference Include="..\BluBlu.Invoices.Domain\BluBlu.Invoices.Domain.csproj" />
       <ProjectReference Include="..\BluBlu.Invoices.Infrastructure\BluBlu.Invoices.Infrastructure.csproj" />
+      <ProjectReference Include="..\BluBlu.Tenants.Domain\BluBlu.Tenants.Domain.csproj" />
+      <ProjectReference Include="..\BluBlu.Tenants.Infrastructure\BluBlu.Tenants.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>

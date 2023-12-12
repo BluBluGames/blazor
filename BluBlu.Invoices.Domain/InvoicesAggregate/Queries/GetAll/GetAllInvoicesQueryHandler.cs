@@ -4,9 +4,9 @@ namespace BluBlu.Invoices.Domain.InvoicesAggregate.Queries.GetAll;
 
 public class GetAllInvoicesQueryHandler : IRequestHandler<GetAllInvoicesQuery, List<Invoice>>
 {
-    private readonly IInvoiceRepository _invoicesRepository;
+    private readonly IInvoiceRepositoryMongo _invoicesRepository;
 
-    public GetAllInvoicesQueryHandler(IInvoiceRepository invoicesRepository)
+    public GetAllInvoicesQueryHandler(IInvoiceRepositoryMongo invoicesRepository)
     {
         _invoicesRepository = invoicesRepository;
     }
