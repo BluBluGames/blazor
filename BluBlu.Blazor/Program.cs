@@ -38,7 +38,13 @@ builder.Services.AddDefaultIdentity<BluBluIdentity>(options => options.SignIn.Re
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddMediatR(typeof(InvoicesDomainEmptyClass), typeof(TenantsDomainEmptyClass));
+
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssemblyContaining(typeof(InvoicesDomainEmptyClass));
+    cfg.RegisterServicesFromAssemblyContaining(typeof(TenantsDomainEmptyClass));
+});
+
 builder.Services.AddTransient<IRequestHandler<CreateTenantCommand, Tenant>, CreateTenantCommandHandler>();
 
 builder.Services.AddAutoMapper(typeof(InvoicesDomainEmptyClass));

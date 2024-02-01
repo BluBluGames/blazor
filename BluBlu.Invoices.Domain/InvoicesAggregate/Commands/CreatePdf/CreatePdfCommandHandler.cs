@@ -239,19 +239,24 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
         var count = 1;
         foreach (var product in request.Invoice.Products)
         {
+            var totalNetPrice = product.Product.PriceNet.Value * product.NumberOfUnits.Value;
+            var vatAmount = product.Product.PriceGross.Value * product.NumberOfUnits.Value - totalNetPrice;
+            var totalGrossPrice = product.Product.PriceGross.Value * product.NumberOfUnits.Value;
+
             AddCell($"{count}", true, false, 1);
             AddCell($"{product.Product.Name.Value}", true, false, 4);
             AddCell($"{product.Product.LegalBasisForTaxExemption?.Value}", true, false, 2);
             AddCell($"{product.Product.PriceNet.Value:0.00}", true, false, 1);
             AddCell($"{product.NumberOfUnits.Value}", true, false, 1);
             AddCell($"{product.Product.UnitName.Value}", true, false, 1);
-            AddCell($"{Math.Round(product.Product.PriceNet.Value * product.NumberOfUnits.Value, 2):0.00}", true, false, 2);
+            AddCell($"{totalNetPrice:0.00}", true, false, 2); // Total Net Price
             AddCell(product.Product.IsVatZw.Value ? "zw" : $"{product.Product.Vat.Value}%", true, false, 2);
-            AddCell($"{Math.Round(product.Product.PriceNet.Value * product.NumberOfUnits.Value * product.Product.Vat.Value / 100, 2):0.00}", true, false, 2);
-            AddCell($"{Math.Round(product.Product.PriceNet.Value * product.NumberOfUnits.Value + product.Product.PriceNet.Value * product.NumberOfUnits.Value * product.Product.Vat.Value / 100, 2):0.00}", true, false, 3);
+            AddCell($"{vatAmount:0.00}", true, false, 2); // VAT Amount
+            AddCell($"{totalGrossPrice:0.00}", true, false, 3); // Total Gross Price
             count++;
         }
-            
+
+
         AddCell("", true, false, 1);
         AddCell("", true, false, 4);
         AddCell("", true, false, 2);
@@ -270,7 +275,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
             AddCell("", true, false, 1);
             AddCell(_localize.Get("Includes", request.Invoice.SelectedLanguage.Value!), true, true, 2);
             AddCell($"{value.NetPrice:0.00}", true, false, 2);
-            AddCell(value.IsVatZw ? _localize.Get("ZW", request.Invoice.SelectedLanguage.Value!) : $"{key}%", true, false, 2);
+            AddCell(value.IsVatZw ? _localize.Get("ZW", request.Invoice.SelectedLanguage.Value!) : $"{key}", true, false, 2);
             AddCell($"{value.VatPrice:0.00}", true, false, 2);
             AddCell($"{value.GrossPrice:0.00}", true, false, 3);
         }
@@ -305,7 +310,7 @@ public class CreatePdfCommandHandler : IRequestHandler<CreatePdfCommand, Unit>
 
         AddCell(_localize.Get("PaymentDueDate", request.Invoice.SelectedLanguage.Value!), false);
         AddCell($"{request.Invoice.DateOfPayment.Value.ToShortDateString()}", true);
-        AddCell(_localize.Get("PaymentDueDate", request.Invoice.SelectedLanguage.Value!), false);
+        AddCell(_localize.Get("FormOfPayment", request.Invoice.SelectedLanguage.Value!), false);
         AddCell($"{request.Invoice.FormOfPayment}", true);
         AddCell(_localize.Get("AccountNumber", request.Invoice.SelectedLanguage.Value!), false);
         AddCell($"{request.Invoice.AccountPrefix?.Value + " " ?? ""}{PrepareAccountNumber(request.Invoice.AccountNumber.Value!)}", true);

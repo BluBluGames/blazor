@@ -246,10 +246,11 @@
                                 {
                                     var idName = $"{product.value.Name}-{product.index}-Name";
                                     var idLegalBasisForTaxExemption = $"{product.value.LegalBasisForTaxExemption}-{product.index}-LegalBasisForTaxExemption";
-                                    var idPriceNet = $"{product.value.Name}-{product.index}-Name";
-                                    var idNumberOfUnits = $"{product.value.Name}-{product.index}-Name";
-                                    var idUnitName = $"{product.value.Name}-{product.index}-Name";
-                                    var idVat = $"{product.value.Name}-{product.index}-Name";
+                                    var idPriceNet = $"{product.value.Name}-{product.index}-PriceNet";
+                                    var idPriceGross = $"{product.value.Name}-{product.index}-PriceGross";
+                                    var idNumberOfUnits = $"{product.value.Name}-{product.index}-NumberOfUnits";
+                                    var idUnitName = $"{product.value.Name}-{product.index}-UnitName";
+                                    var idVat = $"{product.value.Name}-{product.index}-Vat";
                                     var idIsVatZw = $"{product.value.Name}-{product.index}-IsVatZw";
                             
                                     <div class="row g-2">
@@ -264,13 +265,23 @@
                                             <label for="@idLegalBasisForTaxExemption">Tax Exemption Basis</label>
                                             <ValidationMessage For="@(() => _requestModel.Products.ToList()[product.index].LegalBasisForTaxExemption)"></ValidationMessage>
                                         </div>
-                            
+
                                         <div class="col-2">
-                                            <InputNumber class="w-100" id="@idPriceNet" @bind-Value="_requestModel.Products.ToList()[product.index].PriceNet" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;"/>
-                                            <label for="@idPriceNet">Price per Unit</label>
+                                            <InputNumber class="w-100" id="@idPriceNet" @bind-Value="_requestModel.Products.ToList()[product.index].PriceNet"
+                                                         @oninput="(e) => RecalculateGrossFromNet(Convert.ToDecimal(e.Value), _requestModel.Products.ToList()[product.index].Vat, product.index)"
+                                                         style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
+                                            <label for="@idPriceNet">Price per Unit Net</label>
                                             <ValidationMessage For="@(() => _requestModel.Products.ToList()[product.index].PriceNet)"></ValidationMessage>
                                         </div>
-                            
+
+                                        <div class="col-2">
+                                            <InputNumber class="w-100" id="@idPriceGross" @bind-Value="_requestModel.Products.ToList()[product.index].PriceGross"
+                                                         @oninput="(e) => RecalculateFromBruttoToNetto(Convert.ToDecimal(e.Value), _requestModel.Products.ToList()[product.index].Vat, product.index)"
+                                                         style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
+                                            <label for="@idPriceGross">Price per Unit Gross</label>
+                                            <ValidationMessage For="@(() => _requestModel.Products.ToList()[product.index].PriceGross)"></ValidationMessage>
+                                        </div>
+
                                         <div class="col-1">
                                             <InputNumber class="w-100" id="@idNumberOfUnits" @bind-Value="_requestModel.Products.ToList()[product.index].NumberOfUnits" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                             <label for="@idNumberOfUnits">Units</label>
@@ -282,13 +293,16 @@
                                             <label for="@idUnitName">Unit Name</label>
                                             <ValidationMessage For="@(() => _requestModel.Products.ToList()[product.index].UnitName)"></ValidationMessage>
                                         </div>
-                            
+
                                         <div class="col-1">
-                                            <InputNumber class="w-100" id="@idVat" @bind-Value="_requestModel.Products.ToList()[product.index].Vat" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
+                                            <InputNumber class="w-100" id="@idVat" @bind-Value="_requestModel.Products.ToList()[product.index].Vat"
+                                                         @oninput="(e) => { RecalculateGrossFromNet(_requestModel.Products.ToList()[product.index].PriceNet, Convert.ToDecimal(e.Value), product.index);
+                                                                                RecalculateFromBruttoToNetto(_requestModel.Products.ToList()[product.index].PriceGross, Convert.ToDecimal(e.Value), product.index); }"
+                                                         style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                             <label for="@idVat">Vat</label>
                                             <ValidationMessage For="@(() => _requestModel.Products.ToList()[product.index].Vat)"></ValidationMessage>
                                         </div>
-                            
+
                                         <div class="col-1">
                                             <InputCheckbox class="w-100" id="@idIsVatZw" @bind-Value="_requestModel.Products.ToList()[product.index].IsVatZw" style="background-color: #424848; color: #f5f5f5; border-color: #79b9d1;" />
                                             <label for="@idIsVatZw">Is Vat Zw</label>
@@ -297,7 +311,6 @@
                                     </div>
 
                                     <div class="col-4">
-                                        <button type="button" class="btn btn-primary" @onclick="(e) => RecalculateFromBruttoToNetto(_requestModel.Products.ToList()[product.index].PriceNet, _requestModel.Products.ToList()[product.index].Vat, product.index)">Recalculate Brutto to Netto</button>
                                         <button type="button" class="btn btn-danger" @onclick="(e) => RemoveProduct(product)">Remove</button>
                                     </div>
                                 }
@@ -547,13 +560,34 @@
         Close();
     }
 
-    private void RecalculateFromBruttoToNetto(decimal priceNet, decimal vat, int index)
+    private void RecalculateFromBruttoToNetto(decimal priceGross, decimal vat, int index)
     {
-        decimal vatMultiplier = vat / 100 + 1;
-    
-        decimal priceNetNew = Math.Round(priceNet / vatMultiplier, 2);
-        
-        _requestModel.Products.ToList()[index].PriceNet = priceNetNew;
+        if (vat == 0m || priceGross == 0m)
+        {
+            // If VAT is zero or priceGross is zero, set net price to gross price.
+            _requestModel.Products.ToList()[index].PriceNet = priceGross;
+        }
+        else
+        {
+            decimal vatMultiplier = 1 + vat / 100;
+            decimal priceNetNew = Math.Round(priceGross / vatMultiplier, 2);
+            _requestModel.Products.ToList()[index].PriceNet = priceNetNew;
+        }
+    }
+
+    private void RecalculateGrossFromNet(decimal priceNet, decimal vat, int index)
+    {
+        if (priceNet == 0m)
+        {
+            // If the net price is zero, set the gross price to zero.
+            _requestModel.Products.ToList()[index].PriceGross = 0m;
+        }
+        else
+        {
+            decimal vatMultiplier = 1 + vat / 100;
+            decimal priceGrossNew = Math.Round(priceNet * vatMultiplier, 2);
+            _requestModel.Products.ToList()[index].PriceGross = priceGrossNew;
+        }
     }
 
     private void RemoveProduct(dynamic product)
