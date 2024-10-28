@@ -3,6 +3,7 @@
 @using BluBlu.Blazor.Pages.Invoices.Requests
 @using BluBlu.Invoices.Domain.InvoicesAggregate
 @using BluBlu.Invoices.Domain.InvoicesAggregate.Commands.Create
+@using System.Text.RegularExpressions
 @inject IMediator _mediator
 
 <div class="modal @_addModalClass bg-dark text-light" tabindex="-1" role="dialog" style="display:@_addModalDisplay">
@@ -389,7 +390,7 @@
                                  .ToList();
         }
     }
-    
+
     private InvoiceRequestModel CloneInvoiceData(Invoice invoiceToClone, List<Invoice> invoices)
     {
         _invoices = invoices;
@@ -445,45 +446,100 @@
             }).ToList()
         };
     }
-
     private string GenerateNextInvoiceNumber(List<Invoice> invoices)
     {
         var currentMonth = DateTime.Now.Month;
+        var currentYear = DateTime.Now.Year;
         var nextInvoiceNumber = 1;
-        
+
         if (invoices.Any())
         {
-            var invoiceFromCurrentMonth = invoices
-                .Where(x => int.Parse(x.InvoiceNumber.Value?.Substring(5, 2)!) == currentMonth)
-                .OrderByDescending(x => x.InvoiceNumber.Value?[..4])
-                .FirstOrDefault()?.InvoiceNumber.Value;
+            var filteredInvoices = invoices
+                .Where(x =>
+                    x.InvoiceNumber != null &&
+                    Regex.IsMatch(x.InvoiceNumber.Value, @"^F\d{3}-\d{2}-\d{4}$") && // Ensure correct format
+                    int.Parse(x.InvoiceNumber.Value.Substring(5, 2)) == currentMonth && // Only current month
+                    int.Parse(x.InvoiceNumber.Value.Substring(8, 4)) == currentYear // Only current year
+                );
 
-            nextInvoiceNumber = invoiceFromCurrentMonth != null ? 
-                int.Parse(invoiceFromCurrentMonth?.Substring(1, 3)!) + 1 : 1;
+            var invoiceFromCurrentMonth = filteredInvoices
+                .OrderByDescending(x => int.Parse(x.InvoiceNumber.Value.Substring(1, 3))) // Sort by number sequence
+                .FirstOrDefault()?.InvoiceNumber;
+
+            if (invoiceFromCurrentMonth != null)
+            {
+                // Extract the number part and increment
+                nextInvoiceNumber = int.Parse(invoiceFromCurrentMonth.Value.Substring(1, 3)) + 1;
+            }
         }
-        
-        var invoiceNumber = $"F{nextInvoiceNumber:000}-{DateTime.Now.Month:00}-{DateTime.Now.Year}";
+
+        // Generate the new invoice number in the desired format
+        var invoiceNumber = $"F{nextInvoiceNumber:000}-{currentMonth:00}-{currentYear}";
+
         return invoiceNumber;
     }
+
+    // private string GenerateNextInvoiceNumber(List<Invoice> invoices)
+    // {
+    //     var currentMonth = DateTime.Now.Month;
+    //     var nextInvoiceNumber = 1;
+    //     var invoiceNumber = "";
+    //     if (invoices.Any())
+    //     {
+    //         var invoiceFromCurrentMonth = invoices
+    //             .Where(x => int.Parse(x.InvoiceNumber.Value?.Substring(5, 2)!) == currentMonth)
+    //             .OrderByDescending(x => x.InvoiceNumber.Value?[..4])
+    //             .FirstOrDefault()?.InvoiceNumber.Value;
+
+    //         if (invoiceFromCurrentMonth != null && Regex.IsMatch(invoiceFromCurrentMonth, @"^FL\d{2}-\d{2}-\d{4}$"))
+    //         {
+    //             invoiceNumber = $"FL{invoiceFromCurrentMonth.Substring(2, 2)}-{(int.Parse(invoiceFromCurrentMonth.Substring(5, 2)) + 1):D2}-{invoiceFromCurrentMonth.Substring(8)}";
+    //         }
+    //         else
+    //         {
+    //             nextInvoiceNumber = invoiceFromCurrentMonth != null ?
+    //                 int.Parse(invoiceFromCurrentMonth?.Substring(1, 3)!) + 1 : 1;
+
+    //             invoiceNumber = $"F{nextInvoiceNumber:000}-{DateTime.Now.Month:00}-{DateTime.Now.Year}";
+    //         }
+    //     }
+        
+    //     return invoiceNumber;
+    // }
     
     private void GenerateNextInvoiceNumberForPreviousMonth(List<Invoice> invoices)
     {
         var currentMonth = DateTime.Now.AddMonths(-1).Month;
         var nextInvoiceNumber = 1;
-        
+
+        // if (invoices.Any())
+        // {
+        //     var invoiceFromCurrentMonth = invoices
+        //         .Where(x => int.Parse(x.InvoiceNumber.Value?.Substring(5, 2)!) == currentMonth)
+        //         .OrderByDescending(x => x.InvoiceNumber.Value?[..4])
+        //         .FirstOrDefault()?.InvoiceNumber.Value;
+
+        //     nextInvoiceNumber = invoiceFromCurrentMonth != null ?
+        //         int.Parse(invoiceFromCurrentMonth?.Substring(1, 3)!) + 1 : 1;
+        // }
+
         if (invoices.Any())
         {
-            var invoiceFromCurrentMonth = invoices
+            var validInvoices = invoices
+                .Where(x => Regex.IsMatch(x.InvoiceNumber.Value, @"^F\d{3}-\d{2}-\d{4}$"))
+                .ToList();
+
+            var invoiceFromCurrentMonth = validInvoices
                 .Where(x => int.Parse(x.InvoiceNumber.Value?.Substring(5, 2)!) == currentMonth)
                 .OrderByDescending(x => x.InvoiceNumber.Value?[..4])
                 .FirstOrDefault()?.InvoiceNumber.Value;
 
-            nextInvoiceNumber = invoiceFromCurrentMonth != null ? 
-                int.Parse(invoiceFromCurrentMonth?.Substring(1, 3)!) + 1 : 1;
+            nextInvoiceNumber = invoiceFromCurrentMonth != null ?
+                int.Parse(invoiceFromCurrentMonth.Substring(1, 3)) + 1 : 1;
         }
-        
+
         _requestModel.InvoiceNumber = $"F{nextInvoiceNumber:000}-{DateTime.Now.AddMonths(-1).Month:00}-{DateTime.Now.Year}";
-        
+
         var year = DateTime.Now.Year;
         var month = DateTime.Now.Month;
         if (month == 1)

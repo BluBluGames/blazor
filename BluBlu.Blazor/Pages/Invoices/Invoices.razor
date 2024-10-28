@@ -58,7 +58,7 @@
                         <td>
                             <div class="d-flex justify-content-end">
                                 <button type="button" @onclick="() => CreatePdf(invoice)" class="btn btn-sm btn-secondary me-2 w-100">Generate</button>
-                                <button type="button" @onclick="() => AddModal.Open(invoice, _invoices)" class="btn btn-sm btn-primary me-2 w-100">Add Similar</button>
+                                <button type="button" @onclick="(async () => await HandleAddSimilarClick(invoice))" class="btn btn-sm btn-primary me-2 w-100">Add Similar</button>
                                 <button type="button" @onclick="() => UpdateModal.Open(invoice, _invoices)" class="btn btn-sm btn-warning me-2 w-100">Update</button>
                                 <button type="button" @onclick="() => Delete(invoice.Id)" class="btn btn-sm btn-danger me-2 w-100">Delete</button>
                             </div>
@@ -91,7 +91,13 @@
             Console.WriteLine(e);
         }
     }
-    
+
+    private async Task HandleAddSimilarClick(Invoice invoice)
+    {
+        var invoices = await GetAll(); // Await the async call to get all invoices
+        AddModal.Open(invoice, invoices);  // Use the fetched invoices to open the modal
+    }
+
     private async Task<List<Invoice>> GetAll()
     {
         _invoices = await _mediator.Send(new GetAllInvoicesQuery());
